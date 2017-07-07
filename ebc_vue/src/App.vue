@@ -3,7 +3,7 @@
     <div class = "jumbotron banner-portal">
       <div class="row align-items-center">
 
-        <div class="col col-sm-8" align="left">
+        <div class="col col-xs-6" align="left">
           <div class="hcon">
             <h1>
               <div>
@@ -17,13 +17,21 @@
             <p></p>
           </div>
         </div>
-        <div class="col col-sm-4" align="right">
+        <div class="col col-xs-6 hidden-sm-down" align="right">
           <a href="http://www.snappartnership.net/">
-            <img src="./assets/snap-acronym-color-white.png" height="75">
+            <img src="./assets/snap-acronym-color-white.png" alt="snap partnership logo" height="75px">
           </a>
-          <br>
         </div>
 
+      </div>
+      <div class="row align-items-center justify-content-end hidden-md-up">
+        <div class = "col-8" style="background-color: rgb(131,146,143);">
+          <a href="http://www.snappartnership.net/">
+            <svg viewBox="0,0,290,75" style="max-height:75px; max-width:290px; min-width:100px;">
+              <image xlink:href="./assets/snap-acronym-color-white.png" x="0" y="0" height="75px" width="290px"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
     <nav class="navbar navbar-toggleable-sm navbar-default navbar-light bg-faded nb-main" role="navigation">
@@ -68,6 +76,7 @@
               <a class="nav-link" href="#">USER REGISTRATION</a>
             </li>
           </ul>
+
         </div>
       </div>
     </nav>
@@ -98,12 +107,15 @@ export default {
     background-repeat: no-repeat;
     background-position: 25% 20%;
     margin-bottom: 0px;
+    padding-top: 0px;
     border-radius: 0px;
+    background-color: rgb(131,146,143);
   }
 
   .banner-portal .hcon {
     background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;
+    margin-top: 20px;
   }
 
   .banner-portal .hcon h1 {
