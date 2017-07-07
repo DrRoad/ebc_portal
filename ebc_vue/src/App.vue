@@ -19,7 +19,7 @@
         </div>
         <div class="col col-xs-6 hidden-sm-down" align="right">
           <a href="http://www.snappartnership.net/">
-            <img src="../static/snap-acronym-color-white.png" alt="snap partnership logo" height="75px">
+            <img src="./assets/snap-acronym-color-white.png" alt="snap partnership logo" height="75px">
           </a>
         </div>
 
@@ -28,7 +28,7 @@
         <div class = "col-8" style="background-color: rgb(131,146,143);">
           <a href="http://www.snappartnership.net/">
             <svg viewBox="0,0,290,75" style="max-height:75px; max-width:290px; min-width:100px;">
-              <image xlink:href="../static/snap-acronym-color-white.png" x="0" y="0" height="75px" width="290px"/>
+              <image xlink:href="./assets/snap-acronym-color-white.png" x="0" y="0" height="75px" width="290px"/>
             </svg>
           </a>
         </div>
@@ -103,7 +103,7 @@ export default {
   }
 
   .banner-portal {
-    background-image: url('../static/header2_test.png');
+    background-image: url('./assets/header2_test.png');
     background-repeat: no-repeat;
     background-position: 25% 20%;
     margin-bottom: 0px;
