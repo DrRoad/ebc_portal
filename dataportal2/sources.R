@@ -23,7 +23,7 @@ library(reshape2)
 library(stringr)
 library(dplyr)
 
-setwd("~/Documents/github/dataportal2/")
+#setwd("./dataportal2/")
 #setwd("/srv/shiny-server/iwt_portal/")
 map_data_final <- readRDS("data/map_data_final.rds")
 # xl <- read.csv("test_data2.csv",header=TRUE,encoding="utf8")
