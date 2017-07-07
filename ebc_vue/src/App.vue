@@ -86,7 +86,7 @@
 <script>
 export default {
   name: 'app',
-  data () {
+  data: function () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
@@ -103,7 +103,7 @@ export default {
   }
 
   .banner-portal {
-    background-image: url('./assets/header2_test.png');
+    background-image: url('assets/header2_test.png');
     background-repeat: no-repeat;
     background-position: 25% 20%;
     margin-bottom: 0px;
