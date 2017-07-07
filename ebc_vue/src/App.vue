@@ -34,9 +34,9 @@
         </div>
       </div>
     </div>
-    <nav class="navbar navbar-toggleable-sm navbar-default navbar-light bg-faded nb-main" role="navigation">
+    <nav class="navbar navbar-toggleable-sm navbar-light nb-main" role="navigation">
       <div class = "container">
-        <div class="navbar-header">
+        <div class="navbar-header" style="width:130px;">
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#nb-main-collapse" aria-controls="navbarSupportedContentMain" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -125,6 +125,7 @@ export default {
 
   .nb-main {
     background-color: #44CDB5;
+    font-size: 90%;
   }
   .nb-main > .container > .navbar-header  .navbar-brand, #nb-main-collapse > ul a  {
     color: #fff;
