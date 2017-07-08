@@ -40,46 +40,48 @@
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#nb-main-collapse" aria-controls="navbarSupportedContentMain" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <a class="navbar-brand" href="#">Home</a>
+          <router-link to="/" class="navbar-brand">Home</router-link>
         </div>
         <div class="collapse navbar-collapse" id="nb-main-collapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">  
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ABOUT</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">The Method</a>
-                <a class="dropdown-item" href="#">The Data &amp; Tool</a>
-                <a class="dropdown-item" href="#">The Group</a>
+                <router-link to="/about" class="dropdown-item">The Method</router-link>
+                <router-link to="/about" class="dropdown-item">The Data &amp; Tool</router-link>
+                <router-link to="/about" class="dropdown-item">The Group</router-link>
               </div>
             </li>
             <li class="nav-item dropdown">  
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">EXPLORE BY</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Evidence Map</a>
-                <a class="dropdown-item" href="#">Linkage Explorer</a>
-                <a class="dropdown-item" href="#">Dashboard</a>
+                <router-link to="/explore" class="dropdown-item">Evidence Map</router-link>
+                <router-link to="/explore" class="dropdown-item">Linkage Explorer</router-link>
+                <router-link to="/explore" class="dropdown-item">Dashboard</router-link>
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">NEWS</a>
+              <router-link to="/news" class="nav-link">NEWS</router-link>
             </li>
             <li class="nav-item dropdown">  
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">RESEARCH</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Ongoing syntheses/maps</a>
+                <router-link to="/research" class="dropdown-item">Ongoing syntheses/maps</router-link>
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">CONTACT</a>
+              <router-link to="/contact" class="nav-link">CONTACT</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">USER REGISTRATION</a>
+              <router-link to="/register" class="nav-link">USER REGISTRATION</router-link>
             </li>
           </ul>
 
         </div>
       </div>
     </nav>
+
+    <router-view></router-view>
   </div>
 </template>
 
