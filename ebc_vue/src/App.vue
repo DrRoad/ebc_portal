@@ -24,14 +24,13 @@
         </div>
 
       </div>
-      <div class="row align-items-center justify-content-end hidden-md-up">
-        <div style="background-color: rgb(131,146,143);">
+      <div class="row align-items-center justify-content-end hidden-md-up">>
           <a href="http://www.snappartnership.net/">
-            <svg viewBox="0,0,290,75" style="max-height:75px; max-width:130px; min-width:70px;">
+            <svg viewBox="0,0,290,75"
+                 style="max-height:75px; max-width:130px; min-width:70px;background-color: rgb(131,146,143);">
               <image xlink:href="./assets/snap-acronym-color-white.png" x="0" y="0" height="75px" width="290px"/>
             </svg>
           </a>
-        </div>
       </div>
     </div>
     <nav class="navbar navbar-toggleable-sm navbar-light nb-main" role="navigation">
