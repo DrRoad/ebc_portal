@@ -25,9 +25,9 @@
 
       </div>
       <div class="row align-items-center justify-content-end hidden-md-up">
-        <div class = "col-8" style="background-color: rgb(131,146,143);">
+        <div class = "col-6" style="background-color: rgb(131,146,143);">
           <a href="http://www.snappartnership.net/">
-            <svg viewBox="0,0,290,75" style="max-height:75px; max-width:290px; min-width:100px;">
+            <svg viewBox="0,0,290,75" style="max-height:75px; max-width:120px; min-width:50px;">
               <image xlink:href="./assets/snap-acronym-color-white.png" x="0" y="0" height="75px" width="290px"/>
             </svg>
           </a>
