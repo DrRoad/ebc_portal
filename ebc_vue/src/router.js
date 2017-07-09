@@ -1,10 +1,13 @@
 import VueRouter from 'vue-router'
+import Home from './components/Home.vue'
+import About from './components/About.vue'
+import AboutMethod from './components/AboutMethod.vue'
+import AboutGroup from './components/AboutGroup.vue'
+import AboutTool from './components/AboutTool.vue'
 
 // 1. Define route components.
 // These can be imported from other files
-var Home = { template: '<div>home</div>' }
-var About = { template: '<div>about</div>' }
-var Explore = { template: '<div>explore</div>' }
+var Explore = { template: '<h4>explore</h4>' }
 var News = { template: '<div>news</div>' }
 var Research = { template: '<div>research</div>' }
 var Contact = { template: '<div>contact</div>' }
@@ -17,7 +20,7 @@ var Register = { template: '<div>register</div>' }
 // We'll talk about nested routes later.
 var routes = [
   { path: '/', component: Home },
-  { path: '/about', component: About/*,
+  { path: '/about', component: About,
       children: [
         {
           path: 'method',
@@ -25,13 +28,13 @@ var routes = [
         },
         {
           path: 'tool',
-          component: AboutTool
+          component: About //AboutTool
         },
         {
           path: 'group',
-          component: AboutGroup
+          component: About //AboutGroup
         }
-      ]*/
+      ]
   },
   { path: '/explore', component: Explore/*,
       children: [
