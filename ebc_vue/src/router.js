@@ -36,7 +36,7 @@ var routes = [
           children: [
             {
               path: '',
-              redirect: 'data'
+              component: AboutToolData
             },
             {
               path: 'data',
