@@ -4,6 +4,9 @@ import About from './components/About.vue'
 import AboutMethod from './components/AboutMethod.vue'
 import AboutGroup from './components/AboutGroup.vue'
 import AboutTool from './components/AboutTool.vue'
+import AboutToolData from './components/AboutToolData.vue'
+import AboutToolTool from './components/AboutToolTool.vue'
+import AboutToolGlossary from './components/AboutToolGlossary.vue'
 import Research from './components/Research.vue'
 import ResearchOngoing from './components/ResearchOngoing.vue'
 import Contact from './components/Contact.vue'
@@ -29,7 +32,25 @@ var routes = [
         },
         {
           path: 'tool',
-          component: AboutTool
+          component: AboutTool,
+          children: [
+            {
+              path: '',
+              redirect: 'data'
+            },
+            {
+              path: 'data',
+              component: AboutToolData
+            },
+            {
+              path: 'tool',
+              component: AboutToolTool
+            },
+            {
+              path: 'glossary',
+              component: AboutToolGlossary
+            }
+          ]
         },
         {
           path: 'group',
@@ -70,7 +91,8 @@ var routes = [
 // You can pass in additional options here, but let's
 // keep it simple for now.
 var router = new VueRouter({
-  routes: routes // short for `routes: routes`
+  routes: routes,
+  mode: 'history'
 })
 
 export default router

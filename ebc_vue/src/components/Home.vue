@@ -130,7 +130,7 @@
             <strong>Where do I filter data and explore it? Why are there so many different options?</strong>
           </div>
         </h5>
-        <p>This site is constantly in development and we are refining it to make searching for and exploring data as functional and intuitive as possible. As well, while Shiny is a fantastic method for visualizing data, it can be difficult to incorporate multiple elements that it is not designed for. Hence, there are different tabs for exploring data. We encourage you to watch the how-to video on how to explore, filter, and download data.</p>
+        <p>This site is constantly in development and we are refining it to make searching for and exploring data as functional and intuitive as possible.  We encourage you to watch the how-to video on how to explore, filter, and download data.</p>
         <p>
           In general, options for exploration are located in the 
           <span style="color:#006666">
