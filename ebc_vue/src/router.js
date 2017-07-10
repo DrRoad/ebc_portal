@@ -28,11 +28,11 @@ var routes = [
         },
         {
           path: 'tool',
-          component: About //AboutTool
+          component: AboutTool
         },
         {
           path: 'group',
-          component: About //AboutGroup
+          component: AboutGroup
         }
       ]
   },

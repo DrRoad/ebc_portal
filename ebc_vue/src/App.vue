@@ -47,8 +47,8 @@
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ABOUT</a>
               <div class="dropdown-menu">
                 <router-link to="/about/method" class="dropdown-item">The Method</router-link>
-                <router-link to="/about" class="dropdown-item">The Data &amp; Tool</router-link>
-                <router-link to="/about" class="dropdown-item">The Group</router-link>
+                <router-link to="/about/tool" class="dropdown-item">The Data &amp; Tool</router-link>
+                <router-link to="/about/group" class="dropdown-item">The Group</router-link>
               </div>
             </li>
             <li class="nav-item dropdown">  
