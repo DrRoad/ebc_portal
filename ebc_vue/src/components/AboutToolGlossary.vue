@@ -155,10 +155,6 @@
 
 
 <style scoped>
-  .row.glossary-groups > .col.glossary-card {
-    display: flex;
-  }
-
   .card {
     background-color: #ecf0f1;
     border-radius: 4px;
