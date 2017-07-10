@@ -65,7 +65,7 @@
             <li class="nav-item dropdown">  
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">RESEARCH</a>
               <div class="dropdown-menu">
-                <router-link to="/research" class="dropdown-item">Ongoing syntheses/maps</router-link>
+                <router-link to="/research/ongoing" class="dropdown-item">Ongoing syntheses/maps</router-link>
               </div>
             </li>
             <li class="nav-item">

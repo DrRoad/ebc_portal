@@ -4,13 +4,14 @@ import About from './components/About.vue'
 import AboutMethod from './components/AboutMethod.vue'
 import AboutGroup from './components/AboutGroup.vue'
 import AboutTool from './components/AboutTool.vue'
+import Research from './components/Research.vue'
+import ResearchOngoing from './components/ResearchOngoing.vue'
 import Contact from './components/Contact.vue'
 
 // 1. Define route components.
 // These can be imported from other files
 var Explore = { template: '<h4>explore</h4>' }
 var News = { template: '<div>news</div>' }
-var Research = { template: '<div>research</div>' }
 var Register = { template: '<div>register</div>' }
 
 // 2. Define some routes
@@ -52,13 +53,13 @@ var routes = [
         }
       ]*/
   },
-  { path: '/research', component: Research/*,
+  { path: '/research', component: Research,
       children: [
         {
           path: 'ongoing',
           component: ResearchOngoing
         }
-      ]*/
+      ]
   },
   { path: '/news', component: News },
   { path: '/contact', component: Contact },
