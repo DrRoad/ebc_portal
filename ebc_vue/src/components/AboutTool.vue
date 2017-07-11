@@ -29,7 +29,7 @@
 
     <div class = "tab-content">
       <div class="row align-items-start justify-content-center">
-        <div class="col col-8>
+        <div class="col col-8">
           <router-view></router-view>
         </div>
       </div>
