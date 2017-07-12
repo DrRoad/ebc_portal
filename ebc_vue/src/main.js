@@ -7,6 +7,6 @@ Vue.use(VueRouter)
 
 new Vue({
   el: '#app',
-  render: function(h) {return h(App)},
+  render: h => h(App),
   router: Router
 })
