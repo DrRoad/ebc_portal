@@ -25,9 +25,21 @@ module.exports = {
         exclude: /node_modules/
       },
       {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
+          name: '[name].[ext]'
+        }
+      },
+      {
+        test: /\.(woff2?|eot|ttf)(\?.*)?$/,
+        loader: 'url-loader',
+        query: {
+          limit: 10000,
           name: '[name].[ext]'
         }
       }

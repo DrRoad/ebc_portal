@@ -7,6 +7,7 @@ import AboutTool from './components/AboutTool.vue'
 import AboutToolData from './components/AboutToolData.vue'
 import AboutToolTool from './components/AboutToolTool.vue'
 import AboutToolGlossary from './components/AboutToolGlossary.vue'
+import Explore from './components/Explore.vue'
 import Research from './components/Research.vue'
 import ResearchOngoing from './components/ResearchOngoing.vue'
 import Contact from './components/Contact.vue'
@@ -14,7 +15,6 @@ import News from './components/News.vue'
 
 // 1. Define route components.
 // These can be imported from other files
-var Explore = { template: '<h4>explore</h4>' }
 var Register = { template: '<div>register</div>' }
 
 // 2. Define some routes
