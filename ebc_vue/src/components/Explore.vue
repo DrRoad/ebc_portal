@@ -4,7 +4,8 @@
       <filters  v-on:checked-nodes="checkHandler"></filters>
     </div>
     <div class="col col-sm-9">
-      <p>{{getCount(filtered)}}</p>
+      <p v-if="fulldata.length > 0">{{getCount(filtered)}}</p>
+      <p v-else>loading...</p>
     </div>
   </div>
 </template>
