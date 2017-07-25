@@ -80,9 +80,10 @@ export default {
     Tree
   },
   data() {
+    debugger;
     return {
-      geo: GeoFilters().children,
-      habitat: HabitatFilters().children,
+      geo: GeoFilters()[0].children,
+      habitat: HabitatFilters()[0].children,
       intervention: InterventionFilters().children,
       outcome: OutcomeFilters().children,
       defaultProps: {

@@ -18,7 +18,9 @@ cat(
   sprintf(
 "
 export default function() {
-  return %s
+  var data = %s;
+  data.name = 'Geo';
+  return [data];
 }
 "
 ,d3r::d3_nest(geo)
@@ -42,13 +44,16 @@ dat %>%
       .
     )
   } %>%
-  mutate(id = 1:n()-1) %>%
+  mutate(id = 1:n()) %>%
   {
     cat(
       sprintf(
 "
 export default function() {
-  return %s
+  var data = %s;
+  data.id = 0;
+  data.name = 'root';
+  return [data];
 }
 "
 ,d3r::d3_nest(., value_cols=c("code","id"))
