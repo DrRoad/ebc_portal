@@ -80,17 +80,28 @@
       </div>
     </nav>
 
-    <router-view></router-view>
+    <router-view :fulldata="fulldata"></router-view>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'app',
   data: function () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      fulldata: []
     }
+  },
+  created: function() {
+    axios.get('./static/data.json').then(response => {
+      this.fulldata = response.data
+    })
+    .catch(e => {
+      console.log('error getting data', e)
+      //this.errors.push(e)
+    })
   }
 }
 </script>

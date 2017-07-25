@@ -1,4 +1,4 @@
-<template>
+<template :fulldata="fulldata">
   <div class="row align-items-start">
     <div class="col col-sm-3" style="overflow:auto;height:200px;position:relative;">
       <filters  v-on:checked-nodes="checkHandler"></filters>
@@ -20,9 +20,11 @@ export default {
   components: {
     Filters
   },
+  props: ['fulldata'],
   data: function() {
+    debugger
     return {
-      fulldata: [],
+//      fulldata: [],
       checkedgeo: [],
       checkedhabitat: [],
       checkedintervention: [],
@@ -38,6 +40,7 @@ export default {
     }
   },
   created: function() {
+/*
     axios.get('./static/data.json').then(response => {
       this.fulldata = response.data
     })
@@ -45,6 +48,7 @@ export default {
       console.log('error getting data', e)
       //this.errors.push(e)
     })
+  */
   },
   methods: {
     filterData: function(geo, habitat, intervention, outcome) {

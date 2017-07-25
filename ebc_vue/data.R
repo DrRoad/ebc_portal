@@ -26,10 +26,23 @@ export default function() {
   file="../ebc_vue/src/geofilters.js"
 )
 
-readr::read_csv("data/biomelabels.csv") %>%
-  left_join(codes, by=c("mht" = "code")) %>%
-  mutate(habitat = code_def, code=mht) %>%
-  select(habitat, code, ecoregion) %>%
+dat %>%
+  select(Biome.) %>%
+  unique() %>%
+  left_join(codes, by=c("Biome." = "code")) %>%
+  mutate(habitat = unlist(lapply(code_def,function(x){strsplit(x,"-")[[1]][1]}))) %>%
+  mutate(ecoregion = unlist(lapply(code_def,function(x){strsplit(x,"-")[[1]][2]}))) %>%
+  rename(code = Biome.) %>%
+  select(habitat, ecoregion, code ) %>%
+  {
+    bind_rows(
+      data_frame(
+        habitat = .$habitat
+      ),
+      .
+    )
+  } %>%
+  mutate(id = 1:n()-1) %>%
   {
     cat(
       sprintf(
@@ -38,7 +51,7 @@ export default function() {
   return %s
 }
 "
-,d3r::d3_nest(., value_cols="code")
+,d3r::d3_nest(., value_cols=c("code","id"))
       ),
       file="../ebc_vue/src/habitatfilters.js"
     )    
@@ -52,6 +65,16 @@ unique(dat[,c("int_group","Int_type")]) %>%
   mutate(type=code_def, type_code=Int_type) %>%
   select(group, group_code, type, type_code) %>%
   {
+    bind_rows(
+      data_frame(
+        group = .$group,
+        group_code = .$group_code
+      ),
+      .
+    )
+  } %>%
+  mutate(id = 1:n()-1) %>%
+  {
     cat(
       sprintf(
 "
@@ -59,7 +82,7 @@ export default function() {
   return %s
 }
 "
-,d3r::d3_nest(., value_cols=c("group_code","type_code"))
+,d3r::d3_nest(., value_cols=c("group_code","type_code","id"))
       ),
       file="../ebc_vue/src/interventionfilters.js"
     )    
