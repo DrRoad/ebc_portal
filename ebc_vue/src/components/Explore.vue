@@ -37,7 +37,7 @@ export default {
     }
   },
   created: function() {
-    axios.get('/static/data.json').then(response => {
+    axios.get('./static/data.json').then(response => {
       this.fulldata = response.data
     })
     .catch(e => {
