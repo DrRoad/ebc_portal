@@ -1,6 +1,7 @@
 library(dplyr)
 
 dat <- readRDS("./data/map_data_final.rds")
+codes <- readr::read_csv("./data/codes.csv")
 
 cat(
   jsonlite::toJSON(
@@ -13,7 +14,6 @@ cat(
 )
 
 geo <- unique(dat[,c("region","subregion")])
-
 cat(
   sprintf(
 "
@@ -25,6 +25,66 @@ export default function() {
   ),
   file="../ebc_vue/src/geofilters.js"
 )
+
+readr::read_csv("data/biomelabels.csv") %>%
+  left_join(codes, by=c("mht" = "code")) %>%
+  mutate(habitat = code_def, code=mht) %>%
+  select(habitat, code, ecoregion) %>%
+  {
+    cat(
+      sprintf(
+"
+export default function() {
+  return %s
+}
+"
+,d3r::d3_nest(., value_cols="code")
+      ),
+      file="../ebc_vue/src/habitatfilters.js"
+    )    
+  }
+  
+unique(dat[,c("int_group","Int_type")]) %>%
+  left_join(codes, by=c("int_group"="code")) %>%
+  mutate(group=code_def, group_code=int_group) %>%
+  select(group, group_code, Int_type) %>%
+  left_join(codes, by=c("Int_type"="code")) %>%
+  mutate(type=code_def, type_code=Int_type) %>%
+  select(group, group_code, type, type_code) %>%
+  {
+    cat(
+      sprintf(
+"
+export default function() {
+  return %s
+}
+"
+,d3r::d3_nest(., value_cols=c("group_code","type_code"))
+      ),
+      file="../ebc_vue/src/interventionfilters.js"
+    )    
+  }
+
+
+data_frame(outcome=unique(dat[,c("Outcome")])) %>%
+  left_join(codes, by=c("outcome"="code")) %>%
+  mutate(code=outcome, outcome=code_def) %>%
+  unique() %>%
+  select(outcome, code) %>%
+  {
+    cat(
+      sprintf(
+"
+export default function() {
+  return %s
+}
+"
+,d3r::d3_nest(., value_cols="code")
+      ),
+      file="../ebc_vue/src/outcomefilters.js"
+    )
+  }
+
 
 dat %>%
   select(int_group, Outcome, aid) %>%
