@@ -65,20 +65,24 @@ export default {
   },
   methods: {
     filterData: function(filters) {
+      var geo = filters.filter(dd=>dd.type==='geo').map(dd=>dd.name); 
+      var habitat = filters.filter(dd=>dd.type==='habitat').map(dd=>dd.code);
+      var intervention = filters.filter(dd=>dd.type==='intervention').map(dd=>dd.type_code);
+      var outcome = filters.filter(dd=>dd.type==='outcome').map(dd=>dd.code);
+      
       return this.fulldata
         .filter(
           function(d) {
             debugger
-            return filters.filter(dd=>dd.type==='geo').map(dd=>dd.name).indexOf(d.subregion) > -1 &&
-               filters.filter(dd=>dd.type==='habitat').map(dd=>dd.code).indexOf(d["Biome."]) > -1 && 
-               filters.filter(dd=>dd.type==='intervention').map(dd=>dd.type_code).indexOf(d.Int_type) > -1 &&
-               filters.filter(dd=>dd.type==='outcome').map(dd=>dd.code).indexOf(d.Outcome) > -1
+
+            return geo.indexOf(d.subregion) > -1 &&
+               habitat.indexOf(d["Biome."]) > -1 && 
+               intervention.indexOf(d.Int_type) > -1 &&
+               outcome.indexOf(d.Outcome) > -1
           }
         )
     },
     checkHandler: function(checkednodes) {
-      debugger;
-
       var allfilters = [].concat(checkednodes.filter(d=>d.colname==="subregion").map(d=>{return {type:'geo','id':d.id,'name':d.name}}))
         .concat(checkednodes.filter(d=>d.colname==="ecoregion").map(d=>{return {type:'habitat','id':d.id,'code':d.code}}))
         .concat(checkednodes.filter(d=>d.colname==="type").map(d=>{return {type:'intervention','id':d.id,'type_code':d.type_code}}))
