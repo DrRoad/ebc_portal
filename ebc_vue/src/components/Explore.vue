@@ -1,7 +1,7 @@
 <template :fulldata="fulldata">
   <div class="container-fluid" style="margin-top: 2em;">
     <div class="row align-items-start justify-content-center">
-      <div class="col col-sm-3" style="overflow:auto;height:200px;position:relative;">
+      <div class="col col-sm-3" style="overflow:auto;max-height:400px;position:relative;">
         <filters  v-on:checked-nodes="checkHandler"></filters>
       </div>
       <div class="col col-sm-9">
