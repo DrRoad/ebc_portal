@@ -7,6 +7,21 @@
       <div class="col col-sm-9">
         <div class="row justify-content-center">
           <div class="col col-md-3">
+            <h5>Filtered</h5>
+            <Treemap
+              :tree="filteredtree"
+              :tile="tileDice"
+              :depth="1"
+              :treeheight=100
+              :treewidth=200
+              :styleObject="{'width':'200px', height:'100px'}"
+              :colorScale="colorScaleBW"
+              :colorValueFun="colorData"
+              :rectStyle="{'stroke':'black'}"
+            >
+            </Treemap>
+          </div>
+          <div class="col col-md-3">
             <div class="card text-center" style="background-color:#31698a;">
               <div class="card-block">
                 <h5 class="card-title">Total Articles</h5>
@@ -35,16 +50,20 @@
           </div>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
-          <Treemap
-           :tree="faketree"
-           :depth="1"
-           :paddingOuter="20"
-           :treeheight=300
-           :treewidth=300
-           :styleObject="{'width':'300px', height:'300px'}"
-           :rectStyle="{'stroke':'black', fill:'white'}"
-          >
-          </Treemap>
+          <div class="col col-sm-3">
+            <h5>Geography</h5>
+            <Treemap
+              :tree="geotree"
+              :depth="2"
+              :tile="tile"
+              :treeheight=400
+              :treewidth=400
+              :paddingOuter=20
+              :styleObject="{'width':'100%', height:'400px'}"
+              :rectStyle="{'stroke':'white'}"
+            >
+            </Treemap>
+          </div>
         </div>
       </div>
     </div>
@@ -54,8 +73,10 @@
 <script>
 import axios from 'axios'
 import {arrayeq} from '../utils.js'
-import {set} from 'd3-collection'
-import {flattree} from '../flattree.js'
+import {set, nest} from 'd3-collection'
+import {treemapBinary, treemapDice} from 'd3-hierarchy'
+import {scaleOrdinal} from 'd3-scale'
+import flattree from '../flattree.js'
 
 import Filters from './Filters.vue'
 import Treemap from './Treemap.vue'
@@ -76,7 +97,11 @@ export default {
           {name: 'B', size:400},
           {name: 'C', size:600}
         ]
-      }
+      },
+      tileDice: treemapDice,
+      tileBinary: treemapBinary,
+      colorData: function(d) {return d.data.name},
+      colorScaleBW: scaleOrdinal(['#bab','#fff'])
     }
   },
   computed: {
@@ -85,6 +110,52 @@ export default {
       //if(this.checkedgeo.length > 0) {
         return this.filterData(this.checkedfilters)
       //}
+    },
+    totalcount: function() {
+      return this.getArticleCount(this.fulldata)
+    },
+    filteredcount: function() {
+      return this.getArticleCount(this.filtered)
+    },
+    filteredtree: function() {
+      return {
+        name: 'root',
+        children: [
+          {name: 'Filtered', size: this.filteredcount},
+          {name: 'Not in Filter', size: this.totalcount - this.filteredcount}
+        ]
+      }
+    },
+    geotree: function() {
+      debugger;
+      var filtered = this.filtered;
+
+      var nested = nest()
+        .key(d=>d.subregion)
+        .rollup(d=>{return {
+          region: d[0].region,
+          subregion: d[0].subregion,
+          size: set(d.map(dd=>dd.aid)).size()
+        }})
+        .entries(filtered);
+      //flattree(
+      //  filtered.map(d=>{return {region:d.region, subregion:d.subregion, aid:d.aid}}),
+       // ['region', 'subregion']
+      //)
+      var ftr = flattree(
+        nested.map(d=>d.value),
+        ['region','subregion']
+      ).each(d=>{
+        try {
+          d.name = d.data.key
+        } catch(e) {}
+
+        try {
+          d.size = d.data.values.size
+        } catch(e) {}
+      });
+
+      return ftr
     }
   },
   methods: {

@@ -1,5 +1,5 @@
 <template>
-  <svg v-bind:style="styleObject" :viewBox=viewBox>
+  <svg v-bind:style="styleObject" :viewBox=viewBox preserveAspectRatio="xMidYMin">
       <g>
         <TreemapNode
            v-for="(node, index) in nodes"
@@ -7,7 +7,8 @@
             v-bind:key="node.id ? node.id : node.name"
             v-if="node.depth <= depth && node.depth > 0"
             v-bind:node="node"
-            v-bind:color="color"
+            v-bind:colorScale="colorScale"
+            v-bind:colorValueFun = "colorValueFun"
             v-bind:rectStyle="rectStyle"
         >
         </TreemapNode>
@@ -50,11 +51,30 @@ export default {
       type: Number,
       default: 2
     },
-    color: {
+    colorScale: {
       type: [Function,Object],
       default: scaleOrdinal(schemeCategory10)
     },
+    colorValueFun: {
+      type: [Function,Object],
+      default: function(d) {return d.parent.data.name}
+    },
     padding: {
+      default: null
+    },
+    paddingTop: {
+      default: null
+    },
+    paddingBottom: {
+      default: null
+    },
+    paddingLeft: {
+      default: null
+    },
+    paddingRight: {
+      default: null
+    },
+    paddingInner: {
       default: null
     },
     paddingOuter: {
@@ -74,11 +94,6 @@ export default {
     }
   },
   computed: {
-  /*
-    styleObject: function() {
-      return {width: this.treewidth, height: this.treeheight}
-    },
-  */
     viewBox: function() {
       return '0,0,' + this.treewidth + ',' + this.treeheight;
     },
@@ -105,13 +120,9 @@ export default {
         .tile(this.tile)
         .round(true);
       
-      if(this.padding) {
-        tm.padding(+this.padding);
-      }
-
-      if(this.paddingOuter) {
-        tm.paddingOuter(+this.paddingOuter);
-      }
+      ['padding','paddingTop','paddingBottom','paddingLeft','paddingRight','paddingOuter','paddingInner'].forEach(
+        d => {if(this[d]){tm[d](this[d])}}
+      )
 
       return tm(d3t)
     },
