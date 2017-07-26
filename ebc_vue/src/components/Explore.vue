@@ -65,10 +65,10 @@ export default {
   },
   methods: {
     filterData: function(filters) {
-      debugger
       return this.fulldata
         .filter(
           function(d) {
+            debugger
             return filters.filter(dd=>dd.type==='geo').map(dd=>dd.name).indexOf(d.subregion) > -1 &&
                filters.filter(dd=>dd.type==='habitat').map(dd=>dd.code).indexOf(d["Biome."]) > -1 && 
                filters.filter(dd=>dd.type==='intervention').map(dd=>dd.type_code).indexOf(d.Int_type) > -1 &&
@@ -79,10 +79,11 @@ export default {
     checkHandler: function(checkednodes) {
       debugger;
 
-      let allfilters = checkednodes.filter(d=>d.colname==="subregion").map(d=>{return {type:'geo','id':d.id,'name':d.name}})
-      allfilters.push(checkednodes.filter(d=>d.colname==="ecoregion").map(d=>{return {type:'habitat','id':d.id,'code':d.code}}))
-      allfilters.push(checkednodes.filter(d=>d.colname==="type").map(d=>{return {type:'intervention','id':d.id,'type_code':d.type_code}}))
-      allfilters.push(checkednodes.filter(d=>d.colname==="outcome").map(d=>{return {type:'outcome','id':d.id,'code':d.code}}))
+      var allfilters = [].concat(checkednodes.filter(d=>d.colname==="subregion").map(d=>{return {type:'geo','id':d.id,'name':d.name}}))
+        .concat(checkednodes.filter(d=>d.colname==="ecoregion").map(d=>{return {type:'habitat','id':d.id,'code':d.code}}))
+        .concat(checkednodes.filter(d=>d.colname==="type").map(d=>{return {type:'intervention','id':d.id,'type_code':d.type_code}}))
+        .concat(checkednodes.filter(d=>d.colname==="outcome").map(d=>{return {type:'outcome','id':d.id,'code':d.code}})
+      )
       
       if(!arrayeq(this.checkedfilters, allfilters, function(d){return d.id})) {
         this.checkedfilters = allfilters

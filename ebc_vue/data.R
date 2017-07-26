@@ -56,14 +56,14 @@ dat %>%
       .
     )
   } %>%
-  mutate(id = paste0("outcome",1:n())) %>%
+  mutate(id = paste0("habitat",1:n())) %>%
   {
     cat(
       sprintf(
 "
 export default function() {
   var data = %s;
-  data.id = 'outcome0';
+  data.id = 'habitat0';
   data.name = 'Habitat';
   return data;
 }
