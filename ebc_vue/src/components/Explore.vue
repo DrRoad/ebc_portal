@@ -34,25 +34,49 @@
             </div>
           </div>
         </div>
+        <div class="row align-items-start" style="margin-top:2em;">
+          <Treemap
+           :tree="faketree"
+           :depth="1"
+           :paddingOuter="20"
+           :treeheight=300
+           :treewidth=300
+           :styleObject="{'width':'300px', height:'300px'}"
+           :rectStyle="{'stroke':'black', fill:'white'}"
+          >
+          </Treemap>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import Filters from './Filters.vue'
+import axios from 'axios'
 import {arrayeq} from '../utils.js'
 import {set} from 'd3-collection'
+import {flattree} from '../flattree.js'
+
+import Filters from './Filters.vue'
+import Treemap from './Treemap.vue'
 
 export default {
   components: {
-    Filters
+    Filters,
+    Treemap
   },
   props: ['fulldata'],
   data: function() {
     return {
-      checkedfilters: []
+      checkedfilters: [],
+      faketree: {
+        name: 'root',
+        children: [
+          {name: 'A', size:100},
+          {name: 'B', size:400},
+          {name: 'C', size:600}
+        ]
+      }
     }
   },
   computed: {
