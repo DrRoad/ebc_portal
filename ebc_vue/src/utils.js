@@ -1,4 +1,4 @@
-const arrayeq = function(arr1, arr2) {
+const arrayeq = function(arr1, arr2, fun) {
   if(!Array.isArray(arr1) || !Array.isArray(arr2)) {
     return false
   }
@@ -8,7 +8,7 @@ const arrayeq = function(arr1, arr2) {
   }
 
   for(var i = 0; i<arr1.length; i++) {
-    if(arr1[i] !== arr2[i]) {
+    if(fun(arr1[i]) !== fun(arr2[i])) {
       return false
     }
   }

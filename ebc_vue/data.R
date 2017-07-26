@@ -13,20 +13,32 @@ cat(
   file="../ebc_vue/data/data.json"
 )
 
-geo <- unique(dat[,c("region","subregion")])
-cat(
-  sprintf(
+unique(dat[,c("region","subregion")]) %>%
+{
+  bind_rows(
+    data_frame(
+      region = .$region
+    ),
+    .
+  )
+} %>%
+  mutate(id = paste0("geo",1:n())) %>%  
+{  
+  cat(
+    sprintf(
 "
 export default function() {
   var data = %s;
   data.name = 'Geo';
+  data.id = 'geo0'
   return data;
 }
 "
-,d3r::d3_nest(geo)
-  ),
-  file="../ebc_vue/src/geofilters.js"
-)
+,d3r::d3_nest(., value_cols = "id")
+    ),
+    file="../ebc_vue/src/geofilters.js"
+  )
+}
 
 dat %>%
   select(Biome.) %>%
@@ -44,14 +56,14 @@ dat %>%
       .
     )
   } %>%
-  mutate(id = 1:n()) %>%
+  mutate(id = paste0("outcome",1:n())) %>%
   {
     cat(
       sprintf(
 "
 export default function() {
   var data = %s;
-  data.id = 0;
+  data.id = 'outcome0';
   data.name = 'Habitat';
   return data;
 }
@@ -78,13 +90,16 @@ unique(dat[,c("int_group","Int_type")]) %>%
       .
     )
   } %>%
-  mutate(id = 1:n()-1) %>%
+  mutate(id = paste0("intervention",1:n())) %>%
   {
     cat(
       sprintf(
 "
 export default function() {
-  return %s
+  var data = %s;
+  data.id = 'intervention0';
+  data.name = 'Intervention';
+  return data;
 }
 "
 ,d3r::d3_nest(., value_cols=c("group_code","type_code","id"))
@@ -98,16 +113,20 @@ data_frame(outcome=unique(dat[,c("Outcome")])) %>%
   left_join(codes, by=c("outcome"="code")) %>%
   mutate(code=outcome, outcome=code_def) %>%
   unique() %>%
+  mutate(id=paste0("outcome",1:n())) %>%
   select(outcome, code) %>%
   {
     cat(
       sprintf(
 "
 export default function() {
-  return %s
+  var data = %s;
+  data.id = 'outcome0'
+  data.name = 'Outcome'
+  return data;
 }
 "
-,d3r::d3_nest(., value_cols="code")
+,d3r::d3_nest(., value_cols=c("code","id"))
       ),
       file="../ebc_vue/src/outcomefilters.js"
     )

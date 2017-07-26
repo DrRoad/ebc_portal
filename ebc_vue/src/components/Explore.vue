@@ -51,69 +51,41 @@ export default {
   },
   props: ['fulldata'],
   data: function() {
-    debugger
     return {
-//      fulldata: [],
-      checkedgeo: [],
-      checkedhabitat: [],
-      checkedintervention: [],
-      checkedoutcome:[]
+      checkedfilters: []
     }
   },
   computed: {
     filtered: function() {
       debugger
       //if(this.checkedgeo.length > 0) {
-        return this.filterData(this.checkedgeo, this.checkedhabitat, this.checkedintervention, this.checkedoutcome)
+        return this.filterData(this.checkedfilters)
       //}
     }
   },
-  created: function() {
-/*
-    axios.get('./static/data.json').then(response => {
-      this.fulldata = response.data
-    })
-    .catch(e => {
-      console.log('error getting data', e)
-      //this.errors.push(e)
-    })
-  */
-  },
   methods: {
-    filterData: function(geo, habitat, intervention, outcome) {
+    filterData: function(filters) {
       debugger
       return this.fulldata
         .filter(
-          d => geo.indexOf(d.subregion) > -1 &&
-               habitat.indexOf(d["Biome."]) > -1 && 
-               intervention.indexOf(d.Int_type) > -1 &&
-               outcome.indexOf(d.Outcome) > -1
+          function(d) {
+            return filters.filter(dd=>dd.type==='geo').map(dd=>dd.name).indexOf(d.subregion) > -1 &&
+               filters.filter(dd=>dd.type==='habitat').map(dd=>dd.code).indexOf(d["Biome."]) > -1 && 
+               filters.filter(dd=>dd.type==='intervention').map(dd=>dd.type_code).indexOf(d.Int_type) > -1 &&
+               filters.filter(dd=>dd.type==='outcome').map(dd=>dd.code).indexOf(d.Outcome) > -1
+          }
         )
     },
-    checkHandler: function(type, checkednodes) {
+    checkHandler: function(checkednodes) {
       debugger;
-      if(type==="geo") {
-        if(!arrayeq(this.checkedgeo,checkednodes.filter(d=>d.colname==="subregion").map(d=>d.name))) {
-          this.checkedgeo = checkednodes.filter(d=>d.colname==="subregion").map(d=>d.name)
-        }
-      }
 
-      if(type==="habitat") {
-        if(!arrayeq(this.checkedhabitat,checkednodes.filter(d=>d.colname==="ecoregion").map(d=>d.code))) {
-          this.checkedhabitat = checkednodes.filter(d=>d.colname==="ecoregion").map(d=>d.code)
-        }
-      }
-
-      if(type==="intervention") {
-        if(!arrayeq(this.checkedintervention,checkednodes.filter(d=>d.colname==="type").map(d=>d.type_code))) {
-          this.checkedintervention = checkednodes.filter(d=>d.colname==="type").map(d=>d.type_code)
-        }
-      }
-
-      if(type==="outcome") {
-        if(!arrayeq(this.checkedoutcome,checkednodes.filter(d=>d.colname==="outcome").map(d=>d.code))) {
-          this.checkedoutcome = checkednodes.filter(d=>d.colname==="outcome").map(d=>d.code)
-        }
+      let allfilters = checkednodes.filter(d=>d.colname==="subregion").map(d=>{return {type:'geo','id':d.id,'name':d.name}})
+      allfilters.push(checkednodes.filter(d=>d.colname==="ecoregion").map(d=>{return {type:'habitat','id':d.id,'code':d.code}}))
+      allfilters.push(checkednodes.filter(d=>d.colname==="type").map(d=>{return {type:'intervention','id':d.id,'type_code':d.type_code}}))
+      allfilters.push(checkednodes.filter(d=>d.colname==="outcome").map(d=>{return {type:'outcome','id':d.id,'code':d.code}}))
+      
+      if(!arrayeq(this.checkedfilters, allfilters, function(d){return d.id})) {
+        this.checkedfilters = allfilters
       }
     },
     getArticleCount: function(data) {
