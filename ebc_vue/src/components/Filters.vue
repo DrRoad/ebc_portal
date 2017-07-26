@@ -29,7 +29,6 @@ export default {
     Tree
   },
   data() {
-    debugger;
     return {
       filters: [GeoFilters(),HabitatFilters(),InterventionFilters(),OutcomeFilters()],
       defaultProps: {

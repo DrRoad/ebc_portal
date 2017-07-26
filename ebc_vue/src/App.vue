@@ -1,38 +1,6 @@
 <template>
   <div id="app" class="container-fluid">
-    <div class = "jumbotron banner-portal">
-      <div class="row align-items-center">
-
-        <div class="col col-xs-6" align="left">
-          <div class="hcon">
-            <h1>
-              <div>
-                <strong>EVIDENCE FOR NATURE AND PEOPLE</strong>
-              </div>
-            </h1>
-            <p>
-              </p><div style="color:#F9CC0F;font-size:30px">
-                <em>DATA PORTAL</em>
-              </div>
-            <p></p>
-          </div>
-        </div>
-        <div class="col col-xs-6 hidden-sm-down" align="right">
-          <a href="http://www.snappartnership.net/">
-            <img src="./assets/snap-acronym-color-white.png" alt="snap partnership logo" height="75px">
-          </a>
-        </div>
-
-      </div>
-      <div class="row align-items-center justify-content-end hidden-md-up">
-          <a href="http://www.snappartnership.net/">
-            <svg viewBox="0,0,290,75"
-                 style="min-width:200px; background-color: rgb(131,146,143);">
-              <image xlink:href="./assets/snap-acronym-color-white.png" x="0" y="0" height="75px" width="290px"/>
-            </svg>
-          </a>
-      </div>
-    </div>
+    <banner :minimal="minimalbanner"></banner>
     <nav class="navbar navbar-toggleable-sm navbar-light nb-main" role="navigation">
       <div class = "container">
         <div class="navbar-header" style="width:130px;">
@@ -80,18 +48,21 @@
       </div>
     </nav>
 
-    <router-view :fulldata="fulldata"></router-view>
+    <router-view :fulldata="fulldata" @minimizeBanner = "changeBannerSize"></router-view>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import Banner from './components/Banner.vue'
 
 export default {
   name: 'app',
+  components: {Banner},
   data: function () {
     return {
-      fulldata: []
+      fulldata: [],
+      minimalbanner: false
     }
   },
   created: function() {
@@ -102,6 +73,11 @@ export default {
       console.log('error getting data', e)
       //this.errors.push(e)
     })
+  },
+  methods: {
+    changeBannerSize: function (minimal) {
+      this.minimalbanner = minimal
+    }
   }
 }
 </script>

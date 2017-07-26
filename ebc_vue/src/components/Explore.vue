@@ -73,8 +73,6 @@ export default {
       return this.fulldata
         .filter(
           function(d) {
-            debugger
-
             return geo.indexOf(d.subregion) > -1 &&
                habitat.indexOf(d["Biome."]) > -1 && 
                intervention.indexOf(d.Int_type) > -1 &&
@@ -111,6 +109,13 @@ export default {
       }
       return 0
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => vm.$emit("minimizeBanner", true))
+  },
+  beforeRouteLeave (to, from, next) {
+    this.$emit("minimizeBanner", false)
+    next()
   }
 }
 </script>

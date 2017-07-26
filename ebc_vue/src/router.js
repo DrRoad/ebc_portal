@@ -58,7 +58,8 @@ var routes = [
         }
       ]
   },
-  { path: '/explore', component: Explore/*,
+  { path: '/explore', component: Explore,
+  /*,
       children: [
         {
           path: 'map',
@@ -72,7 +73,8 @@ var routes = [
           path: 'dashboard',
           component: ExploreDashboard
         }
-      ]*/
+      ]
+    */
   },
   { path: '/research', component: Research,
       children: [
