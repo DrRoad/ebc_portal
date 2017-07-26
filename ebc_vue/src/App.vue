@@ -48,7 +48,9 @@
       </div>
     </nav>
 
-    <router-view :fulldata="fulldata" @minimizeBanner = "changeBannerSize"></router-view>
+    <keep-alive>
+      <router-view :fulldata="fulldata" @minimizeBanner = "changeBannerSize"></router-view>
+    </keep-alive>
   </div>
 </template>
 
