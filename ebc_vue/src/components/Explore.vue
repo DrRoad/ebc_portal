@@ -1,11 +1,40 @@
 <template :fulldata="fulldata">
-  <div class="row align-items-start">
-    <div class="col col-sm-3" style="overflow:auto;height:200px;position:relative;">
-      <filters  v-on:checked-nodes="checkHandler"></filters>
-    </div>
-    <div class="col col-sm-9">
-      <p v-if="fulldata.length > 0">{{getCount(filtered)}}</p>
-      <p v-else>loading...</p>
+  <div class="container-fluid" style="margin-top: 2em;">
+    <div class="row align-items-start justify-content-center">
+      <div class="col col-sm-3" style="overflow:auto;height:200px;position:relative;">
+        <filters  v-on:checked-nodes="checkHandler"></filters>
+      </div>
+      <div class="col col-sm-9">
+        <div class="row justify-content-center">
+          <div class="col col-md-3">
+            <div class="card text-center" style="background-color:#31698a;">
+              <div class="card-block">
+                <h5 class="card-title">Total Articles</h5>
+                <p class="card-text" v-if="fulldata.length > 0">{{getArticleCount(filtered)}}</p>
+                <p class="card-text" v-else>loading...</p>
+              </div>
+            </div>
+          </div>
+          <div class="col col-md-3">
+            <div class="card text-center" style="background-color:#31698a;">
+              <div class="card-block">
+                <h5 class="card-title">Impact Evaluations</h5>
+                <p class="card-text" v-if="fulldata.length > 0">{{getImpactCount(filtered)}}</p>
+                <p class="card=text" v-else>loading...</p>
+              </div>
+            </div>
+          </div>
+          <div class="col col-md-3">
+            <div class="card text-center" style="background-color:#31698a;">
+              <div class="card-block">
+                <h5 class="card-title">Open Access</h5>
+                <p class="card-text" v-if="fulldata.length > 0">{{getOpenCount(filtered)}}</p>
+                <p class="card-text" v-else>loading...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -87,9 +116,21 @@ export default {
         }
       }
     },
-    getCount: function(data) {
+    getArticleCount: function(data) {
       if(Array.isArray(data)) {
         return set(data.map(d=>d.aid)).size();
+      }
+      return 0
+    },
+    getImpactCount: function(data) {
+      if(Array.isArray(data)) {
+        return set(data.filter(d=>d.IE === "Y").map(d=>d.aid)).size();
+      }
+      return 0
+    },
+    getOpenCount: function(data) {
+      if(Array.isArray(data)) {
+        return set(data.filter(d=>d.FullText === "Y").map(d=>d.aid)).size();
       }
       return 0
     }
@@ -98,4 +139,5 @@ export default {
 </script>
 
 <style scoped>
+  .card-title, .card-text {color:white;}
 </style>

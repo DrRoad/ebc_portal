@@ -20,7 +20,7 @@ cat(
 export default function() {
   var data = %s;
   data.name = 'Geo';
-  return [data];
+  return data;
 }
 "
 ,d3r::d3_nest(geo)
@@ -52,8 +52,8 @@ dat %>%
 export default function() {
   var data = %s;
   data.id = 0;
-  data.name = 'root';
-  return [data];
+  data.name = 'Habitat';
+  return data;
 }
 "
 ,d3r::d3_nest(., value_cols=c("code","id"))
