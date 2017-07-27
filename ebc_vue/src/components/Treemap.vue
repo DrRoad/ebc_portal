@@ -62,7 +62,7 @@ export default {
     },
     textValueFun: {
       type: [Function,Object],
-      default: function(d) {console.log(d);return d.data.name}
+      default: function(d) {return d.data.name}
     },
     padding: {
       default: null

@@ -60,6 +60,7 @@
               :treewidth=400
               :paddingOuter=20
               :styleObject="{'width':'100%', height:'400px'}"
+              :colorScale="colorScaleGrayStart"
               :rectStyle="{'stroke':'white'}"
             >
             </Treemap>
@@ -75,7 +76,7 @@ import axios from 'axios'
 import {arrayeq} from '../utils.js'
 import {set, nest} from 'd3-collection'
 import {treemapBinary, treemapDice} from 'd3-hierarchy'
-import {scaleOrdinal} from 'd3-scale'
+import {scaleOrdinal, schemeCategory10} from 'd3-scale'
 import flattree from '../flattree.js'
 
 import Filters from './Filters.vue'
@@ -101,6 +102,7 @@ export default {
       tileDice: treemapDice,
       tileBinary: treemapBinary,
       colorData: function(d) {return d.data.name},
+      colorScaleGrayStart: scaleOrdinal(['#ded'].concat(schemeCategory10)),
       colorScaleBW: scaleOrdinal(['#bab','#fff'])
     }
   },
