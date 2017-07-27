@@ -66,7 +66,7 @@
             </Treemap>
           </div>
           <div class="col col-sm-7">
-            <Adjacency :hier="fakehier"></Adjacency>
+            <Heatmap :matrix="matrix" :size="[600,400]" x="int_group" y="outcome" z="size"></Heatmap>
           </div>
         </div>
       </div>
@@ -80,17 +80,18 @@ import {arrayeq} from '../utils.js'
 import {set, nest} from 'd3-collection'
 import {hierarchy, treemapBinary, treemapDice} from 'd3-hierarchy'
 import {scaleOrdinal, schemeCategory10} from 'd3-scale'
+import {merge} from 'd3-array'
 import flattree from '../flattree.js'
 
 import Filters from './Filters.vue'
 import Treemap from './Treemap.vue'
-import Adjacency from './Adjacency.vue'
+import Heatmap from './Heatmap.vue'
 
 export default {
   components: {
     Filters,
     Treemap,
-    Adjacency
+    Heatmap
   },
   props: ['fulldata'],
   data: function() {
@@ -159,6 +160,22 @@ export default {
       });
 
       return ftr
+    },
+    matrix: function() {
+      var filtered = this.filtered;
+
+      var nested = nest()
+        .key(d=>d.int_group)
+        .key(d=>d.Outcome)
+        .rollup(d=>{ return {
+          int_group: d[0].int_group,
+          outcome: d[0].Outcome,
+          size: set(d.map(dd=>dd.aid)).size()
+        }})
+        .entries(filtered)
+        .map(d=>d.values.map(dd=>dd.value));
+
+      return merge(nested)
     },
     fakehier: function () {
       return hierarchy(this.faketree)
