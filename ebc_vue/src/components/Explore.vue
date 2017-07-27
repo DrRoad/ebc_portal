@@ -1,10 +1,10 @@
 <template :fulldata="fulldata">
   <div class="container-fluid" style="margin-top: 2em;">
     <div class="row align-items-start justify-content-center">
-      <div class="col col-sm-3" style="overflow:auto;max-height:400px;position:relative;">
+      <div class="col col-md-3" style="overflow:auto;max-height:400px;position:relative;">
         <filters  v-on:checked-nodes="checkHandler"></filters>
       </div>
-      <div class="col col-sm-9">
+      <div class="col col-md-9">
         <div class="row justify-content-center">
           <div class="col col-md-3">
             <h5>Filtered</h5>
@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
-          <div class="col col-sm-5">
+          <div class="col col-md-5">
             <h5>Geography</h5>
             <Treemap
               :tree="geotree"
@@ -65,7 +65,7 @@
             >
             </Treemap>
           </div>
-          <div class="col col-sm-7">
+          <div class="col col-md-7">
             <Heatmap :matrix="matrix" :size="[600,400]" x="int_group" y="outcome" z="size"></Heatmap>
           </div>
         </div>
