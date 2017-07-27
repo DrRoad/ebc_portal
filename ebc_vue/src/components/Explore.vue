@@ -65,6 +65,9 @@
             >
             </Treemap>
           </div>
+          <div class="col col-sm-7">
+            <Adjacency :hier="fakehier"></Adjacency>
+          </div>
         </div>
       </div>
     </div>
@@ -75,17 +78,19 @@
 import axios from 'axios'
 import {arrayeq} from '../utils.js'
 import {set, nest} from 'd3-collection'
-import {treemapBinary, treemapDice} from 'd3-hierarchy'
+import {hierarchy, treemapBinary, treemapDice} from 'd3-hierarchy'
 import {scaleOrdinal, schemeCategory10} from 'd3-scale'
 import flattree from '../flattree.js'
 
 import Filters from './Filters.vue'
 import Treemap from './Treemap.vue'
+import Adjacency from './Adjacency.vue'
 
 export default {
   components: {
     Filters,
-    Treemap
+    Treemap,
+    Adjacency
   },
   props: ['fulldata'],
   data: function() {
@@ -129,7 +134,6 @@ export default {
       }
     },
     geotree: function() {
-      debugger;
       var filtered = this.filtered;
 
       var nested = nest()
@@ -140,10 +144,7 @@ export default {
           size: set(d.map(dd=>dd.aid)).size()
         }})
         .entries(filtered);
-      //flattree(
-      //  filtered.map(d=>{return {region:d.region, subregion:d.subregion, aid:d.aid}}),
-       // ['region', 'subregion']
-      //)
+
       var ftr = flattree(
         nested.map(d=>d.value),
         ['region','subregion']
@@ -158,6 +159,9 @@ export default {
       });
 
       return ftr
+    },
+    fakehier: function () {
+      return hierarchy(this.faketree)
     }
   },
   methods: {

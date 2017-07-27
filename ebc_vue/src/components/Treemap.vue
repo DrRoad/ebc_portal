@@ -18,9 +18,7 @@
 </template>
 
 <script>
-import {hierarchy} from 'd3-hierarchy'
-import {treemap} from 'd3-hierarchy'
-import {treemapSquarify} from 'd3-hierarchy'
+import {hierarchy, treemap, treemapSquarify} from 'd3-hierarchy'
 import {scaleOrdinal} from 'd3-scale'
 import {schemeCategory10} from 'd3-scale'
 
