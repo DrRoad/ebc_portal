@@ -9,6 +9,7 @@
             v-bind:node="node"
             v-bind:colorScale="colorScale"
             v-bind:colorValueFun = "colorValueFun"
+            v-bind:textValueFun = "textValueFun"
             v-bind:rectStyle="rectStyle"
         >
         </TreemapNode>
@@ -58,6 +59,10 @@ export default {
     colorValueFun: {
       type: [Function,Object],
       default: function(d) {return d.parent.data.name}
+    },
+    textValueFun: {
+      type: [Function,Object],
+      default: function(d) {console.log(d);return d.data.name}
     },
     padding: {
       default: null

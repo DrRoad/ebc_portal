@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
-          <div class="col col-sm-3">
+          <div class="col col-sm-5">
             <h5>Geography</h5>
             <Treemap
               :tree="geotree"
