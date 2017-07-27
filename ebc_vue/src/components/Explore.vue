@@ -55,7 +55,7 @@
             <Treemap
               :tree="geotree"
               :depth="2"
-              :tile="tile"
+              :tile="tileBinary"
               :treeheight=400
               :treewidth=400
               :paddingOuter=20

@@ -1,5 +1,5 @@
 <template>
-  <g :node="node" :rectStyle="rectStyle" :colorScale="colorScale" :colorValueFun="colorValueFun">
+  <g>
     <rect
       v-bind="{
         'x': node.x0, 'width': node.x1 - node.x0,'y': node.y0,
