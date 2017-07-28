@@ -115,9 +115,10 @@ export default {
     },
     updateViewBox: function() {
       var xticks = select(this.$el).selectAll('.heatmap-xaxis g.tick')
-      var yadj = max(xticks.nodes().map(d=>d.getBoundingClientRect().height)) || 0
+      var yadj = max(xticks.nodes().map(d=>d.getBBox().height)) || 0
+
       var yticks = select(this.$el).selectAll('.heatmap-yaxis g.tick')
-      var xadj = max(yticks.nodes().map(d=>d.getBoundingClientRect().width)) || 0
+      var xadj = max(yticks.nodes().map(d=>d.getBBox().width)) || 0
 
       var vb = (-xadj) + ',' + (-yadj) + ',' + (+xadj +this.width) + ',' + (+yadj+this.height)
 
