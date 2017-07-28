@@ -1,24 +1,23 @@
 <template>
-  <svg
-   :style = "{'width':'100%', 'height':'100%'}"
-   :viewBox = "viewbox"
-   preserveAspectRatio="xMidYMin"
-  >
-    <g
-       v-for="(node, index) in matrix"
-          v-bind:key="index"
-          :transform="'translate(' + xscale(node[x]) + ',' + yscale(node[y]) +')'"
+    <svg
+    :style = "{'width':'100%', 'height':'100%'}"
+    preserveAspectRatio="xMidYMin"
     >
-      <rect
-        :width = "xscale.bandwidth()"
-        :height = "yscale.bandwidth()"
-        :style = "{'fill': color()(zscale(node[z])), 'stroke':'white'}"
+      <g
+        v-for="(node, index) in matrix"
+            v-bind:key="index"
+            :transform="'translate(' + xscale(node[x]) + ',' + yscale(node[y]) +')'"
       >
-      </rect>
-    </g>
-    <g class="heatmap-xaxis"></g>
-    <g class="heatmap-yaxis"></g>
-  </svg>  
+        <rect
+          :width = "xscale.bandwidth()"
+          :height = "yscale.bandwidth()"
+          :style = "{'fill': color()(zscale(node[z])), 'stroke':'white'}"
+        >
+        </rect>
+      </g>
+      <g class="heatmap-xaxis"></g>
+      <g class="heatmap-yaxis"></g>
+    </svg> 
 </template>
 
 <script>
@@ -57,21 +56,12 @@ export default {
       default: () => interpolateViridis
     }
   },
-  data: () => {
-    return {
-      xadj: 0,
-      yadj: 0
-    }
-  },
   computed: {
     width: function() {
       return this.size[0]
     },
     height: function() {
       return this.size[1]
-    },
-    viewbox: function() {
-      return (-this.xadj) + ',' + (-this.yadj) + ',' + (+this.xadj +this.width) + ',' + (+this.yadj+this.height)
     },
     xvals: function() {
       var vm = this
@@ -96,6 +86,7 @@ export default {
   updated: function() {
     this.createXAxis()
     this.createYAxis()
+    this.updateViewBox()
   },
   methods: {
     createXAxis: function() {
@@ -111,9 +102,6 @@ export default {
         .attr('dx', '0.5em')
         .attr('dy', '0.25em')
         .attr('font-family', 'inherit')
-
-      var xticks = xaxis.selectAll('.heatmap-xaxis g.tick')
-      this.yadj = max(xticks.nodes().map(d=>d.getBoundingClientRect().height)) || 0
     },
     createYAxis: function() {
       var yaxis = select(this.$el).select(".heatmap-yaxis")
@@ -124,10 +112,17 @@ export default {
       yaxis.attr('font-family','inherit')
       yaxis.selectAll('.tick text')
         .attr('font-family','inherit')
+    },
+    updateViewBox: function() {
+      var xticks = select(this.$el).selectAll('.heatmap-xaxis g.tick')
+      var yadj = max(xticks.nodes().map(d=>d.getBoundingClientRect().height)) || 0
+      var yticks = select(this.$el).selectAll('.heatmap-yaxis g.tick')
+      var xadj = max(yticks.nodes().map(d=>d.getBoundingClientRect().width)) || 0
 
-            
-      var yticks = yaxis.selectAll('.heatmap-yaxis g.tick')
-      this.xadj = max(yticks.nodes().map(d=>d.getBoundingClientRect().width)) || 0
+      var vb = (-xadj) + ',' + (-yadj) + ',' + (+xadj +this.width) + ',' + (+yadj+this.height)
+
+      select(this.$el)
+        .attr('viewBox', vb)
     }
   }
 }
