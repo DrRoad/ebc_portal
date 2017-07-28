@@ -129,9 +129,17 @@ export default {
       if(xticks.nodes().length === 0) {
         return
       }
-      this.yadj = max(xticks.nodes().map(d=>d.getBoundingClientRect().height))
+      var yadj = max(xticks.nodes().map(d=>d.getBoundingClientRect().height))
       var yticks = select(this.$el).selectAll('.heatmap-yaxis g.tick')
-      this.xadj = max(xticks.nodes().map(d=>d.getBoundingClientRect().width))
+      var xadj = max(xticks.nodes().map(d=>d.getBoundingClientRect().width))
+
+      if(yadj !== this.yadj) {
+        this.yadj = yadj
+      }
+
+      if(xadj !== this.xadj) {
+        this.xadj = xadj
+      }
     }
   }
 }
