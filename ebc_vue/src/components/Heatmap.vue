@@ -96,8 +96,6 @@ export default {
   updated: function() {
     this.createXAxis()
     this.createYAxis()
-    var vm = this
-    Vue.nextTick(function(){vm.adjustViewBox()})
   },
   methods: {
     createXAxis: function() {
@@ -113,6 +111,9 @@ export default {
         .attr('dx', '0.5em')
         .attr('dy', '0.25em')
         .attr('font-family', 'inherit')
+
+      var xticks = xaxis.selectAll('.heatmap-xaxis g.tick')
+      this.yadj = max(xticks.nodes().map(d=>d.getBoundingClientRect().height)) || 0
     },
     createYAxis: function() {
       var yaxis = select(this.$el).select(".heatmap-yaxis")
@@ -123,23 +124,10 @@ export default {
       yaxis.attr('font-family','inherit')
       yaxis.selectAll('.tick text')
         .attr('font-family','inherit')
-    },
-    adjustViewBox: function() {
-      var xticks = select(this.$el).selectAll('.heatmap-xaxis g.tick')
-      if(xticks.nodes().length === 0) {
-        return
-      }
-      var yadj = max(xticks.nodes().map(d=>d.getBoundingClientRect().height))
-      var yticks = select(this.$el).selectAll('.heatmap-yaxis g.tick')
-      var xadj = max(xticks.nodes().map(d=>d.getBoundingClientRect().width))
 
-      if(yadj !== this.yadj) {
-        this.yadj = yadj
-      }
-
-      if(xadj !== this.xadj) {
-        this.xadj = xadj
-      }
+            
+      var yticks = yaxis.selectAll('.heatmap-yaxis g.tick')
+      this.xadj = max(yticks.nodes().map(d=>d.getBoundingClientRect().width)) || 0
     }
   }
 }
