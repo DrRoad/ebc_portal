@@ -14,7 +14,7 @@
               :depth="1"
               :treeheight=100
               :treewidth=200
-              :styleObject="{'width':'200px', height:'100px'}"
+              :styleObject="{'width':'100%', height:'100px'}"
               :colorScale="colorScaleBW"
               :colorValueFun="colorData"
               :rectStyle="{'stroke':'black'}"
@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
-          <div class="col col-md-5">
+          <div class="col col-md-4">
             <h5>Geography</h5>
             <Treemap
               :tree="geotree"
@@ -65,8 +65,8 @@
             >
             </Treemap>
           </div>
-          <div class="col col-md-7">
-            <Heatmap :matrix="matrix" :size="[600,400]" x="int_group" y="outcome" z="size"></Heatmap>
+          <div class="col col-md-8">
+            <Heatmap :matrix="matrix" :size="[300,200]" x="int_group" y="outcome" z="size"></Heatmap>
           </div>
         </div>
       </div>
@@ -75,7 +75,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import {arrayeq} from '../utils.js'
 import {set, nest} from 'd3-collection'
 import {hierarchy, treemapBinary, treemapDice} from 'd3-hierarchy'
