@@ -50,8 +50,41 @@
           </div>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
+          <div class="col col-md-6">
+            <h5>Vega Heatmap</h5>
+            <VegaHeatmap
+              :matrix = "matrix_intout"
+              x = "outcome"
+              y = "int_group"
+              z = "size"
+            >
+            </VegaHeatmap>
+          </div>
+          <div class="col col-md-6">
+            <h5>Vega Bar</h5>
+            <VegaBarChart
+              :matrix = "matrix_intout"
+              y = "int_group"
+              x = "size"
+            >
+            </VegaBarChart>
+          </div>
+        </div>
+        <div class="row align-items-start" style="margin-top:2em;">
+          <div class="col col-md-12">
+            <h5>Vega Facet Bar</h5>
+            <VegaBarFacet
+              :matrix = "matrix_geoint"
+              x = "size"
+              y = "intgroup"
+              facet = "region"
+            >
+            </VegaBarFacet>
+          </div>
+        </div>
+        <div class="row align-items-start" style="margin-top:2em;">
           <div class="col col-md-4">
-            <h5>Geography</h5>
+            <h5>Treemap Geography</h5>
             <Treemap
               :tree="geotree"
               :depth="2"
@@ -66,7 +99,8 @@
             </Treemap>
           </div>
           <div class="col col-md-8">
-            <Heatmap :matrix="matrix" :size="[300,200]" x="int_group" y="outcome" z="size"></Heatmap>
+            <h5>Custom Heatmap</h5>
+            <Heatmap :matrix="matrix_intout" :size="[300,200]" x="int_group" y="outcome" z="size"></Heatmap>
           </div>
         </div>
       </div>
@@ -80,17 +114,24 @@ import {set, nest} from 'd3-collection'
 import {hierarchy, treemapBinary, treemapDice} from 'd3-hierarchy'
 import {scaleOrdinal, schemeCategory10} from 'd3-scale'
 import {merge} from 'd3-array'
+import * as vegalite from 'vega-lite'
 import flattree from '../flattree.js'
 
 import Filters from './Filters.vue'
 import Treemap from './Treemap.vue'
 import Heatmap from './Heatmap.vue'
+import VegaHeatmap from './VegaHeatmap.vue'
+import VegaBarChart from './VegaBarChart.vue'
+import VegaBarFacet from './VegaBarFacet.vue'
 
 export default {
   components: {
     Filters,
     Treemap,
-    Heatmap
+    Heatmap,
+    VegaHeatmap,
+    VegaBarChart,
+    VegaBarFacet
   },
   props: ['fulldata'],
   data: function() {
@@ -160,7 +201,7 @@ export default {
 
       return ftr
     },
-    matrix: function() {
+    matrix_intout: function() {
       var filtered = this.filtered;
 
       var nested = nest()
@@ -174,6 +215,21 @@ export default {
         .entries(filtered)
         .map(d=>d.values.map(dd=>dd.value));
 
+      return merge(nested)
+    },
+    matrix_geoint: function() {
+      var filtered = this.filtered;
+
+      var nested = nest()
+        .key(d=>d.region)
+        .key(d=>d.int_group)
+        .rollup(d=>{ return {
+          region: d[0].region,
+          intgroup: d[0].int_group,
+          size: set(d.map(dd=>dd.aid)).size()
+        }})
+        .entries(filtered)
+        .map(d=>d.values.map(dd=>dd.value));
       return merge(nested)
     },
     fakehier: function () {
