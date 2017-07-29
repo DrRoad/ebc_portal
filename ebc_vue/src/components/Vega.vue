@@ -65,21 +65,31 @@ export default {
   },
   methods: {
     createView: function(spec) {
-      debugger;
+      // very destructive way to rerender and not taking advantage of Vega DataFlow
+      //  but for now we will go with this
+
+      // should I view.finalize before re-render
+            // if no spec finalize and destroy view
+      if(this.view && this.view.finalize) {
+        this.view.finalize()
+      }
+
       if(spec) {
         const runtime = vega.parse(spec);
         const view = new vega.View(runtime);
-        ['renderer', 'padding', 'width', 'height', 'padding', 'background', 'hover'].forEach( (setting) => {
+        ['renderer', 'autosize', 'padding', 'width', 'height', 'padding', 'background', 'hover'].forEach( (setting) => {
           if(this[setting]) {
             try {
               view[setting](this[setting])
             } catch(e) {
-
+              console.log('trouble applying setting to vega view', e);
             }
           }
         })
         
         view.initialize(this.$el);
+
+        this.addSignalEmitter(spec, view);
 
         view.run();
 
@@ -89,7 +99,16 @@ export default {
 
         return view;
       }
+    },
+    addSignalEmitter: function(spec, view) {
+      debugger;
+      if(view && spec && spec.signals.length > 0) {
+        spec.signals.forEach(signal => {
+          view.addSignalListener(signal.name, (name,value) => this.$emit(name,value) )
+        })
+      }
     }
   }
+
 }
 </script>
