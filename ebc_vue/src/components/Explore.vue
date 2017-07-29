@@ -83,6 +83,18 @@
           </div>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
+          <div class="col col-md-12">
+            <h5>Vega Facet Dot</h5>
+            <VegaDotFacet
+              :matrix = "matrix_geoint"
+              x = "size"
+              y = "intgroup"
+              facet = "region"
+            >
+            </VegaDotFacet>
+          </div>
+        </div>
+        <div class="row align-items-start" style="margin-top:2em;">
           <div class="col col-md-4">
             <h5>Treemap Geography</h5>
             <Treemap
@@ -123,6 +135,7 @@ import Heatmap from './Heatmap.vue'
 import VegaHeatmap from './VegaHeatmap.vue'
 import VegaBarChart from './VegaBarChart.vue'
 import VegaBarFacet from './VegaBarFacet.vue'
+import VegaDotFacet from './VegaDotFacet.vue'
 
 export default {
   components: {
@@ -131,7 +144,8 @@ export default {
     Heatmap,
     VegaHeatmap,
     VegaBarChart,
-    VegaBarFacet
+    VegaBarFacet,
+    VegaDotFacet
   },
   props: ['fulldata'],
   data: function() {
