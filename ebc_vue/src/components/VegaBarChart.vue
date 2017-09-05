@@ -14,19 +14,19 @@ export default {
     matrix: {
       type: Array,
       default: () => {return []}
-     },
-     x: {
-       type: String,
-       default: 'x'
-     },
-     y: {
-       type: String,
-       default: 'y'
-     },
-     z: {
-       type: String,
-       default: 'z'
-     }
+    },
+    x: {
+      type: String,
+      default: 'x'
+    },
+    y: {
+      type: String,
+      default: 'y'
+    },
+    z: {
+      type: String,
+      default: 'z'
+    }
   },
   computed: {
     specvl: function() {
