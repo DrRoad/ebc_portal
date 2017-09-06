@@ -50,6 +50,9 @@
           </div>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
+          <VegaGeomap :matrix = "matrix_geo"></VegaGeomap>
+        </div>
+        <div class="row align-items-start" style="margin-top:2em;">
           <div class="col col-md-6">
             <h5>Vega Heatmap</h5>
             <VegaHeatmap
@@ -133,6 +136,7 @@ import Filters from './Filters.vue'
 import Treemap from './Treemap.vue'
 import Heatmap from './Heatmap.vue'
 import VegaHeatmap from './VegaHeatmap.vue'
+import VegaGeomap from './VegaGeomap.vue'
 import VegaBarChart from './VegaBarChart.vue'
 import VegaBarFacet from './VegaBarFacet.vue'
 import VegaDotFacet from './VegaDotFacet.vue'
@@ -143,6 +147,7 @@ export default {
     Treemap,
     Heatmap,
     VegaHeatmap,
+    VegaGeomap,
     VegaBarChart,
     VegaBarFacet,
     VegaDotFacet
@@ -214,6 +219,17 @@ export default {
       });
 
       return ftr
+    },
+    matrix_geo: function() {
+      var filtered = this.filtered;
+      var nested = nest()
+        .key(d=>d.region)
+        .rollup(d=>{return {
+          continent: d[0].region,
+          size: set(d.map(dd=>dd.aid)).size()
+        }})
+        .entries(filtered);
+      return nested.map(d=>d.value);
     },
     matrix_intout: function() {
       var filtered = this.filtered;
