@@ -69,12 +69,13 @@ export default {
       //  but for now we will go with this
 
       // should I view.finalize before re-render
-            // if no spec finalize and destroy view
+      // if no spec finalize and destroy view
       if(this.view && this.view.finalize) {
         this.view.finalize()
       }
 
       if(spec) {
+        debugger;
         const runtime = vega.parse(spec);
         const view = new vega.View(runtime);
         ['renderer', 'autosize', 'padding', 'width', 'height', 'padding', 'background', 'hover'].forEach( (setting) => {
@@ -101,7 +102,6 @@ export default {
       }
     },
     addSignalEmitter: function(spec, view) {
-      debugger;
       if(view && spec && spec.signals.length > 0) {
         spec.signals.forEach(signal => {
           view.addSignalListener(signal.name, (name,value) => this.$emit(name,value) )

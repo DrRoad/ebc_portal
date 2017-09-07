@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
-          <VegaGeomap :matrix = "matrix_geo"></VegaGeomap>
+          <VegaGeomap :spec = "spec_geo"></VegaGeomap>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
           <div class="col col-md-6">
@@ -173,7 +173,6 @@ export default {
   },
   computed: {
     filtered: function() {
-      debugger
       //if(this.checkedgeo.length > 0) {
         return this.filterData(this.checkedfilters)
       //}
@@ -220,8 +219,9 @@ export default {
 
       return ftr
     },
-    matrix_geo: function() {
+    spec_geo: function() {
       var filtered = this.filtered;
+      debugger;
       var nested = nest()
         .key(d=>d.region)
         .rollup(d=>{return {
@@ -229,7 +229,137 @@ export default {
           size: set(d.map(dd=>dd.aid)).size()
         }})
         .entries(filtered);
-      return nested.map(d=>d.value);
+      return {        
+        "$schema": "https://vega.github.io/schema/vega/v3.0.json",
+        "width": 900,
+        "height": 500,
+        "autosize": "none",
+
+        "encode": {
+          "update": {
+            "fill": {"signal": "background"}
+          }
+        },
+
+        "signals": [
+          { "name": "scale", "value": 150,
+            "bind": {"input": "range", "min": 50, "max": 2000, "step": 1} },
+          { "name": "rotate0", "value": 0,
+            "bind": {"input": "range", "min": -180, "max": 180, "step": 1} },
+          { "name": "rotate1", "value": 0,
+            "bind": {"input": "range", "min": -90, "max": 90, "step": 1} },
+          { "name": "rotate2", "value": 0,
+            "bind": {"input": "range", "min": -180, "max": 180, "step": 1} },
+          { "name": "center0", "value": 0,
+            "bind": {"input": "range", "min": -180, "max": 180, "step": 1} },
+          { "name": "center1", "value": 0,
+            "bind": {"input": "range", "min": -90, "max": 90, "step": 1} },
+          { "name": "translate0", "update": "width / 2" },
+          { "name": "translate1", "update": "height / 2" },
+
+          { "name": "graticuleDash", "value": 0,
+            "bind": {"input": "radio", "options": [0, 3, 5, 10]} },
+          { "name": "borderWidth", "value": 1,
+            "bind": {"input": "text"} },
+          { "name": "background", "value": "#ffffff",
+            "bind": {"input": "color"} },
+          { "name": "invert", "value": false,
+            "bind": {"input": "checkbox"} }
+        ],
+
+        "projections": [
+          {
+            "name": "projection",
+            "type": "mercator",
+            "scale": {"signal": "scale"},
+            "rotate": [
+              {"signal": "rotate0"},
+              {"signal": "rotate1"},
+              {"signal": "rotate2"}
+            ],
+            "center": [
+              {"signal": "center0"},
+              {"signal": "center1"}
+            ],
+            "translate": [
+              {"signal": "translate0"},
+              {"signal": "translate1"}
+            ]
+          }
+        ],
+
+        "data": [
+          {
+            "name": "geosum",
+            "values": nested.map(d=>d.value)
+          },
+          {
+            "name": "world",
+            "url": "static/world-continents.json",
+            "format": {
+              "type": "topojson",
+              "feature": "continent"
+            },
+            "transform": [
+              { "type": "lookup", "from": "geosum", "key": "continent", "fields": ["properties.continent"], "values": ["size"], "default": 0 }//,
+              //{ "type": "filter", "expr": "datum.size != null" }
+            ]
+          },
+          {
+            "name": "graticule",
+            "transform": [
+              { "type": "graticule" }
+            ]
+          }
+        ],
+
+        "scales": [
+          {
+            "name": "color",
+            "type": "quantize",
+            "domain": {"data": "geosum", "field": "size"},
+            "range": {"scheme": "blues"}
+          }
+        ],
+
+        "marks": [
+          {
+            "type": "shape",
+            "from": {"data": "graticule"},
+            "encode": {
+              "update": {
+                "strokeWidth": {"value": 1},
+                "strokeDash": {"signal": "[+graticuleDash, +graticuleDash]"},
+                "stroke": {"signal": "invert ? '#444' : '#ddd'"},
+                "fill": {"value": null}
+              }
+            },
+            "transform": [
+              { "type": "geoshape", "projection": "projection" }
+            ]
+          },
+          {
+            "type": "shape",
+            "from": {"data": "world"},
+            "encode": {
+              "update": {
+                "strokeWidth": {"signal": "+borderWidth"},
+                "stroke": {"signal": "invert ? '#777' : '#bbb'"},
+                "fill": {"scale": "color", "field": "size"},
+                "zindex": {"value": 0}
+              },
+              "hover": {
+                "strokeWidth": {"signal": "+borderWidth + 1"},
+                "stroke": {"value": "firebrick"},
+                "zindex": {"value": 1}
+              }
+            },
+            "transform": [
+              { "type": "geoshape", "projection": "projection" }
+            ]
+          }
+        ]
+      }
     },
     matrix_intout: function() {
       var filtered = this.filtered;

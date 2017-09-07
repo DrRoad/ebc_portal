@@ -43,7 +43,6 @@ export default {
   },
   methods: {
     handleFilterChange(data, checked, indeterminate) {
-      debugger
       this.checkedfilters = this.$refs.filter_tree.getCheckedNodes()
       this.$emit('checked-nodes', this.checkedfilters)
     }
