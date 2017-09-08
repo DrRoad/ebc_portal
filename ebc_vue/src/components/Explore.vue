@@ -301,8 +301,8 @@ export default {
               "feature": "countries"
             },
             "transform": [
-              { "type": "lookup", "from": "geosum", "key": "id", "fields": ["id"], "values": ["size"], "default": 0 }//,
-              //{ "type": "filter", "expr": "datum.size != null" }
+              { "type": "lookup", "from": "geosum", "key": "id", "fields": ["id"], "values": ["size"] },
+              { "type": "filter", "expr": "datum.size != null" }
             ]
           },
           {
