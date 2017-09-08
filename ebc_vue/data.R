@@ -3,6 +3,37 @@ library(dplyr)
 dat <- readRDS("./data/map_data_final.rds")
 codes <- readr::read_csv("./data/codes.csv")
 
+### check country names for matches with topo ----
+countries <- read.delim(
+  "https://gist.githubusercontent.com/mbostock/4090846/raw/07e73f3c2d21558489604a0bc434b3a5cf41a867/world-country-names.tsv"
+)
+
+dat %>%
+  group_by(Study_country) %>%
+  summarize(n = n()) %>%
+  left_join(countries, by = c("Study_country"="name")) %>%
+  filter(is.na(id))
+
+
+# manual adjust NA
+dat$country <- dat$Study_country
+replace_country <- function(orig, repl) {
+  dat[which(dat$country==orig), "country"] <- repl
+  dat
+}
+dat <- replace_country("Bolivia", "Bolivia, Plurinational State of")
+dat <- replace_country("Congo, The Democratic Republic Of The", "Congo, the Democratic Republic of the")
+#cote de ivorie dat <- replace_country("","")
+dat <- replace_country("Iran, Islamic Republic Of","Iran, Islamic Republic of")
+dat <- replace_country("Saint Vincent And The Grenadines","Saint Vincent and the Grenadines")
+dat <- replace_country("Taiwan, Province Of China","Taiwan, Province of China")
+dat <- replace_country("Tanzania, United Republic Of","Tanzania, United Republic of")
+dat <- replace_country("Venezuela", "Venezuela, Bolivarian Republic of")
+
+dat <- dat %>%
+  left_join(countries, by = c("country"="name")) %>%
+  select(-country)
+
 cat(
   jsonlite::toJSON(
     dat,
@@ -10,7 +41,7 @@ cat(
     dataframe = "rows",
     pretty = TRUE
   ),
-  file="../ebc_vue/data/data.json"
+  file="../ebc_vue/static/data.json"
 )
 
 unique(dat[,c("region","subregion")]) %>%
@@ -210,15 +241,3 @@ rp <- rpivotTable(
   subtotals = TRUE
 )
 
-
-
-### check country names for matches with topo ----
-countries <- read.delim(
-  "https://gist.githubusercontent.com/mbostock/4090846/raw/07e73f3c2d21558489604a0bc434b3a5cf41a867/world-country-names.tsv"
-)
-
-dat %>%
-  group_by(Study_country) %>%
-  summarize(n = n()) %>%
-  left_join(countries, by = c("Study_country"="name")) %>%
-  filter(is.na(id))

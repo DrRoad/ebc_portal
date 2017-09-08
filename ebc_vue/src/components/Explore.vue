@@ -223,9 +223,9 @@ export default {
       var filtered = this.filtered;
       debugger;
       var nested = nest()
-        .key(d=>d.region)
+        .key(d=>d.id)
         .rollup(d=>{return {
-          continent: d[0].region,
+          id: d[0].id,
           size: set(d.map(dd=>dd.aid)).size()
         }})
         .entries(filtered);
@@ -295,13 +295,13 @@ export default {
           },
           {
             "name": "world",
-            "url": "static/world-continents.json",
+            "url": "static/world-110m.json",
             "format": {
               "type": "topojson",
-              "feature": "continent"
+              "feature": "countries"
             },
             "transform": [
-              { "type": "lookup", "from": "geosum", "key": "continent", "fields": ["properties.continent"], "values": ["size"], "default": 0 }//,
+              { "type": "lookup", "from": "geosum", "key": "id", "fields": ["id"], "values": ["size"], "default": 0 }//,
               //{ "type": "filter", "expr": "datum.size != null" }
             ]
           },
