@@ -242,29 +242,19 @@ export default {
         },
 
         "signals": [
-          { "name": "scale", "value": 150,
-            "bind": {"input": "range", "min": 50, "max": 2000, "step": 1} },
-          { "name": "rotate0", "value": 0,
-            "bind": {"input": "range", "min": -180, "max": 180, "step": 1} },
-          { "name": "rotate1", "value": 0,
-            "bind": {"input": "range", "min": -90, "max": 90, "step": 1} },
-          { "name": "rotate2", "value": 0,
-            "bind": {"input": "range", "min": -180, "max": 180, "step": 1} },
-          { "name": "center0", "value": 0,
-            "bind": {"input": "range", "min": -180, "max": 180, "step": 1} },
-          { "name": "center1", "value": 0,
-            "bind": {"input": "range", "min": -90, "max": 90, "step": 1} },
+          { "name": "scale", "value": 100 },
+          { "name": "rotate0", "value": -10 },
+          { "name": "rotate1", "value": 0 },
+          { "name": "rotate2", "value": 0 },
+          { "name": "center0", "value": 0 },
+          { "name": "center1", "value": 0 },
           { "name": "translate0", "update": "width / 2" },
           { "name": "translate1", "update": "height / 2" },
 
-          { "name": "graticuleDash", "value": 0,
-            "bind": {"input": "radio", "options": [0, 3, 5, 10]} },
-          { "name": "borderWidth", "value": 1,
-            "bind": {"input": "text"} },
-          { "name": "background", "value": "#ffffff",
-            "bind": {"input": "color"} },
-          { "name": "invert", "value": false,
-            "bind": {"input": "checkbox"} }
+          { "name": "graticuleDash", "value": 0 },
+          { "name": "borderWidth", "value": 1 },
+          { "name": "background", "value": "#ffffff" },
+          { "name": "invert", "value": false }
         ],
 
         "projections": [
@@ -316,7 +306,7 @@ export default {
         "scales": [
           {
             "name": "color",
-            "type": "quantize",
+            "type": "quantile",
             "domain": {"data": "geosum", "field": "size"},
             "range": {"scheme": "blues"}
           }
@@ -358,7 +348,8 @@ export default {
               { "type": "geoshape", "projection": "projection" }
             ]
           }
-        ]
+        ],
+
       }
     },
     matrix_intout: function() {
