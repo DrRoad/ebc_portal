@@ -42,7 +42,19 @@ export default {
       default: 'hover'
     },
     useViewbox: {
+      type: Boolean,
       default: true
+    },
+    useTooltip: {
+      type: Boolean,
+      default: true
+    },
+    tooltipOptions: {
+      default: function() {
+        return {
+          showAllFields: true
+        }
+      }
     }
   },
   data: () => {
@@ -97,13 +109,17 @@ export default {
         this.addSignalEmitter(spec, view);
 
         view.run();
-
-        //if(this.useViewbox) {
+debugger
+        if(this.useViewbox) {
           select(this.$el).select('svg')
             .style('width', '100%')
             .style('height', '100%')
-        //}
-        vegaTooltip.vega(view);
+        }
+
+        if(this.useTooltip) {
+          vegaTooltip.vega(view, this.tooltipOptions);
+        }
+
         return view;
       }
     },

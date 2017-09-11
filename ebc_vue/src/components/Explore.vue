@@ -49,7 +49,11 @@
           </div>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
-          <VegaGeomap :spec = "spec_geo" useViewbox = "false"></VegaGeomap>
+          <VegaGeomap
+            :spec = "spec_geo"
+            :use-viewbox = "false"
+          >
+          </VegaGeomap>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
           <div class="col col-md-6">
@@ -227,6 +231,7 @@ export default {
         .key(d=>d.id)
         .rollup(d=>{return {
           id: d[0].id,
+          country: d[0].Study_country,
           size: set(d.map(dd=>dd.aid)).size()
         }})
         .entries(filtered);
@@ -336,7 +341,7 @@ export default {
               "feature": "countries"
             },
             "transform": [
-              { "type": "lookup", "from": "geosum", "key": "id", "fields": ["id"], "values": ["size"] },
+              { "type": "lookup", "from": "geosum", "key": "id", "fields": ["id"], "values": ["country", "size"] },
               { "type": "filter", "expr": "datum.size != null" }
             ]
           },
@@ -399,7 +404,7 @@ export default {
           {
             "fill": "color",
             "type": "gradient",
-            "orient": "right",
+            "orient": "left",
             "title": "Count of Articles",
             "format": ",.0f"
           }

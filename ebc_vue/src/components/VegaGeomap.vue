@@ -1,5 +1,10 @@
 <template>
-  <Vega v-if="spec !== null" :spec="spec"></Vega>
+  <Vega
+    v-if="spec !== null" :spec="spec"
+    :use-viewbox = "useViewbox"
+    :use-tooltip = "useTooltip"
+    :tooltip-options = "tooltipOptions"
+  ></Vega>
 </template>
 
 <script>
@@ -9,6 +14,6 @@ export default {
   components: {
     Vega
   },
-  props: ["spec"]
+  props: ["spec", "useViewbox", "useTooltip", "tooltipOptions"]
 }
 </script>
