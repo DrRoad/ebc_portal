@@ -300,9 +300,9 @@ export default {
         "scales": [
           {
             "name": "color",
-            "type": "linear",
+            "type": "sequential",
             "domain": {"data": "geosum", "field": "size"},
-            "range": {"scheme": "Viridis"}
+            "range": "heatmap"
           }
         ],
 
