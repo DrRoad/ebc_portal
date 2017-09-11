@@ -2,26 +2,25 @@
   <div class="container-fluid" style="margin-top: 2em;">
     <div class="row align-items-start justify-content-center">
       <div class="col col-md-3" style="overflow:auto;max-height:400px;position:relative;">
+        <h4>Filters</h4>
+        <Treemap
+          :tree="filteredtree"
+          :tile="tileDice"
+          :depth="1"
+          :treeheight=30
+          :treewidth=200
+          :styleObject="{'width':'100%', height:'30px'}"
+          :colorScale="colorScaleBW"
+          :colorValueFun="colorData"
+          :rectStyle="{'stroke':'#bab'}"
+          preserveAspectRatio="xMinYMin"
+        >
+        </Treemap>
         <filters  v-on:checked-nodes="checkHandler"></filters>
       </div>
       <div class="col col-md-9">
         <div class="row justify-content-center">
-          <div class="col col-md-3">
-            <h5>Filtered</h5>
-            <Treemap
-              :tree="filteredtree"
-              :tile="tileDice"
-              :depth="1"
-              :treeheight=100
-              :treewidth=200
-              :styleObject="{'width':'100%', height:'100px'}"
-              :colorScale="colorScaleBW"
-              :colorValueFun="colorData"
-              :rectStyle="{'stroke':'black'}"
-            >
-            </Treemap>
-          </div>
-          <div class="col col-md-3">
+          <div class="col col-md-4">
             <div class="card text-center" style="background-color:#31698a;">
               <div class="card-block">
                 <h5 class="card-title">Total Articles</h5>
@@ -30,7 +29,7 @@
               </div>
             </div>
           </div>
-          <div class="col col-md-3">
+          <div class="col col-md-4">
             <div class="card text-center" style="background-color:#31698a;">
               <div class="card-block">
                 <h5 class="card-title">Impact Evaluations</h5>
@@ -39,7 +38,7 @@
               </div>
             </div>
           </div>
-          <div class="col col-md-3">
+          <div class="col col-md-4">
             <div class="card text-center" style="background-color:#31698a;">
               <div class="card-block">
                 <h5 class="card-title">Open Access</h5>
@@ -50,7 +49,7 @@
           </div>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
-          <VegaGeomap :spec = "spec_geo"></VegaGeomap>
+          <VegaGeomap :spec = "spec_geo" useViewbox = "false"></VegaGeomap>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
           <div class="col col-md-6">
@@ -110,6 +109,7 @@
               :styleObject="{'width':'100%', height:'400px'}"
               :colorScale="colorScaleGrayStart"
               :rectStyle="{'stroke':'white'}"
+              preserveAspectRatio="xMidYMin"
             >
             </Treemap>
           </div>
@@ -120,6 +120,7 @@
         </div>
       </div>
     </div>
+    <div id="vis-tooltip" class="vg-tooltip"></div>    
   </div>
 </template>
 
@@ -231,8 +232,8 @@ export default {
         .entries(filtered);
       return {        
         "$schema": "https://vega.github.io/schema/vega/v3.0.json",
-        "width": 900,
-        "height": 500,
+        "width": 600,
+        "height": 400,
         "autosize": "none",
 
         "encode": {
@@ -242,14 +243,14 @@ export default {
         },
 
         "signals": [
-          { "name": "scale", "value": 100 },
-          { "name": "rotate0", "value": -10 },
+          { "name": "scale", "value": 90 },
+          { "name": "rotate0", "value": -12 },
           { "name": "rotate1", "value": 0 },
           { "name": "rotate2", "value": 0 },
           { "name": "center0", "value": 0 },
           { "name": "center1", "value": 0 },
-          { "name": "translate0", "update": "width / 2" },
-          { "name": "translate1", "update": "height / 2" },
+          { "name": "tx", "update": "width / 2"},
+          { "name": "ty", "update": "height / 2"},
 
           { "name": "graticuleDash", "value": 0 },
           { "name": "borderWidth", "value": 1 },
@@ -267,14 +268,7 @@ export default {
               {"signal": "rotate1"},
               {"signal": "rotate2"}
             ],
-            "center": [
-              {"signal": "center0"},
-              {"signal": "center1"}
-            ],
-            "translate": [
-              {"signal": "translate0"},
-              {"signal": "translate1"}
-            ]
+            "translate": [{"signal": "tx"}, {"signal": "ty"}]
           }
         ],
 
@@ -306,9 +300,9 @@ export default {
         "scales": [
           {
             "name": "color",
-            "type": "quantile",
+            "type": "linear",
             "domain": {"data": "geosum", "field": "size"},
-            "range": {"scheme": "blues"}
+            "range": {"scheme": "Viridis"}
           }
         ],
 
@@ -347,6 +341,16 @@ export default {
             "transform": [
               { "type": "geoshape", "projection": "projection" }
             ]
+          }
+        ],
+
+        "legends": [
+          {
+            "fill": "color",
+            "type": "gradient",
+            "orient": "right",
+            "title": "Count of Articles",
+            "format": ",.0f"
           }
         ],
 
@@ -446,4 +450,52 @@ export default {
 
 <style scoped>
   .card-title, .card-text {color:white;}
+
+  .vg-tooltip {
+    visibility: hidden;
+    padding: 6px;
+    border-radius: 3px;
+    position: fixed;
+    z-index: 2000;
+    font-family: sans-serif;
+    font-size: 11px;
+
+    /* The default look of the tooltip is the same as .light-theme
+    but it can be overwritten by .dark-theme */
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #d9d9d9;
+    color: black;
+  }
+  .vg-tooltip td.key, .vg-tooltip td.value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .vg-tooltip td.key {
+    color: #808080;
+    max-width: 150px;
+    text-align: right;
+    padding-right: 1px;
+  }
+  .vg-tooltip td.value {
+    max-width: 200px;
+    text-align: left;
+  }
+
+  /* Dark and light color themes */
+  .vg-tooltip.dark-theme {
+    background-color: rgba(64, 64, 64, 0.9);
+    border: none;
+    color: white;
+  }
+  .vg-tooltip.dark-theme td.key {
+    color: #bfbfbf;
+  }
+  .vg-tooltip.light-theme {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #d9d9d9;
+    color: black;
+  }
+  .vg-tooltip.light-theme td.key {
+    color: #808080;
+  }
 </style>

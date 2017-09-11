@@ -14,6 +14,11 @@ dat %>%
   left_join(countries, by = c("Study_country"="name")) %>%
   filter(is.na(id))
 
+# use to verify in JavaScript
+dat %>%
+  group_by(Study_country, id) %>%
+  summarize(n = length(unique(aid))) %>%
+  arrange(desc(n))
 
 # manual adjust NA
 dat$country <- dat$Study_country
@@ -34,15 +39,15 @@ dat <- dat %>%
   left_join(countries, by = c("country"="name")) %>%
   select(-country)
 
-cat(
-  jsonlite::toJSON(
-    dat,
-    auto_unbox = TRUE,
-    dataframe = "rows",
-    pretty = TRUE
-  ),
-  file="../ebc_vue/static/data.json"
-)
+#cat(
+#  jsonlite::toJSON(
+#    dat,
+#    auto_unbox = TRUE,
+#    dataframe = "rows",
+#    pretty = TRUE
+#  ),
+#  file="../ebc_vue/static/data.json"
+#)
 
 unique(dat[,c("region","subregion")]) %>%
 {

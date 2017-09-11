@@ -1,5 +1,5 @@
 <template>
-  <svg v-bind:style="styleObject" :viewBox=viewBox preserveAspectRatio="xMidYMin">
+  <svg v-bind:style="styleObject" :viewBox=viewBox>
       <g>
         <TreemapNode
            v-for="(node, index) in nodes"

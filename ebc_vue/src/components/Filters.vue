@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h4>Filters</h4>
-
     <div>
       <tree
         ref = "filter_tree"

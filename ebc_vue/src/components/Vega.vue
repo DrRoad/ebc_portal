@@ -4,6 +4,7 @@
 
 <script>
 import * as vega from 'vega';
+import * as vegaTooltip from 'vega-tooltip';
 import {select} from 'd3-selection';
 
 export default {
@@ -39,6 +40,9 @@ export default {
     },
     hover: {
       default: 'hover'
+    },
+    useViewbox: {
+      default: true
     }
   },
   data: () => {
@@ -94,10 +98,12 @@ export default {
 
         view.run();
 
-        select(this.$el).select('svg')
-          .style('width', '100%')
-          .style('height', '100%')
-
+        //if(this.useViewbox) {
+          select(this.$el).select('svg')
+            .style('width', '100%')
+            .style('height', '100%')
+        //}
+        vegaTooltip.vega(view);
         return view;
       }
     },
