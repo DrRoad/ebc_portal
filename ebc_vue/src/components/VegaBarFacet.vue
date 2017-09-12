@@ -46,8 +46,9 @@ export default {
           "spec": {
             "mark": "rect",
             "encoding": {
-              "y": {"field": this.y, "type": "ordinal"},
-              "x": {"field": this.x, "type": "quantitative"}
+              "y": {"field": this.y, "type": "nominal"},
+              "x": {"field": this.x, "type": "quantitative"},
+              "color": {"field": this.facet, "type": "nominal", "legend": null}
             }
           }
         }
