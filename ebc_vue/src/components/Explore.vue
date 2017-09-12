@@ -124,25 +124,21 @@
           </div>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
-          <div class="col col-md-4">
-            <h5>Treemap Geography</h5>
+          <div class="col col-md-8">
+            <h5>Treemap Geography (reminder that we can do this)</h5>
             <Treemap
               :tree="geotree"
               :depth="2"
               :tile="tileBinary"
-              :treeheight=400
-              :treewidth=400
+              :treeheight=600
+              :treewidth=800
               :paddingOuter=20
-              :styleObject="{'width':'100%', height:'400px'}"
+              :styleObject="{'width':'100%', height:'600px'}"
               :colorScale="colorScaleGrayStart"
               :rectStyle="{'stroke':'white'}"
               preserveAspectRatio="xMidYMin"
             >
             </Treemap>
-          </div>
-          <div class="col col-md-8">
-            <h5>Custom Heatmap</h5>
-            <Heatmap :matrix="matrix_intout" :size="[300,200]" x="int_group" y="outcome" z="size"></Heatmap>
           </div>
         </div>
       </div>
