@@ -52,12 +52,34 @@
           <VegaGeomap
             :spec = "spec_geo"
             :use-viewbox = "false"
+            :use-tooltip = "true"
+            :tooltip-options = "{
+              showAllFields:false,
+              fields: [
+                {
+                  field: 'region',
+                  title: 'Region'
+                },
+                {
+                  field: 'subregion',
+                  title: 'Subregion'
+                },
+                {
+                  field: 'country',
+                  title: 'Country'
+                },
+                {
+                  field: 'size',
+                  title: 'ArticleCount'
+                }
+              ]
+            }"
           >
           </VegaGeomap>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
           <div class="col col-md-6">
-            <h5>Vega Heatmap</h5>
+            <h5>Intervention by Outcome Heatmap</h5>
             <VegaHeatmap
               :matrix = "matrix_intout"
               x = "outcome"
@@ -67,18 +89,19 @@
             </VegaHeatmap>
           </div>
           <div class="col col-md-6">
-            <h5>Vega Bar</h5>
-            <VegaBarChart
+            <h5>Intervention by Outcome Heatmap</h5>
+            <VegaHeatmap
               :matrix = "matrix_intout"
+              x = "outcome"
               y = "int_group"
-              x = "size"
+              z = "size"
             >
-            </VegaBarChart>
+            </VegaHeatmap>>
           </div>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
           <div class="col col-md-12">
-            <h5>Vega Facet Bar</h5>
+            <h5>Intervention by Region</h5>
             <VegaBarFacet
               :matrix = "matrix_geoint"
               x = "size"
@@ -90,14 +113,14 @@
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
           <div class="col col-md-12">
-            <h5>Vega Facet Dot</h5>
-            <VegaDotFacet
-              :matrix = "matrix_geoint"
+            <h5>Habitat by Region</h5>
+            <VegaBarFacet
+              :matrix = "matrix_geohab"
               x = "size"
-              y = "intgroup"
+              y = "habitat"
               facet = "region"
             >
-            </VegaDotFacet>
+            </VegaBarFacet>
           </div>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
@@ -145,6 +168,8 @@ import VegaGeomap from './VegaGeomap.vue'
 import VegaBarChart from './VegaBarChart.vue'
 import VegaBarFacet from './VegaBarFacet.vue'
 import VegaDotFacet from './VegaDotFacet.vue'
+
+import Habitats from '../habitats.js'
 
 export default {
   components: {
@@ -226,11 +251,12 @@ export default {
     },
     spec_geo: function() {
       var filtered = this.filtered;
-      debugger;
       var nested = nest()
         .key(d=>d.id)
         .rollup(d=>{return {
           id: d[0].id,
+          region: d[0].region,
+          subregion: d[0].subregion,
           country: d[0].Study_country,
           size: set(d.map(dd=>dd.aid)).size()
         }})
@@ -239,7 +265,7 @@ export default {
         "$schema": "https://vega.github.io/schema/vega/v3.0.json",
         "width": 600,
         "height": 500,
-        "autosize": "none",
+        "autosize": "fit",
 
         "encode": {
           "update": {
@@ -252,10 +278,10 @@ export default {
           { "name": "ty", "update": "height / 2"},
           {
             "name": "scale",
-            "value": 150,
+            "value": 100,
             "on": [{
               "events": {"type": "wheel", "consume": true},
-              "update": "clamp(scale * pow(1.0005, -event.deltaY * pow(16, event.deltaMode)), 150, 3000)"
+              "update": "clamp(scale * pow(1.0005, -event.deltaY * pow(16, event.deltaMode)), 100, 3000)"
             }]
           },
           {
@@ -341,7 +367,10 @@ export default {
               "feature": "countries"
             },
             "transform": [
-              { "type": "lookup", "from": "geosum", "key": "id", "fields": ["id"], "values": ["country", "size"] },
+              { 
+                "type": "lookup", "from": "geosum", "key": "id",
+                "fields": ["id"], "values": ["region", "subregion", "country", "size"]
+              },
               { "type": "filter", "expr": "datum.size != null" }
             ]
           },
@@ -404,7 +433,7 @@ export default {
           {
             "fill": "color",
             "type": "gradient",
-            "orient": "left",
+            "orient": "top-left",
             "title": "Count of Articles",
             "format": ",.0f"
           }
@@ -441,6 +470,26 @@ export default {
         }})
         .entries(filtered)
         .map(d=>d.values.map(dd=>dd.value));
+      return merge(nested)
+    },
+    matrix_geohab: function() {
+      var filtered = this.filtered;
+      var nested = nest()
+        .key(d=>d.region)
+        .key(function(d) {
+          return Habitats().filter(function(dh){return d["Biome."] === dh.code})[0].habitat
+        })
+        .rollup(function(d) {
+          debugger 
+          return {
+            region: d[0].region,
+            habitat: Habitats().filter(function(dh){return d[0]["Biome."] === dh.code})[0].habitat,
+            size: set(d.map(dd=>dd.aid)).size()
+          }
+        })
+        .entries(filtered)
+        .map(d=>d.values.map(dd=>dd.value));
+      
       return merge(nested)
     },
     fakehier: function () {

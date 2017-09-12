@@ -109,6 +109,29 @@ export default function() {
       file="../ebc_vue/src/habitatfilters.js"
     )    
   }
+
+dat %>%
+  select(Biome.) %>%
+  unique() %>%
+  left_join(codes, by=c("Biome." = "code")) %>%
+  mutate(habitat = unlist(lapply(code_def,function(x){strsplit(x,"-")[[1]][1]}))) %>%
+  mutate(ecoregion = unlist(lapply(code_def,function(x){strsplit(x,"-")[[1]][2]}))) %>%
+  rename(code = Biome.) %>%
+  select(habitat, ecoregion, code ) %>%
+  {
+    cat(
+      sprintf(
+        "
+export default function() {
+  var data = %s;
+  return data;
+}
+"
+,jsonlite::toJSON(., dataframe="rows")
+      ),
+file="../ebc_vue/src/habitats.js"
+    )
+  }
   
 unique(dat[,c("int_group","Int_type")]) %>%
   left_join(codes, by=c("int_group"="code")) %>%

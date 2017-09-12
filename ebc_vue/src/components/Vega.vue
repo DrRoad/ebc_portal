@@ -109,7 +109,7 @@ export default {
         this.addSignalEmitter(spec, view);
 
         view.run();
-debugger
+
         if(this.useViewbox) {
           select(this.$el).select('svg')
             .style('width', '100%')

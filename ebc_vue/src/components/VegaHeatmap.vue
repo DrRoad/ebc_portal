@@ -38,7 +38,11 @@ export default {
           "encoding": {
             "x": {"field": this.x, "type": "ordinal"},
             "y": {"field": this.y, "type": "ordinal"},
-            "color": {"field": this.z, "type": "quantitative"}
+            "color": {
+              "field": this.z,
+              "type": "quantitative",
+              "legend": {"orient": "top"}
+            }
           }
         }
       }
