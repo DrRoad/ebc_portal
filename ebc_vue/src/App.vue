@@ -22,9 +22,8 @@
             <li class="nav-item dropdown">  
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">EXPLORE BY</a>
               <div class="dropdown-menu">
-                <router-link to="/explore" class="dropdown-item">Evidence Map</router-link>
-                <router-link to="/explore" class="dropdown-item">Linkage Explorer</router-link>
-                <router-link to="/explore" class="dropdown-item">Dashboard</router-link>
+                <router-link to="/explore/wellbeing" class="dropdown-item">Human Well-Being</router-link>
+                <router-link to="/explore/profor" class="dropdown-item">Program on Forests</router-link>
               </div>
             </li>
             <li class="nav-item">

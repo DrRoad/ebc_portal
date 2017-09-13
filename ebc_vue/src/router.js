@@ -7,7 +7,8 @@ import AboutTool from './components/AboutTool.vue'
 import AboutToolData from './components/AboutToolData.vue'
 import AboutToolTool from './components/AboutToolTool.vue'
 import AboutToolGlossary from './components/AboutToolGlossary.vue'
-import Explore from './components/Explore.vue'
+import ExploreHumanWellBeing from './components/ExploreHumanWellBeing.vue'
+import ExploreProgramForests from './components/ExploreProgramForests.vue'
 import Research from './components/Research.vue'
 import ResearchOngoing from './components/ResearchOngoing.vue'
 import Contact from './components/Contact.vue'
@@ -58,23 +59,17 @@ var routes = [
         }
       ]
   },
-  { path: '/explore', component: Explore,
-  /*,
+  { path: '/explore', component: ExploreHumanWellBeing,
       children: [
         {
-          path: 'map',
-          component: ExploreMap
+          path: 'wellbeing',
+          component: ExploreHumanWellBeing
         },
         {
-          path: 'linkage',
-          component: ExploreLinkage
-        },
-        {
-          path: 'dashboard',
-          component: ExploreDashboard
+          path: 'profor',
+          component: ExploreProgramForests
         }
       ]
-    */
   },
   { path: '/research', component: Research,
       children: [
