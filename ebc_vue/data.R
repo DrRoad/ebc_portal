@@ -192,6 +192,24 @@ export default function() {
   }
 
 
+codes %>%
+  {
+    cat(
+      sprintf(
+"
+export default function() {
+  var data = %s;
+  data.id = 'outcome0'
+  data.name = 'Outcome'
+  return data;
+}
+",
+        jsonlite::toJSON(codes, dataframe="rows")
+      ),
+      file = "../ebc_vue/src/codes.js"
+    )
+  }
+
 dat %>%
   select(int_group, Outcome, aid) %>%
   unique() %>%

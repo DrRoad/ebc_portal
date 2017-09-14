@@ -20,7 +20,7 @@ export default {
      },
      x: {
        type: String,
-       default: 'x'
+       default: 'x',
      },
      y: {
        type: String,
@@ -40,14 +40,23 @@ export default {
           "facet": {
             "column": {
               "field": this.facet,
-              "type": "nominal"
+              "type": "nominal",
             }
           },
           "spec": {
             "mark": "rect",
             "encoding": {
-              "y": {"field": this.y, "type": "nominal"},
-              "x": {"field": this.x, "type": "quantitative"},
+              "y": {
+                "field": this.y,
+                "type": "nominal"
+              },
+              "x": {
+                "field": this.x,
+                "type": "quantitative",
+                "axis": {
+                  title: null
+                }
+              },
               "color": {"field": this.facet, "type": "nominal", "legend": null}
             }
           }

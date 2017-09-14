@@ -78,35 +78,13 @@
           </VegaGeomap>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
-          <div class="col col-md-6">
-            <h5>Intervention by Outcome Heatmap</h5>
-            <VegaHeatmap
-              :matrix = "matrix_intout"
-              x = "outcome"
-              y = "int_group"
-              z = "size"
-            >
-            </VegaHeatmap>
-          </div>
-          <div class="col col-md-6">
-            <h5>Intervention by Outcome Heatmap</h5>
-            <VegaHeatmap
-              :matrix = "matrix_intout"
-              x = "outcome"
-              y = "int_group"
-              z = "size"
-            >
-            </VegaHeatmap>>
-          </div>
-        </div>
-        <div class="row align-items-start" style="margin-top:2em;">
           <div class="col col-md-12">
             <h5>Intervention by Region</h5>
             <VegaBarFacet
               :matrix = "matrix_geoint"
-              x = "size"
-              y = "intgroup"
-              facet = "region"
+              x = "ArticleCount"
+              y = "Intervention"
+              facet = "Region"
             >
             </VegaBarFacet>
           </div>
@@ -116,11 +94,23 @@
             <h5>Habitat by Region</h5>
             <VegaBarFacet
               :matrix = "matrix_geohab"
-              x = "size"
-              y = "habitat"
-              facet = "region"
+              x = "ArticleCount"
+              y = "Habitat"
+              facet = "Region"
             >
             </VegaBarFacet>
+          </div>
+        </div>
+        <div class="row align-items-start" style="margin-top:2em;">
+          <div class="col col-md-6">
+            <h5>Intervention by Outcome Heatmap</h5>
+            <VegaHeatmap
+              :matrix = "matrix_intout"
+              x = "Outcome"
+              y = "Intervention"
+              z = "ArticleCount"
+            >
+            </VegaHeatmap>
           </div>
         </div>
         <div class="row align-items-start" style="margin-top:2em;">
@@ -166,6 +156,7 @@ import VegaBarFacet from './VegaBarFacet.vue'
 import VegaDotFacet from './VegaDotFacet.vue'
 
 import Habitats from '../habitats.js'
+import Codes from '../codes.js'
 
 export default {
   components: {
@@ -444,9 +435,9 @@ export default {
         .key(d=>d.int_group)
         .key(d=>d.Outcome)
         .rollup(d=>{ return {
-          int_group: d[0].int_group,
-          outcome: d[0].Outcome,
-          size: set(d.map(dd=>dd.aid)).size()
+          Intervention: Codes().filter(dc => dc.code=== d[0].int_group)[0].code_def,
+          Outcome: Codes().filter(dc => dc.code=== d[0].Outcome)[0].code_def,
+          ArticleCount: set(d.map(dd=>dd.aid)).size()
         }})
         .entries(filtered)
         .map(d=>d.values.map(dd=>dd.value));
@@ -460,9 +451,10 @@ export default {
         .key(d=>d.region)
         .key(d=>d.int_group)
         .rollup(d=>{ return {
-          region: d[0].region,
-          intgroup: d[0].int_group,
-          size: set(d.map(dd=>dd.aid)).size()
+          Region: d[0].region,
+          Intervention: d[0].int_group,
+          Description: Codes().filter(dc => dc.code=== d[0].int_group)[0].code_def,
+          ArticleCount: set(d.map(dd=>dd.aid)).size()
         }})
         .entries(filtered)
         .map(d=>d.values.map(dd=>dd.value));
@@ -476,11 +468,10 @@ export default {
           return Habitats().filter(function(dh){return d["Biome."] === dh.code})[0].habitat
         })
         .rollup(function(d) {
-          debugger 
           return {
-            region: d[0].region,
-            habitat: Habitats().filter(function(dh){return d[0]["Biome."] === dh.code})[0].habitat,
-            size: set(d.map(dd=>dd.aid)).size()
+            Region: d[0].region,
+            Habitat: Habitats().filter(function(dh){return d[0]["Biome."] === dh.code})[0].habitat,
+            ArticleCount: set(d.map(dd=>dd.aid)).size()
           }
         })
         .entries(filtered)
