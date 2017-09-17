@@ -1,134 +1,136 @@
 <template :fulldata="fulldata">
   <div class="container-fluid" style="margin-top: 2em;">
-    <div class="row align-items-start justify-content-center">
-      <div class="col col-md-3" style="overflow:auto;max-height:400px;position:relative;">
-        <h4>Filters</h4>
-        <Treemap
-          :tree="filteredtree"
-          :tile="tileDice"
-          :depth="1"
-          :treeheight=30
-          :treewidth=200
-          :styleObject="{'width':'100%', height:'30px'}"
-          :colorScale="colorScaleBW"
-          :colorValueFun="colorData"
-          :rectStyle="{'stroke':'#bab'}"
-          preserveAspectRatio="xMinYMin"
-        >
-        </Treemap>
-        <filters  v-on:checked-nodes="checkHandler"></filters>
-      </div>
-      <div class="col col-md-9">
-        <div class="row justify-content-center">
-          <div class="col col-md-4">
-            <div class="card text-center" style="background-color:#31698a;">
-              <div class="card-block">
-                <h5 class="card-title">Total Articles</h5>
-                <p class="card-text" v-if="fulldata.length > 0">{{getArticleCount(filtered)}}</p>
-                <p class="card-text" v-else>loading...</p>
+    <div class="col col-3" style="overflow:auto; max-height:400px; position:fixed; top:150px;">
+      <h4>Filters</h4>
+      <Treemap
+        :tree="filteredtree"
+        :tile="tileDice"
+        :depth="1"
+        :treeheight=30
+        :treewidth=200
+        :styleObject="{'width':'100%', height:'30px'}"
+        :colorScale="colorScaleBW"
+        :colorValueFun="colorData"
+        :rectStyle="{'stroke':'#bab'}"
+        preserveAspectRatio="xMinYMin"
+      >
+      </Treemap>
+      <filters  v-on:checked-nodes="checkHandler"></filters>
+    </div>
+    <div class="col-md-8 offset-md-4">
+      <div class="row align-items-start justify-content-center">
+        <div class="row">
+          <div class="row justify-content-center">
+            <div class="col col-md-4">
+              <div class="card text-center" style="background-color:#31698a;">
+                <div class="card-block">
+                  <h5 class="card-title">Total Articles</h5>
+                  <p class="card-text" v-if="fulldata.length > 0">{{getArticleCount(filtered)}}</p>
+                  <p class="card-text" v-else>loading...</p>
+                </div>
+              </div>
+            </div>
+            <div class="col col-md-4">
+              <div class="card text-center" style="background-color:#31698a;">
+                <div class="card-block">
+                  <h5 class="card-title">Impact Evaluations</h5>
+                  <p class="card-text" v-if="fulldata.length > 0">{{getImpactCount(filtered)}}</p>
+                  <p class="card=text" v-else>loading...</p>
+                </div>
+              </div>
+            </div>
+            <div class="col col-md-4">
+              <div class="card text-center" style="background-color:#31698a;">
+                <div class="card-block">
+                  <h5 class="card-title">Open Access</h5>
+                  <p class="card-text" v-if="fulldata.length > 0">{{getOpenCount(filtered)}}</p>
+                  <p class="card-text" v-else>loading...</p>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col col-md-4">
-            <div class="card text-center" style="background-color:#31698a;">
-              <div class="card-block">
-                <h5 class="card-title">Impact Evaluations</h5>
-                <p class="card-text" v-if="fulldata.length > 0">{{getImpactCount(filtered)}}</p>
-                <p class="card=text" v-else>loading...</p>
-              </div>
+          <div class="row align-items-start" style="margin-top:2em;">
+            <VegaGeomap
+              :spec = "spec_geo"
+              :use-viewbox = "false"
+              :use-tooltip = "true"
+              :tooltip-options = "{
+                showAllFields:false,
+                fields: [
+                  {
+                    field: 'region',
+                    title: 'Region'
+                  },
+                  {
+                    field: 'subregion',
+                    title: 'Subregion'
+                  },
+                  {
+                    field: 'country',
+                    title: 'Country'
+                  },
+                  {
+                    field: 'size',
+                    title: 'ArticleCount'
+                  }
+                ]
+              }"
+            >
+            </VegaGeomap>
+          </div>
+          <div class="row align-items-start" style="margin-top:2em;">
+            <div class="col col-md-12">
+              <h5>Intervention by Region</h5>
+              <VegaBarFacet
+                :matrix = "matrix_geoint"
+                x = "ArticleCount"
+                y = "Intervention"
+                facet = "Region"
+              >
+              </VegaBarFacet>
             </div>
           </div>
-          <div class="col col-md-4">
-            <div class="card text-center" style="background-color:#31698a;">
-              <div class="card-block">
-                <h5 class="card-title">Open Access</h5>
-                <p class="card-text" v-if="fulldata.length > 0">{{getOpenCount(filtered)}}</p>
-                <p class="card-text" v-else>loading...</p>
-              </div>
+          <div class="row align-items-start" style="margin-top:2em;">
+            <div class="col col-md-12">
+              <h5>Habitat by Region</h5>
+              <VegaBarFacet
+                :matrix = "matrix_geohab"
+                x = "ArticleCount"
+                y = "Habitat"
+                facet = "Region"
+              >
+              </VegaBarFacet>
             </div>
           </div>
-        </div>
-        <div class="row align-items-start" style="margin-top:2em;">
-          <VegaGeomap
-            :spec = "spec_geo"
-            :use-viewbox = "false"
-            :use-tooltip = "true"
-            :tooltip-options = "{
-              showAllFields:false,
-              fields: [
-                {
-                  field: 'region',
-                  title: 'Region'
-                },
-                {
-                  field: 'subregion',
-                  title: 'Subregion'
-                },
-                {
-                  field: 'country',
-                  title: 'Country'
-                },
-                {
-                  field: 'size',
-                  title: 'ArticleCount'
-                }
-              ]
-            }"
-          >
-          </VegaGeomap>
-        </div>
-        <div class="row align-items-start" style="margin-top:2em;">
-          <div class="col col-md-12">
-            <h5>Intervention by Region</h5>
-            <VegaBarFacet
-              :matrix = "matrix_geoint"
-              x = "ArticleCount"
-              y = "Intervention"
-              facet = "Region"
-            >
-            </VegaBarFacet>
+          <div class="row align-items-start" style="margin-top:2em;">
+            <div class="col col-md-6">
+              <h5>Intervention by Outcome Heatmap</h5>
+              <VegaHeatmap
+                :matrix = "matrix_intout"
+                x = "Outcome"
+                y = "Intervention"
+                z = "ArticleCount"
+              >
+              </VegaHeatmap>
+            </div>
           </div>
-        </div>
-        <div class="row align-items-start" style="margin-top:2em;">
-          <div class="col col-md-12">
-            <h5>Habitat by Region</h5>
-            <VegaBarFacet
-              :matrix = "matrix_geohab"
-              x = "ArticleCount"
-              y = "Habitat"
-              facet = "Region"
-            >
-            </VegaBarFacet>
-          </div>
-        </div>
-        <div class="row align-items-start" style="margin-top:2em;">
-          <div class="col col-md-6">
-            <h5>Intervention by Outcome Heatmap</h5>
-            <VegaHeatmap
-              :matrix = "matrix_intout"
-              x = "Outcome"
-              y = "Intervention"
-              z = "ArticleCount"
-            >
-            </VegaHeatmap>
-          </div>
-        </div>
-        <div class="row align-items-start" style="margin-top:2em;">
-          <div class="col col-md-8">
-            <h5>Treemap Geography (reminder that we can do this)</h5>
-            <Treemap
-              :tree="geotree"
-              :depth="2"
-              :tile="tileBinary"
-              :treeheight=600
-              :treewidth=800
-              :paddingOuter=20
-              :styleObject="{'width':'100%', height:'600px'}"
-              :colorScale="colorScaleGrayStart"
-              :rectStyle="{'stroke':'white'}"
-              preserveAspectRatio="xMidYMin"
-            >
-            </Treemap>
+          <div class="row align-items-start" style="margin-top:2em;">
+            <div class="col col-md-8">
+              <h5>Treemap Geography (reminder that we can do this)</h5>
+              <Treemap
+                :tree="geotree"
+                :depth="2"
+                :tile="tileBinary"
+                :treeheight=600
+                :treewidth=800
+                :paddingOuter=20
+                :styleObject="{'width':'100%', height:'600px'}"
+                :colorScale="colorScaleGrayStart"
+                :rectStyle="{'stroke':'white'}"
+                preserveAspectRatio="xMidYMin"
+              >
+              </Treemap>
+            </div>
           </div>
         </div>
       </div>
