@@ -251,12 +251,7 @@ export default {
         "width": 600,
         "height": 500,
         "autosize": "fit",
-
-        "encode": {
-          "update": {
-            "fill": {"signal": "background"}
-          }
-        },
+        "background": "ded",
 
         "signals": [
           { "name": "tx", "update": "width / 2"},
@@ -322,9 +317,7 @@ export default {
             }]
           },
 
-          { "name": "graticuleDash", "value": 0 },
           { "name": "borderWidth", "value": 1 },
-          { "name": "background", "value": "#ffffff" },
           { "name": "invert", "value": false }
         ],
 
@@ -355,16 +348,10 @@ export default {
               { 
                 "type": "lookup", "from": "geosum", "key": "id",
                 "fields": ["id"], "values": ["region", "subregion", "country", "size"]
-              },
-              { "type": "filter", "expr": "datum.size != null" }
+              }//,
+              //{ "type": "filter", "expr": "datum.size != null" }
             ]
           },
-          {
-            "name": "graticule",
-            "transform": [
-              { "type": "graticule" }
-            ]
-          }
         ],
 
         "scales": [
@@ -379,27 +366,19 @@ export default {
         "marks": [
           {
             "type": "shape",
-            "from": {"data": "graticule"},
-            "encode": {
-              "update": {
-                "strokeWidth": {"value": 1},
-                "strokeDash": {"signal": "[+graticuleDash, +graticuleDash]"},
-                "stroke": {"signal": "invert ? '#444' : '#ddd'"},
-                "fill": {"value": null}
-              }
-            },
-            "transform": [
-              { "type": "geoshape", "projection": "projection" }
-            ]
-          },
-          {
-            "type": "shape",
             "from": {"data": "world"},
             "encode": {
               "update": {
                 "strokeWidth": {"signal": "+borderWidth"},
                 "stroke": {"signal": "invert ? '#777' : '#bbb'"},
-                "fill": {"scale": "color", "field": "size"},
+                "fill": [
+                  {
+                    "test": "datum.size!==null",
+                    "scale": "color",
+                    "field": "size"
+                  },
+                  {"value": "lightgray"}
+                ],
                 "zindex": {"value": 0}
               },
               "hover": {
