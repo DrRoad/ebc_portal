@@ -11,43 +11,65 @@
     <title>Evidence Based Icon Array</title>
   </head>
   <body>
+    <select id="group-select">
+      <option>region</option>
+      <option>Outcome</option>
+      <option>int_group</option>
+    </select>
     <script>
       // much of this code adapted from https://bl.ocks.org/tomgp/a2c34418f2341f078624
       //  thanks Tom Pearson
+
+      var grouping = d3.select("#group-select");
+      var dat;
+
       d3.json("./static/data.json", function(error, data) {
+        dat = data;
+        update(data);
+      });
+
+      function update(data) {
+        var nested = nest(data);
+        draw(nested);
+      }
+
+      function nest(data) {
         var nested = d3.nest()
-          .key(function(d){return d.region})
+          .key(function(d){return d[grouping.node().value]})
           .key(function(d){return d.aid})
           .rollup(function(d){return d[0]})
           .entries(data)
-        draw(nested);
-      });
-
-      var gridWidth = 100;
-      var gridHeight = 5;
-      var layout = d3_iconarray.layout()
-        .width(gridWidth)
-        .height(gridHeight)
-        .widthFirst(false);
-      var width = 800;
-      var height = 50;
-      var margin = {top: width/gridWidth, left: height/gridHeight}
-      
-      var scaley = d3.scaleLinear()
-        .range([0, width - margin.left*2])
-        .domain([0, gridWidth]);
-      var scalex = d3.scaleLinear()
-        .range([0, height - margin.top*2])
-        .domain([0, gridHeight]);
-      var rectWidth = scalex(1) - scalex(0);
-      var rectHeight = scaley(1) - scaley(0);
+        return nested;
+      }
 
       function draw(data) {
+        var max = d3.max(data.map(function(dd) {return dd.values.length}));
+        var gridWidth = Math.ceil(max/5/20) * 20;
+        var gridHeight = 5;
+        var layout = d3_iconarray.layout()
+          .width(gridWidth)
+          .height(gridHeight)
+          .widthFirst(false);
+        var width = 800;
+        var height = 50;
+        var margin = {top: width/gridWidth, left: height/gridHeight}
+        
+        var scalex = d3.scaleLinear()
+          .range([0, width - margin.left*2])
+          .domain([0, gridWidth]);
+        var scaley = d3.scaleLinear()
+          .range([0, height - margin.top*2])
+          .domain([0, gridHeight]);
+        var rectWidth = scalex(1) - scalex(0);
+        var rectHeight = scaley(1) - scaley(0);
+
         var sections = d3.select("body").selectAll("div").data(data);
-        sections.exit().remove();
+        sections.exit()
+          .remove();
         sections = sections.merge(sections.enter().append("div"));
 
         sections.each(function(d) {
+          d3.select(this).selectAll("*").remove();
           var heading = d3.select(this).selectAll("h3").data([d]);
           heading = heading.merge(
             heading.enter().append("h3")
@@ -55,6 +77,7 @@
           heading.text(function(d){return d.key + " | " + d.values.length });
 
           var grid = d3.select(this).selectAll("svg").data([d.values]);
+          grid.exit().remove();
           grid = grid.merge(
             grid.enter().append("svg")
               .style("width", width)
@@ -83,6 +106,10 @@
           function unhighlight() {
             d3.selectAll(".aid-" + d3.select(this).datum().data.key).style("fill", "#aba")
           }
+
+          grouping.on("change", function() {
+            update(dat);
+          })
         });
 
       }
