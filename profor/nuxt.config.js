@@ -39,7 +39,7 @@ module.exports = {
         })
       }
       */
-      config.output.publicPath = '.dist/'
+      config.output.publicPath = './dist/'
     }
   }
 }
