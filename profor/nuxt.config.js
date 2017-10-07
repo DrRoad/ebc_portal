@@ -27,9 +27,9 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    /*
-    ** Run ESLint on save
     extend (config, ctx) {
+      /*
+          ** Run ESLint on save
       if (ctx.dev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
@@ -38,7 +38,8 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
+      */
+      config.output.publicPath = '.dist/'
     }
-    */
   }
 }

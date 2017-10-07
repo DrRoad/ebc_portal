@@ -1,5 +1,5 @@
 {
-  "publicPath": "/_nuxt/",
+  "publicPath": ".dist/",
   "all": [
     "LICENSES",
     "fonts/element-icons.d2f69a9.woff",
@@ -7,18 +7,18 @@
     "layouts\\default.2c8cb18b9e516c435da5.js",
     "common.c12be465eb820e96dcc0.js",
     "app.27b9e39e5ac26d1129c8.js",
-    "manifest.0679cfe3747378ffc6f1.js",
+    "manifest.ca67b438e0ed2f009d22.js",
     "fonts/element-icons.b02bdc1.ttf",
     "pages\\index.0aead34cfe66aa5992c3.js.map",
     "layouts\\default.2c8cb18b9e516c435da5.js.map",
     "common.c12be465eb820e96dcc0.js.map",
     "app.27b9e39e5ac26d1129c8.js.map",
-    "manifest.0679cfe3747378ffc6f1.js.map",
+    "manifest.ca67b438e0ed2f009d22.js.map",
     "index.spa.html",
     "index.ssr.html"
   ],
   "initial": [
-    "manifest.0679cfe3747378ffc6f1.js",
+    "manifest.ca67b438e0ed2f009d22.js",
     "common.c12be465eb820e96dcc0.js",
     "app.27b9e39e5ac26d1129c8.js"
   ],
