@@ -54,9 +54,14 @@
         var height = 50;
         var margin = {top: width/gridWidth, left: height/gridHeight}
         
-        var scalex = d3.scaleLinear()
-          .range([0, width - margin.left*2])
-          .domain([0, gridWidth]);
+        var scalex = d3_iconarray.scale()
+          .domain([ 0, layout.maxDimension(max) ])
+          .range([0, width-(margin.left*2)])
+          .gapSize(0.5)
+          .gapInterval(5);
+        //var scalex = d3.scaleLinear()
+        // .range([0, width - margin.left*2])
+        //  .domain([0, gridWidth]);
         var scaley = d3.scaleLinear()
           .range([0, height - margin.top*2])
           .domain([0, gridHeight]);
