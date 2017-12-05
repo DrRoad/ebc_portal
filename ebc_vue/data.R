@@ -58,6 +58,15 @@ unique(dat[,c("region","subregion")]) %>%
     .
   )
 } %>%
+{
+  bind_rows(
+    data_frame(
+      region = c("NA","NA"),
+      subregion = c(NA,"NA")
+    ),
+    .
+  ) 
+} %>%
   mutate(id = paste0("geo",1:n())) %>%  
 {  
   cat(
@@ -107,7 +116,7 @@ export default function() {
 ,d3r::d3_nest(., value_cols=c("code","id"))
       ),
       file="../ebc_vue/src/habitatfilters.js"
-    )    
+    )
   }
 
 dat %>%
