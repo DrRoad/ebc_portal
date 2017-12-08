@@ -9,6 +9,8 @@ import AboutToolTool from './components/AboutToolTool.vue'
 import AboutToolGlossary from './components/AboutToolGlossary.vue'
 import Explore from './components/Explore.vue'
 import ExploreHumanWellBeing from './components/ExploreHumanWellBeing.vue'
+import WellbeingVis from './components/Vis.vue'
+import WellbeingDataTable from './components/DataTable.vue'
 import ExploreProgramForests from './profor/ExploreProgramForests.vue'
 import ProforVis from './profor/components/Vis.vue'
 import ProforDataTable from './profor/components/DataTable.vue'
@@ -70,7 +72,21 @@ var routes = [
         },
         {
           path: 'wellbeing',
-          component: ExploreHumanWellBeing
+          component: ExploreHumanWellBeing,
+          children: [
+            {
+              path: '',
+              component: WellbeingVis
+            },
+            {
+              path: 'charts',
+              component: WellbeingVis
+            },
+            {
+              path: 'tables',
+              component: WellbeingDataTable
+            }
+          ]          
         },
         {
           path: 'profor',

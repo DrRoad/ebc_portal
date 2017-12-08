@@ -1,5 +1,5 @@
 <template :profordata="profordata" :fulldata="fulldata">
-  <div style=>
+  <div>
     <div class="row" style="margin-top: 2em;">
       <div class="col-md-3" style="overflow:auto; min-height: 100px; max-height:400px; position:fixed; top:150px;">
         <h4>Filters</h4>

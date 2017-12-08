@@ -21,35 +21,40 @@ import GeoFilters from '../geofilters.js'
 import HabitatFilters from '../habitatfilters.js'
 import InterventionFilters from '../interventionfilters.js'
 import OutcomeFilters from '../outcomefilters.js'
+import StudyFilters from '../studyfilters.js'
+import CompFilters from '../compfilters.js'
 
 export default {
   components: {
     Tree
   },
-  data() {
+  data () {
     return {
-      filters: [GeoFilters(),HabitatFilters(),InterventionFilters(),OutcomeFilters()],
+      filters: [GeoFilters(), HabitatFilters(), InterventionFilters(), OutcomeFilters(), StudyFilters(), CompFilters()],
       defaultProps: {
         children: 'children',
         label: 'name'
       },
       checkedfilters: []
-    };
+    }
   },
-  mounted: function() {
-    this.handleFilterChange();
+  mounted: function () {
+    this.handleFilterChange()
   },
   methods: {
-    handleFilterChange(data, checked, indeterminate) {
+    handleFilterChange (data, checked, indeterminate) {
       this.checkedfilters = this.$refs.filter_tree.getCheckedNodes()
       this.$emit('checked-nodes', this.checkedfilters)
     }
   }
-};
+}
 </script>
 
 
+
 <style>
+  .el-tree {border: none;}
+
   .el-checkbox {margin-bottom: 0px;}
 
   .el-checkbox__input.is-indeterminate .el-checkbox__inner:before {
@@ -116,3 +121,4 @@ export default {
     left: -999px;
   }
 </style>
+

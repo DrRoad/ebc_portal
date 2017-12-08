@@ -41,7 +41,8 @@ export default {
             "color": {
               "field": this.z,
               "type": "quantitative",
-              "legend": {"orient": "top"}
+              "legend": {"orient": "top"},
+              "zero": true
             }
           }
         }

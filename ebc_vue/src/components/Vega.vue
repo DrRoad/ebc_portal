@@ -91,7 +91,6 @@ export default {
       }
 
       if(spec) {
-        debugger;
         const runtime = vega.parse(spec);
         const view = new vega.View(runtime);
         ['renderer', 'autosize', 'padding', 'width', 'height', 'padding', 'background', 'hover'].forEach( (setting) => {
