@@ -7,8 +7,11 @@ import AboutTool from './components/AboutTool.vue'
 import AboutToolData from './components/AboutToolData.vue'
 import AboutToolTool from './components/AboutToolTool.vue'
 import AboutToolGlossary from './components/AboutToolGlossary.vue'
+import Explore from './components/Explore.vue'
 import ExploreHumanWellBeing from './components/ExploreHumanWellBeing.vue'
-import ExploreProgramForests from './components/ExploreProgramForests.vue'
+import ExploreProgramForests from './profor/ExploreProgramForests.vue'
+import ProforVis from './profor/components/Vis.vue'
+import ProforDataTable from './profor/components/DataTable.vue'
 import Research from './components/Research.vue'
 import ResearchOngoing from './components/ResearchOngoing.vue'
 import Contact from './components/Contact.vue'
@@ -59,15 +62,33 @@ var routes = [
         }
       ]
   },
-  { path: '/explore', component: ExploreHumanWellBeing,
+  { path: '/explore', component: Explore,
       children: [
+        {
+          path: '',
+          component: ExploreHumanWellBeing
+        },
         {
           path: 'wellbeing',
           component: ExploreHumanWellBeing
         },
         {
           path: 'profor',
-          component: ExploreProgramForests
+          component: ExploreProgramForests,
+          children: [
+            {
+              path: '',
+              component: ProforVis
+            },
+            {
+              path: 'charts',
+              component: ProforVis
+            },
+            {
+              path: 'tables',
+              component: ProforDataTable
+            }
+          ]
         }
       ]
   },

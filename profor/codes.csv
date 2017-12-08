@@ -1,13 +1,13 @@
 Int_type,Int_label,Int_group,Out_type,Out_label,out_group
-for_mgmt,Forest management,Productivity,mon_dir,Monetary forest incomeÑdirect sale of goods ,Forest income/consumption
-agrofor,Agroforestry,Productivity,mon_val,Monetary forest incomeÑwage labor ,Forest income/consumption
-hab_mgmt,Habitat management,Productivity,mon_wage,Monetary forest incomeÑvalue addition/entrepreneur- ship ,Forest income/consumption
-gov,Governance,Rights,phys_cons,Physical forest incomeÑconsumption ,Forest income/consumption
-emp,Individual rights/empowerment,Rights,fin_cap,"Financial capitalÑcredit, savings and debt ",Capital/assets
-prod_cap,Produced capital,Investments,nat_for,"Natural capitalÑforest assets with access/use, sale and exclusion rights ",Capital/assets
-hum_cap,Human capital,Investments,nat_land,"Natural capitalÑland assets with access/use, sale and exclusion rights ",Capital/assets
-soc_cap,Social capital,Investments,phys_cap,Physical capitalÑforest-based material assets Human capitalÑforest-based knowledge and skills Health ,Capital/assets
-liv_alt,Linked enterprises & livelihood alternatives,Markets,hum_cap,Human capitalÑforest-based knowledge and skills Health ,Capital/assets
+for_mgmt,Forest management,Productivity,mon_dir,Monetary forest incomeï¿½direct sale of goods ,Forest income/consumption
+agrofor,Agroforestry,Productivity,mon_val,Monetary forest incomeï¿½wage labor ,Forest income/consumption
+hab_mgmt,Habitat management,Productivity,mon_wage,Monetary forest incomeï¿½value addition/entrepreneur- ship ,Forest income/consumption
+gov,Governance,Rights,phys_cons,Physical forest incomeï¿½consumption ,Forest income/consumption
+emp,Individual rights/empowerment,Rights,fin_cap,"Financial capitalï¿½credit, savings and debt ",Capital/assets
+prod_cap,Produced capital,Investments,nat_for,"Natural capitalï¿½forest assets with access/use, sale and exclusion rights ",Capital/assets
+hum_cap,Human capital,Investments,nat_land,"Natural capitalï¿½land assets with access/use, sale and exclusion rights ",Capital/assets
+soc_cap,Social capital,Investments,phys_cap,Physical capitalï¿½forest-based material assets Human capitalï¿½forest-based knowledge and skills Health ,Capital/assets
+liv_alt,Linked enterprises & livelihood alternatives,Markets,hum_cap,Human capitalï¿½forest-based knowledge and skills Health ,Capital/assets
 market,Identifying and strengthening market forces,Markets,health,Health,Capital/assets
 mark_acc,Increasing access to markets,Markets,soc_cap,"Social capital (including inequality, con ict, and empowerment of women and marginalized groups) ",Capital/assets
 eco_ser,Managing and enhancing ecosys- tem services ,Ecosystems,,,

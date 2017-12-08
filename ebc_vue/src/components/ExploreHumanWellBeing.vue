@@ -1,5 +1,5 @@
-<template :fulldata="fulldata">
-  <div class="container-fluid" style="margin-top: 2em;">
+<template :profordata="profordata" :fulldata="fulldata">
+  <div class="row" style="margin-top: 2em;">
     <div class="col col-3" style="overflow:auto; max-height:400px; position:fixed; top:150px;">
       <h4>Filters</h4>
       <Treemap
@@ -167,7 +167,7 @@ export default {
     VegaBarFacet,
     VegaDotFacet
   },
-  props: ['fulldata'],
+  props: ["fulldata","profordata"],
   data: function() {
     return {
       checkedfilters: [],
@@ -506,13 +506,6 @@ export default {
       }
       return 0
     }
-  },
-  beforeRouteEnter (to, from, next) {
-    next(vm => vm.$emit("minimizeBanner", true))
-  },
-  beforeRouteLeave (to, from, next) {
-    this.$emit("minimizeBanner", false)
-    next()
   }
 }
 </script>

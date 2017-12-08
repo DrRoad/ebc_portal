@@ -47,9 +47,11 @@
       </div>
     </nav>
 
-    <keep-alive>
-      <router-view :fulldata="fulldata" @minimizeBanner = "changeBannerSize"></router-view>
-    </keep-alive>
+    <div class="container-fluid">
+      <keep-alive>
+        <router-view :fulldata="fulldata" :profordata="profordata" @minimizeBanner = "changeBannerSize"></router-view>
+      </keep-alive>
+    </div>
   </div>
 </template>
 
@@ -63,12 +65,20 @@ export default {
   data: function () {
     return {
       fulldata: [],
+      profordata: [],
       minimalbanner: false
     }
   },
   created: function() {
     axios.get('./static/data.json').then(response => {
       this.fulldata = response.data
+    })
+    .catch(e => {
+      console.log('error getting data', e)
+      //this.errors.push(e)
+    })
+    axios.get('./static/data_profor.json').then(response => {
+      this.profordata = response.data
     })
     .catch(e => {
       console.log('error getting data', e)

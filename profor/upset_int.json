@@ -1,0 +1,23 @@
+{
+  "file": "https://drive.google.com/file/d/1ZIYTR8kNNbbDGlvMZpqZ4vYF38R53zKg/view?usp=sharing",
+  "name": "Profor Intervention Type",
+  "header": 0,
+  "separator": ",",
+  "skip": 0,
+  "meta": [
+    {
+      "type": "id",
+      "index": 0,
+      "name": "aid"
+    }
+  ],
+  "sets": [
+    {
+      "format": "binary",
+      "start": 1,
+      "end": 15
+    }
+  ],
+  "author": "profor",
+  "description": "profor evidence map"
+}
