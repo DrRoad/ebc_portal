@@ -1,4 +1,4 @@
-<template :profordata="profordata" :fulldata="fulldata">
+<template>
   <div>
     <div class="row" style="margin-top: 2em;">
       <div class="col-md-3" style="overflow:auto; min-height: 100px; max-height:400px; position:fixed; top:150px;">
@@ -6,10 +6,39 @@
         <filters  v-on:checked-nodes="checkHandler"></filters>
       </div>
       <div class="col-md-9 ml-md-auto" style="padding-left: 50px;">
+        <div class="row justify-content-center">
+          <div class="col col-md-4">
+            <div class="card text-center" style="background-color:#31698a;">
+              <div class="card-block">
+                <h5 class="card-title">Total Articles</h5>
+                <p class="card-text" v-if="fulldata.length > 0">{{getArticleCount(filtered.data)}}</p>
+                <p class="card-text" v-else>loading...</p>
+              </div>
+            </div>
+          </div>
+          <!--div class="col col-md-4">
+            <div class="card text-center" style="background-color:#31698a;">
+              <div class="card-block">
+                <h5 class="card-title">Impact Evaluations</h5>
+                <p class="card-text" v-if="fulldata.length > 0">{{getImpactCount(filtered.data)}}</p>
+                <p class="card=text" v-else>loading...</p>
+              </div>
+            </div>
+          </div>
+          <div class="col col-md-4">
+            <div class="card text-center" style="background-color:#31698a;">
+              <div class="card-block">
+                <h5 class="card-title">Open Access</h5>
+                <p class="card-text" v-if="fulldata.length > 0">{{getOpenCount(filtered.data)}}</p>
+                <p class="card-text" v-else>loading...</p>
+              </div>
+            </div>
+          </div-->
+        </div>
         <Navbar></Navbar>
         <div class="row">
           <keep-alive>
-            <router-view :filtered="filtered" :checkedfilters="checkedfilters"></router-view>
+            <router-view :fulldata="profordata" :filtered="filtered" :checkedfilters="checkedfilters"></router-view>
           </keep-alive>
         </div>
       </div>
@@ -97,7 +126,25 @@
         if(!arrayeq(this.checkedfilters, allfilters, function(d){return d.id})) {
           this.checkedfilters = allfilters
         }
-      }
+      },
+      getArticleCount: function(data) {
+        if(Array.isArray(data)) {
+          return data.length
+        }
+        return 0
+      },
+      getImpactCount: function(data) {
+        if(Array.isArray(data)) {
+          return data.filter(d=>d.IE === "Y").length
+        }
+        return 0
+      },
+      getOpenCount: function(data) {
+        if(Array.isArray(data)) {
+          return data.filter(d=>d.FullText === "Y").length
+        }
+        return 0
+      }      
     }
   }
 </script>
@@ -110,4 +157,9 @@
     font-size: 15px;
     line-height: 1.42857143;
   }
+</style>
+
+
+<style scoped>
+  .card-title, .card-text {color:white;}
 </style>

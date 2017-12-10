@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row align-items-start justify-content-center" style="margin-top:2em;">
-      <div class = "col col-md-6">
+      <div class="col col-md-12">
         <h5>Articles by Country</h5>
         <VegaGeomap
           :spec = "spec_geo"
@@ -31,7 +31,9 @@
         >
         </VegaGeomap>
       </div>
-      <div class="col col-md-6">
+    </div>
+    <div class="row align-items-start justify-content-center" style="margin-top:2em;">
+      <div class="col col-md-8">
         <h5>Intervention by Outcome Heatmap</h5>
         <VegaHeatmap
           :matrix = "matrix_intout"
@@ -121,7 +123,7 @@
       VegaHeatmap,
       VegaAdjMatrix
     },
-    props: ['filtered', 'checkedfilters'],
+    props: ['fulldata', 'filtered', 'checkedfilters'],
     computed: {
       spec_geo: function() {
         var filtered = this.filtered
@@ -537,6 +539,26 @@
           })
         }
       }
+    },
+    methods: {
+      getArticleCount: function(data) {
+        if(Array.isArray(data)) {
+          return data.length
+        }
+        return 0
+      },
+      getImpactCount: function(data) {
+        if(Array.isArray(data)) {
+          return data.filter(d=>d.IE === "Y").length
+        }
+        return 0
+      },
+      getOpenCount: function(data) {
+        if(Array.isArray(data)) {
+          return data.filter(d=>d.FullText === "Y").length
+        }
+        return 0
+      }
     }
   }
 </script>
@@ -590,4 +612,3 @@
     color: #808080;
   }
 </style>
-
