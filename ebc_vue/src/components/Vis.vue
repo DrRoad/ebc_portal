@@ -32,7 +32,7 @@
         </VegaGeomap>
       </div>
     </div>
-    <div class="row align-items-start justify-content-center" style="margin-top:2em;">
+    <div class="row align-items-start" style="margin-top:2em;">
       <div class="col col-md-8">
         <h5>Intervention by Outcome Heatmap</h5>
         <VegaHeatmap
