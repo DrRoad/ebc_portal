@@ -1,5 +1,7 @@
 <template>
-  <router-view :fulldata="fulldata" :profordata="profordata"></router-view>
+  <keep-alive>
+    <router-view :fulldata="fulldata" :profordata="profordata"></router-view>
+  </keep-alive>
 </template>
 
 <script>

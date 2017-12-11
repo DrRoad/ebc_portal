@@ -76,7 +76,7 @@ var routes = [
           children: [
             {
               path: '',
-              component: WellbeingVis
+              redirect: 'charts'
             },
             {
               path: 'charts',
@@ -94,7 +94,7 @@ var routes = [
           children: [
             {
               path: '',
-              component: ProforVis
+              redirect: 'charts'
             },
             {
               path: 'charts',
