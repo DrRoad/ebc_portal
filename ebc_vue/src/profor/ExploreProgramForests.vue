@@ -49,7 +49,7 @@
 <script>
   import {arrayeq} from './utils.js'
 
-  import Navbar from './components/Navbar.vue'
+  import Navbar from '../components/Navbar.vue'
   import Filters from './components/Filters.vue'
 
   export default {
