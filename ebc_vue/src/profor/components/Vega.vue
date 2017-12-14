@@ -111,14 +111,15 @@ export default {
           }
         })
         
-        view.initialize(select(this.$el).select('div').node());
+        view.initialize(select(this.$el).select('div.vega-chart').node());
 
         this.addSignalEmitter(spec, view);
 
         view.run();
 
         if(this.useViewbox) {
-          select(this.$el).select('svg.vega-chart')
+          debugger
+          select(this.$el).select('div.vega-chart svg')
             .style('width', '100%')
             .style('height', '100%')
         }
