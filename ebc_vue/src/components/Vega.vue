@@ -44,7 +44,7 @@ export default {
       default: null
     },
     background: {
-      default: null
+      default: 'white'
     },
     hover: {
       default: 'hover'
@@ -111,14 +111,14 @@ export default {
           }
         })
         
-        view.initialize(this.$el);
+        view.initialize(select(this.$el).select('div').node());
 
         this.addSignalEmitter(spec, view);
 
         view.run();
 
         if(this.useViewbox) {
-          select(this.$el).select('svg')
+          select(this.$el).select('svg.vega-chart')
             .style('width', '100%')
             .style('height', '100%')
         }
