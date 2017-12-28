@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :id = "id">
     <svg width="20px" height="20px" viewBox="0 0 1792 1792" @click="exportGraph" @mouseover="hoverButton" @mouseout="hoverOut">
       <rect style="pointer-events:all; fill:none; stroke:none" height=1792 width=1792></rect>
       <g class="download-button">
@@ -17,6 +17,10 @@ import {select} from 'd3-selection';
 
 export default {
   props: {
+    id: {
+      type: String,
+      default: ''
+    },
     spec: {
       type: Object,
       default: null

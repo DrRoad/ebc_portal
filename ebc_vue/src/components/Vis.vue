@@ -1,105 +1,113 @@
 <template>
-  <div>
-    <div class="row align-items-start" style="margin-top:2em;">
-      <div class="col col-md-12">
-        <h5>Articles by Country</h5>
-        <VegaGeomap
-          :spec = "spec_geo"
-          :use-viewbox = "true"
-          :use-tooltip = "true"
-          :tooltip-options = "{
-            showAllFields:false,
-            fields: [
-              {
-                field: 'region',
-                title: 'Region'
-              },
-              {
-                field: 'subregion',
-                title: 'Subregion'
-              },
-              {
-                field: 'country',
-                title: 'Country'
-              },
-              {
-                field: 'size',
-                title: 'ArticleCount'
-              }
-            ]
-          }"
-        >
-        </VegaGeomap>
-      </div>
-    </div>
-    <div class="row align-items-start" style="margin-top:2em;">
-      <div class="col col-md-8">
-        <h5>Intervention by Outcome Heatmap</h5>
-        <VegaHeatmap
-          :matrix = "matrix_intout"
-          x = "Intervention"
-          y = "Outcome"
-          z = "ArticleCount"
-        >
-        </VegaHeatmap>
-      </div>
-    </div>
-    <div class="row align-items-start" style="margin-top:2em;">
-      <div class="col col-md-12">
-        <h5>Intervention by Region</h5>
-        <VegaBarFacet
-          :matrix = "matrix_geoint"
-          x = "ArticleCount"
-          y = "Intervention"
-          facet = "Region"
-        >
-        </VegaBarFacet>
-      </div>
-    </div>
-    <div class="row align-items-start" style="margin-top:2em;">
-      <div class="col col-md-12">
-        <h5>Habitat by Region</h5>
-        <VegaBarFacet
-          :matrix = "matrix_geohab"
-          x = "ArticleCount"
-          y = "Habitat"
-          facet = "Region"
-        >
-        </VegaBarFacet>
-      </div>
-    </div>
-    <div class="row align-items-start" style="margin-top:2em;">
-      <div class="col col-md-12">
-        <h5>Study Type by Comparator</h5>
-        <VegaBarFacet
-          :matrix = "matrix_compstudy"
-          x = "ArticleCount"
-          y = "Comparator"
-          facet = "StudyType"
-        >
-        </VegaBarFacet>
-      </div>
-    </div>
-    <div class="row align-items-start" style="margin-top:2em;">
-      <div class="col col-md-6">
-        <h5>Intervention Combinations</h5>
-        <VegaBar
-          :matrix = "combo_int"
-          x = "ArticleCount"
-          y = "Intervention"
-          style = "height: 300px;"
-        >
-        </VegaBar>
-      </div>
-      <div class="col col-md-6">
-        <h5>Intervention Adjacency Matrix</h5>
-        <VegaAdjMatrix
-          style = "height:300px;"
-          :network = "network_int"
-        >
-        </VegaAdjMatrix>
-      </div>
-    </div>
+  <div class="row" style="width:100%;">
+    <collapse v-model="activeNames" class="col col-12">
+      <collapse-item title = "Articles By Country" name="1">
+        <div class="row align-items-start" style="margin-top:2em;">
+          <div class="col col-md-12">
+            <VegaGeomap
+              :spec = "spec_geo"
+              :use-viewbox = "true"
+              :use-tooltip = "true"
+              :tooltip-options = "{
+                showAllFields:false,
+                fields: [
+                  {
+                    field: 'region',
+                    title: 'Region'
+                  },
+                  {
+                    field: 'subregion',
+                    title: 'Subregion'
+                  },
+                  {
+                    field: 'country',
+                    title: 'Country'
+                  },
+                  {
+                    field: 'size',
+                    title: 'ArticleCount'
+                  }
+                ]
+              }"
+            >
+            </VegaGeomap>
+          </div>
+        </div>
+      </collapse-item>
+      <collapse-item title="Intervention by Outcome Heatmap" name="2">
+        <div class="row align-items-start" style="margin-top:2em;">
+          <div class="col col-md-8">
+            <VegaHeatmap
+              :matrix = "matrix_intout"
+              x = "Intervention"
+              y = "Outcome"
+              z = "ArticleCount"
+            >
+            </VegaHeatmap>
+          </div>
+        </div>
+      </collapse-item>
+      <collapse-item title="Intervention by Region" name="3">
+        <div class="row align-items-start" style="margin-top:2em;">
+          <div class="col col-md-12">
+            <VegaBarFacet
+              :matrix = "matrix_geoint"
+              x = "ArticleCount"
+              y = "Intervention"
+              facet = "Region"
+            >
+            </VegaBarFacet>
+          </div>
+        </div>
+      </collapse-item>
+      <collapse-item title="Habitat by Region" name="4">
+        <div class="row align-items-start" style="margin-top:2em;">
+          <div class="col col-md-12">
+            <VegaBarFacet
+              :matrix = "matrix_geohab"
+              x = "ArticleCount"
+              y = "Habitat"
+              facet = "Region"
+            >
+            </VegaBarFacet>
+          </div>
+        </div>
+      </collapse-item>
+      <collapse-item title="Study Type by Comparator" name="5">
+        <div class="row align-items-start" style="margin-top:2em;">
+          <div class="col col-md-12">
+            <VegaBarFacet
+              :matrix = "matrix_compstudy"
+              x = "ArticleCount"
+              y = "Comparator"
+              facet = "StudyType"
+            >
+            </VegaBarFacet>
+          </div>
+        </div>
+      </collapse-item>
+      <collapse-item title="Intervention Combinations" name="6">
+        <div class="row align-items-start" style="margin-top:2em;">
+          <div class="col col-md-6">
+            <VegaBar
+              :matrix = "combo_int"
+              x = "ArticleCount"
+              y = "Intervention"
+              style = "height: 300px;"
+            >
+            </VegaBar>
+          </div>
+          <!--div class="col col-md-6">
+            <h5>Intervention Adjacency Matrix</h5>
+            <VegaAdjMatrix
+              style = "height:300px;"
+              :network = "network_int"
+            >
+            </VegaAdjMatrix>
+          </div-->
+        </div>
+      </collapse-item>
+    </collapse>
   </div>
 </template>
 
@@ -107,6 +115,7 @@
   import {set, nest, entries} from 'd3-collection'
   import {merge, ascending} from 'd3-array'
 
+  import { Collapse, CollapseItem } from 'element-ui'
   import VegaGeomap from './VegaGeomap.vue'
   import VegaBarFacet from './VegaBarFacet.vue'
   import VegaBar from './VegaBar.vue'
@@ -117,6 +126,8 @@
 
   export default {
     components: {
+      Collapse,
+      CollapseItem,
       VegaGeomap,
       VegaBarFacet,
       VegaBar,
@@ -124,6 +135,11 @@
       VegaAdjMatrix
     },
     props: ['fulldata', 'filtered', 'checkedfilters'],
+    data: function() {
+      return {
+        activeNames: ['1', '2', '3', '4', '5', '6']
+      }
+    },
     computed: {
       spec_geo: function() {
         var filtered = this.filtered
@@ -564,6 +580,14 @@
 </script>
 
 <style>
+  .el-collapse {
+    border: none;
+  }
+
+  .el-collapse-item__wrap{
+    background-color: #fff;
+  }
+
   .vg-tooltip {
     visibility: hidden;
     padding: 6px;
