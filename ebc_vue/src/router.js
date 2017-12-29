@@ -11,6 +11,7 @@ import Explore from './components/Explore.vue'
 import ExploreHumanWellBeing from './components/ExploreHumanWellBeing.vue'
 import WellbeingVis from './components/Vis.vue'
 import WellbeingDataTable from './components/DataTable.vue'
+import WellbeingDownload from './components/Download.vue'
 import ExploreProgramForests from './profor/ExploreProgramForests.vue'
 import ProforVis from './profor/components/Vis.vue'
 import ProforDataTable from './profor/components/DataTable.vue'
@@ -85,6 +86,10 @@ var routes = [
             {
               path: 'tables',
               component: WellbeingDataTable
+            },
+            {
+              path: 'download',
+              component: WellbeingDownload
             }
           ]          
         },

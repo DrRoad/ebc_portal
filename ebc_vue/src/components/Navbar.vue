@@ -7,6 +7,9 @@
       <li class="nav-item">
         <router-link class="nav-link" active-class="active" to="tables">Table</router-link>
       </li>
+      <li class="nav-item">
+        <router-link class="nav-link" active-class="active" to="download">Download</router-link>
+      </li>
     </ul>
   </nav>
 </template>
