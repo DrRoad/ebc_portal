@@ -13,11 +13,15 @@
       since many will not be familiar with manipulating JSON.  Should the csv contain codes for things like outcome, intervention, etc.
       or would you like me to translate codes into long-form fields for the download?
     </p>
-    <button v-on:click="downloadJson">Download</button>
+    <button v-on:click="downloadJson">Download JSON</button>
+    <button v-on:click="downloadCsv">Download CSV</button>
   </div>
 </template>
 
 <script>
+  import {csv} from 'd3-request'
+  import {csvFormat} from 'd3-dsv'
+
   export default {
     props: ['fulldata', 'filtered', 'checkedfilters'],
     methods: {
@@ -46,6 +50,23 @@
       downloadJson: function(fileName) {
         var content = JSON.stringify(this.filtered.data);
         this.download(content, "wellbeing.json", "application/json");
+      },
+      downloadCsv: function(fileName) {
+        // load our static csv data and then filter to match applied filters
+        //   then wrap it all up and send it to the user
+        var thisvue = this
+        var filterids = this.filtered.data.map(function(d) {return d.aid})
+        csv('./static/data_ebc.csv', function(error, data) {
+          var filtered = data.filter(function(d) {
+            return filterids.indexOf(+d.aid) > -1
+          })
+
+          thisvue.download(
+            csvFormat(filtered, Object.keys(filtered[0])),
+            "wellbeing.csv",
+            "text.csv"
+          )
+        })
       }
     }
   }

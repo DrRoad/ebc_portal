@@ -47,7 +47,6 @@
 </template>
 
 <script>
-  import axios from 'axios'
   import {arrayeq} from '../utils.js'
 
   import Navbar from './Navbar.vue'
