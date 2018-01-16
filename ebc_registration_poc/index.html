@@ -7,9 +7,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/axios@0.17.1/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/uuid@3.2.1/lib/sha1-browser.js"></script>
+    <script src="https://unpkg.com/uuid@3.2.1/lib/bytesToUuid.js"></script>
 </head>
 <body>
-    https://x7u2x13yx5.execute-api.us-east-2.amazonaws.com/dev/register
     <div id = "app">
         <el-button type="text" @click="visible = true">register</el-button>
         <el-dialog title="Acceptance of Terms" :visible.sync="visible">
@@ -37,11 +39,14 @@
             </el-form>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="visible = false">Cancel</el-button>
-                <el-button type="primary" @click="visible = false">Confirm</el-button>
+                <el-button type="primary" @click="submit">Confirm</el-button>
             </span>
         </el-dialog>
     </div>
+    <div id="resultElement"></div>
     <script>
+        axios.defaults.withCredentials = true;
+        axios.defaults.crossDomain = true;
         new Vue({
             el: '#app',
             data: function() {
@@ -54,6 +59,46 @@
                         checked: false
                     },
                     formLabelWidth: '120px'
+                }
+            },
+            methods: {
+                submit: function() {
+                    function generateSuccessHTMLOutput(response) {
+                        return  '<h4>Result</h4>' + 
+                                '<h5>Status:</h5> ' + 
+                                '<pre>' + response.status + ' ' + response.statusText + '</pre>' +
+                                '<h5>Headers:</h5>' + 
+                                '<pre>' + JSON.stringify(response.headers, null, '\t') + '</pre>' + 
+                                '<h5>Data:</h5>' + 
+                                '<pre>' + JSON.stringify(response.data, null, '\t') + '</pre>'; 
+                    }
+                    function generateErrorHTMLOutput(error) {
+                        return  '<h4>Result</h4>' + 
+                                '<h5>Message:</h5> ' + 
+                                '<pre>' + error.message + '</pre>' +
+                                '<h5>Status:</h5> ' + 
+                                '<pre>' + error.response.status + ' ' + error.response.statusText + '</pre>' +
+                                '<h5>Headers:</h5>' + 
+                                '<pre>' + JSON.stringify(error.response.headers, null, '\t') + '</pre>' + 
+                                '<h5>Data:</h5>' + 
+                                '<pre>' + JSON.stringify(error.response.data, null, '\t') + '</pre>'; 
+                    }
+                    this.visible = false
+                    axios.post(
+                        'https://x7u2x13yx5.execute-api.us-east-2.amazonaws.com/dev/register', 
+                        JSON.stringify({
+                            userId: bytesToUuid(sha1([])),
+                            email: this.email,
+                            name: this.name,
+                            organization: this.organization
+                        })
+                    )
+                    .then(function (response) {
+                        document.getElementById("resultElement").innerHTML = generateSuccessHTMLOutput(response);
+                    })
+                    .catch(function (error) {
+                        document.getElementById("resultElement").innerHTML = generateErrorHTMLOutput(error);
+                    });
                 }
             }
         })   
