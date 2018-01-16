@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+    https://x7u2x13yx5.execute-api.us-east-2.amazonaws.com/dev/register
+    <div id = "app">
+        <el-button type="text" @click="visible = true">register</el-button>
+        <el-dialog title="Acceptance of Terms" :visible.sync="visible">
+            <el-form :model="form">
+                <el-form-item
+                 prop="email"
+                 label="Email"
+                 :label-width="formLabelWidth"
+                 :rules="[
+                        { required: true, message: 'Please input email address', trigger: 'blur' },
+                        { type: 'email', message: 'Please input correct email address', trigger: 'blur,change' }
+                    ]"
+                >
+                    <el-input v-model="form.email" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="Name" :label-width="formLabelWidth">
+                    <el-input v-model="form.name" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="Organization" :label-width="formLabelWidth">
+                    <el-input v-model="form.organization" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-checkbox v-model="form.checked">
+                    I agree to appropriately cite the source of the data being downloaded if it will be used in any publications.
+                </el-checkbox>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="visible = false">Cancel</el-button>
+                <el-button type="primary" @click="visible = false">Confirm</el-button>
+            </span>
+        </el-dialog>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: function() {
+                return {
+                    visible: false,
+                    form: {
+                        email: '',
+                        name: '',
+                        organization: '',
+                        checked: false
+                    },
+                    formLabelWidth: '120px'
+                }
+            }
+        })   
+    </script>
+</body>
+</html>
