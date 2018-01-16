@@ -8,8 +8,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script src="https://unpkg.com/axios@0.17.1/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/uuid@3.2.1/lib/sha1-browser.js"></script>
-    <script src="https://unpkg.com/uuid@3.2.1/lib/bytesToUuid.js"></script>
 </head>
 <body>
     <div id = "app">
@@ -87,7 +85,6 @@
                     axios.post(
                         'https://x7u2x13yx5.execute-api.us-east-2.amazonaws.com/dev/register', 
                         JSON.stringify({
-                            userId: bytesToUuid(sha1([])),
                             email: this.email,
                             name: this.name,
                             organization: this.organization
