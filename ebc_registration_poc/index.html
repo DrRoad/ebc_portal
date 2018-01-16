@@ -84,9 +84,9 @@
                     axios.post(
                         'https://b3mhxedpr3.execute-api.us-east-2.amazonaws.com/dev/register', 
                         {
-                            email: this.email,
-                            name: this.name,
-                            organization: this.organization
+                            email: this.form.email,
+                            name: this.form.name,
+                            organization: this.form.organization
                         }
                     )
                     .then(function (response) {
