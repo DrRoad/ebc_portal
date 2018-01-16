@@ -84,11 +84,11 @@
                     this.visible = false
                     axios.post(
                         'https://x7u2x13yx5.execute-api.us-east-2.amazonaws.com/dev/register', 
-                        JSON.stringify({
+                        {
                             email: this.email,
                             name: this.name,
                             organization: this.organization
-                        })
+                        }
                     )
                     .then(function (response) {
                         document.getElementById("resultElement").innerHTML = generateSuccessHTMLOutput(response);
