@@ -19,10 +19,11 @@ import Research from './components/Research.vue'
 import ResearchOngoing from './components/ResearchOngoing.vue'
 import Contact from './components/Contact.vue'
 import News from './components/News.vue'
+import Register from './components/Registration.vue'
 
 // 1. Define route components.
 // These can be imported from other files
-var Register = { template: '<div>register</div>' }
+//var Register = { template: '<div>register</div>' }
 
 // 2. Define some routes
 // Each route should map to a component. The "component" can
