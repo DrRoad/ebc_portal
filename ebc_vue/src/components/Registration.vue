@@ -79,13 +79,18 @@
                 var thiz = this
                 if (thiz.validForm) {
                     thiz.visible = false
+                    var data = {
+                        email: thiz.form.email,
+                        name: thiz.form.name,
+                        organization: thiz.form.organization
+                    }
+
+                    if(data.name === '') delete data.name
+                    if(data.organization === '') delete data.organization
+
                     axios.post(
                         'https://b3mhxedpr3.execute-api.us-east-2.amazonaws.com/dev/register', 
-                        {
-                            email: thiz.form.email,
-                            name: thiz.form.name,
-                            organization: thiz.form.organization
-                        }
+                        data
                     )
                     .then(function (response) {
                         thiz.registered = true;
