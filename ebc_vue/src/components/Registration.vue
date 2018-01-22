@@ -1,5 +1,5 @@
 <template>
-    <el-dialog title="Acceptance of Terms" :visible.sync = "dialogVisible" @close="handleClose">
+    <el-dialog title="Registration and Acknowledgement" :visible.sync = "dialogVisible" @close="handleClose">
         <el-form :model="form" ref="registerForm">
             <el-form-item
                 prop="email"
@@ -19,10 +19,17 @@
             <el-form-item label="Organization" :label-width="formLabelWidth">
                 <el-input v-model="form.organization" auto-complete="off"></el-input>
             </el-form-item>
-            <el-checkbox v-model="form.checked">
-                I agree to appropriately cite the source of the data being downloaded<br/>
-                if it will be used in any publications.
-            </el-checkbox>
+            <el-form-item label="Agreement"
+              :rules = "[
+                {required: true, trigger: 'change'}
+              ]"
+              :label-width="formLabelWidth"
+            >
+              <el-checkbox v-model="form.checked">
+                  I agree to appropriately cite the source of the data being downloaded<br/> 
+                  if it will be used in any publications.
+              </el-checkbox>
+            </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">Cancel</el-button>
