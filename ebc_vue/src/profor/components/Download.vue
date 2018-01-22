@@ -19,7 +19,7 @@
 <script>
   import {csv} from 'd3-request'
   import {csvFormat} from 'd3-dsv'
-  import Registration from './Registration.vue'
+  import Registration from '../../components/Registration.vue'
 
   export default {
     components: {
@@ -72,7 +72,7 @@
           return
         }
         var content = JSON.stringify(this.filtered.data);
-        this.download(content, "wellbeing.json", "application/json");
+        this.download(content, "profor.json", "application/json");
       },
       downloadCsv: function(fileName) {
         if(!this.registered) {
@@ -84,15 +84,15 @@
         //   then wrap it all up and send it to the user
         var thisvue = this
         var filterids = this.filtered.data.map(function(d) {return d.aid})
-        csv('./static/data_ebc.csv', function(error, data) {
+        csv('./static/data_profor.csv', function(error, data) {
           var filtered = data.filter(function(d) {
             return filterids.indexOf(+d.aid) > -1
           })
 
           thisvue.download(
             csvFormat(filtered, Object.keys(filtered[0])),
-            "wellbeing.csv",
-            "text.csv"
+            "profor.csv",
+            "text/csv"
           )
         })
       }

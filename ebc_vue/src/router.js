@@ -15,6 +15,7 @@ import WellbeingDownload from './components/Download.vue'
 import ExploreProgramForests from './profor/ExploreProgramForests.vue'
 import ProforVis from './profor/components/Vis.vue'
 import ProforDataTable from './profor/components/DataTable.vue'
+import ProforDownload from './profor/components/Download.vue'
 import Research from './components/Research.vue'
 import ResearchOngoing from './components/ResearchOngoing.vue'
 import Contact from './components/Contact.vue'
@@ -109,6 +110,10 @@ var routes = [
             {
               path: 'tables',
               component: ProforDataTable
+            },
+            {
+              path: 'download',
+              component: ProforDownload
             }
           ]
         }

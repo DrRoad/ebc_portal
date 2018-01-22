@@ -49,7 +49,11 @@
 
     <div class="container-fluid">
       <keep-alive>
-        <router-view :fulldata="fulldata" :profordata="profordata" @minimizeBanner = "changeBannerSize"></router-view>
+        <router-view
+         :fulldata="fulldata"
+         :profordata="profordata"
+         @minimizeBanner = "changeBannerSize"
+        ></router-view>
       </keep-alive>
     </div>
   </div>
