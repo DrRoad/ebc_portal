@@ -106,9 +106,10 @@ export default {
   }
 
   .banner-portal {
-    background-image: url('./assets/header2_test.png');
+    background-image: url('./assets/header3.jpg');
     background-repeat: no-repeat;
-    background-position: 25% 20%;
+    background-position: 0% 55%;
+    background-size: cover;
     margin-bottom: 0px;
     padding-top: 0px;
     border-radius: 0px;

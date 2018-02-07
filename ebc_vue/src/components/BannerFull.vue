@@ -1,9 +1,8 @@
 <template>
   <div class = "jumbotron banner-portal">
     <div class="row align-items-center">
-
-      <div class="col col-xs-6" align="left">
-        <div class="hcon">
+      <div class="col col-sm-8" align="left">
+        <!--div class="hcon"-->
           <h1>
             <div>
               <strong>EVIDENCE FOR NATURE AND PEOPLE</strong>
@@ -12,22 +11,34 @@
           <div style="color:#F9CC0F;font-size:30px">
               <em>DATA PORTAL</em>
           </div>
-        </div>
+        <!--/div-->
       </div>
-      <div class="col col-xs-6 hidden-sm-down" align="right">
-        <a href="http://www.snappartnership.net/">
-          <img src="../assets/snap-acronym-color-white.png" alt="snap partnership logo" height="75px">
-        </a>
+      <div class="col col-sm-1 offset-sm-1" align="right">
+        <h4>
+          <a href="">ABOUT</a>
+        </h4>
       </div>
-
+      <div class="col col-sm-1" align="right">
+        <h4>
+          <a href="">CONTACT</a>
+        </h4>
+      </div>
     </div>
-    <div class="row align-items-center justify-content-end hidden-md-up">
-        <a href="http://www.snappartnership.net/">
-          <svg viewBox="0,0,290,75"
-                style="min-width:200px; background-color: rgb(131,146,143);">
-            <image xlink:href="../assets/snap-acronym-color-white.png" x="0" y="0" height="75px" width="290px"/>
-          </svg>
-        </a>
+    <div class="row align-items-start justify-content-center">
+      <div class="col-3 text-center">
+        UNDERSTAND
+        <div>Evidence Synthesis</div>
+        <div>Portal & Tool</div>
+      </div>
+      <div class="col-3 text-center">
+        EXPLORE THE DATA
+        <div>Conservation & Human Well-Being</div>
+        <div>Effectiveness of international wildlife trade programs</div>
+        <div>Contribution of forests to poverty alleviation</div>
+      </div>
+      <div class="col-3 text-center">
+        UPDATES & NEWS
+      </div>
     </div>
   </div>
 </template>
