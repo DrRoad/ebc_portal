@@ -1,24 +1,72 @@
 <template>
   <div class="container-fluid">
-    <div class="row align-items-center" style="background-color:rgb(131,146,143)">
-      <div class="col col-sm-9" align="left">
-        <div class="hcon">
-          <div style="font-weight:bold;">
-            EVIDENCE FOR NATURE AND PEOPLE
+    <div class="row align-items-center alternate-row" style="background-color:#383838;">
+      <div class="col col-md-8" align="left">
+        <!--div class="hcon"-->
+          <h1>
+            <router-link to="/" style="color:white; text-decoration: none;">EVIDENCE FOR NATURE AND PEOPLE</router-link>
+          </h1>
+          <div style="color: #1a7a95; font-size:30px">
+              <em>DATA PORTAL</em>
           </div>
-          <div style="color:#F9CC0F;">
-            <em>DATA PORTAL</em>
+        <!--/div-->
+      </div>
+      <div class="col col-md-3" align="right">
+        <router-link to="/about/group" style="color:#eec919; font-size:1.5em; padding-right:20px; text-decoration:none;">
+          ABOUT
+        </router-link>
+        <a href="" style="color:#eec919; font-size:1.5em; text-decoration:none;">CONTACT</a>
+      </div>
+    </div>
+    <div class="row align-items-start justify-content-center">
+      <div class="col-sm-3 text-center">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownUnderstandButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            UNDERSTAND
+          </button>
+          <div class="dropdown-menu text-center" aria-labelledby="dropdownUnderstandButton">
+            <router-link to="/about/method" class="dropdown-item">Evidence Synthesis</router-link>
+            <a class="dropdown-item" href="#">Portal & Tool</a>
           </div>
         </div>
       </div>
-      <div class = "col col-sm-3" align="right">
-        <a href="http://www.snappartnership.net/">
-          <svg viewBox="0,0,290,75"
-                style="max-width:150px; background-color: rgb(131,146,143);">
-            <image xlink:href="../assets/snap-acronym-color-white.png" x="0" y="0" height="75px" width="290px"/>
-          </svg>
+      <div class="col-sm-3 text-center">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownExploreButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            EXPLORE THE DATA
+          </button>
+          <div class="dropdown-menu text-center" aria-labelledby="dropdownExploreButton">
+            <router-link to="/explore/wellbeing" class="dropdown-item">Conservation &<br/>Human Well-Being</router-link>
+            <a class="dropdown-item" href="#">Effectiveness of international<br/>wildlife trade programs</a>
+            <router-link to="/explore/profor" class="dropdown-item">Contribution of forests<br/>to poverty alleviation</router-link>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3 text-center">
+        <a class="btn btn-secondary" href="#" role="button">
+          UPDATES & NEWS
         </a>
       </div>
     </div>
   </div>
 </template>
+
+
+
+<style scoped>
+  button.btn-secondary, a.btn {
+    background-color: #047a7a;
+    border: none;
+    border-radius: 0px;
+    color: white;
+  }
+
+  button.btn-secondary:active, .show>.btn-secondary.dropdown-toggle {
+    background-color: #047a7a;
+    color: white;
+  }
+
+  .dropdown-menu {
+    background-color: #bfa952;
+  }
+</style>

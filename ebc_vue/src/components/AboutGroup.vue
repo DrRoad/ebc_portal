@@ -1,28 +1,22 @@
 <template>
 
-  <div class="container" style="margin-top: 2em;">
-    <div class="row align-items-start">
+  <div class="container-fluid" style="margin-top: 2em;">
+    <div class="row align-items-center justify-content-start">
       <div class="col-sm-6">
-        <h2 align="center">
-          <div style="color:#006699">
-            <strong>ABOUT THE GROUP</strong>
-          </div>
-        </h2>
-        <hr>
+        <h3>Our Team</h3>
         <p>
           We are the Science for Nature and People Partnership (SNAPP) Evidence-Based Conservation working group. We are an interdisciplinary group of scientists and practitioners from a diverse set of academic institutions, conservation and development organizations, and government agencies. Our aim is to document the state of current evidence on the impact of conservation on human well-being and provide tools and syntheses to improve evidence-based decision making in conservation. You can read more about our group and research at the 
           <a href="http://snappartnership.net/groups/evidence-based-conservation/">SNAPP website</a>
           .
         </p>
-        <img src="../assets/SNAP.jpg" style="height: auto; width: 100%; padding: 0 20px;">
       </div>
       <div class="col-sm-6">
-        <h3 align="center">
-          <div style="color:#006699">
-            <strong>WORKING GROUP MEMBERS</strong>
-          </div>
-        </h3>
-        <hr>
+        <img src="../assets/SNAP.jpg" style="height: auto; width: 100%; padding: 0 20px;">
+      </div>
+    </div>
+    <div class="row align-items-center alternate-row" style="background-color:#383838;">
+      <div class="col-sm-12">
+        <h3 style="color:#eec919; margin-top:30px; margin-bottom:30px;">Working Group Members</h3>
         
         <div class="row align-items-start">
           <div class="col-sm-4">
@@ -190,7 +184,7 @@
               <em>University of Cambridge</em>
             </p>
             
-                        <p class="contact-name">
+            <p class="contact-name">
               <a href="mailto:e.woodhouse@ucl.ac.uk">Emily Woodhouse</a>
             </p>
             <p class="contact-org">
@@ -215,14 +209,61 @@
         </div>
       </div>
     </div>
+    <div class="row align-items-center justify-content-start">
+      <div class="col-sm-12">
+        <h3>Our Contributing Partners</h3>
+        <div class="row align-items-center">
+          <div class="col-2 offset-1">
+            <img src="../assets/profor.png" style="width:100%;">
+          </div>
+          <div class="col-3">
+            <img src="../assets/ci_logo.png" style="width:100%;">
+          </div>
+        </div>
+        <div class="row align-items-center" style="margin-top: -100px;">
+          <div class="col-2 offset-3">
+            <img src="../assets/asu.png" style="width:100%;">
+          </div>
+
+          <div class="col-3">
+            <img src="../assets/Snapp-Acronym-Color.png" style="width:100%;">
+          </div>
+        </div>
+      </div>
+    </div>
+        <div class="row align-items-center alternate-row" style="background-color:#383838;">
+      <div class="col-sm-12">
+        <h3 style="color:#eec919; margin-top:30px; margin-bottom:30px;">Acknowledgements</h3>
+        <p style="color:white;">
+          Development of this portal was supported in part by the World Bank’s Program for Forests
+          and the Science for Nature and People Partnership (SNAPP), a partnership of The Nature Conservancy,
+          the Wildlife Conservation Society and the National Center for Ecological Analysis and Synthesis
+        </p>
+      </div>
+    </div>
   </div>
 
 </template>
 
 <style scoped>
 
-.contact-name {
+.row {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.row.alternate-row {
+  margin-top: 0px;
   margin-bottom: 0px;
+}
+
+.contact-name, .contact-name > a {
+  margin-bottom: 0px;
+  color: white;
+}
+
+.contact-org {
+  color: white;
 }
 
 </style>

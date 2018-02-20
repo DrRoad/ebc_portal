@@ -1,31 +1,11 @@
 <template>
-  <div class="container" style="margin-top: 2em;">
+  <div class="container-fluid" style="margin-top: 2em;">
   
-    <div class="row align-items-start">
+    <div class="row align-items-center justify-content-center" style="margin-bottom: 50px;">
   
-      <div class="col-sm-8">
+      <div class="col-10">
   
-        <h2 align="center">
-  
-          <div style="color:#006699">
-  
-            <strong>ABOUT THE METHOD</strong>
-  
-          </div>
-  
-        </h2>
-  
-        <h3 align="center">
-  
-          <div>
-  
-            <strong>Systematic mapping</strong>
-  
-          </div>
-  
-        </h3>
-  
-        <hr>
+        <h3>ABOUT Evidence Synthesis Methodologies</h3>
   
         <p>Systematic maps and reviews are transparent, robust, and repeatable methods used to identify and synthesize relevant evidence within a policy-relevant framework. These maps and reviews (SMs and SRs) aim to synthesize large bodies of evidence while minimizing bias in order to provide reliable and comprehensive information for examining impacts and informing decision making. SMs and SRs are widely conducted and used within the medical and public health sector, providing critical syntheses informing best practices and treatment efficacy (Cochrane Collaboration). Systematic maps are particularly useful for assessing the current state of the evidence base, characterizing the research that has been conducted and where key knowledge gaps exist. Both SMs and SRs are increasingly being applied to conservation, environmental management, and development fields (Pullin &amp; Stewart 2006).</p>
   
@@ -48,156 +28,110 @@
         </p>
   
       </div>
+
+    </div>
+
+    <div class="row align-items-center justify-content-center alternate-row" style="background-color:#383838;">
+      <div class="col-10" style="color:white;">
+        <h3 style="color:#eec919; margin-top:30px; margin-bottom:30px;">RESOURCES</h3>
   
-      <div class="col-sm-4">
-  
-        <h4 align="center">
-  
-          <div>
-  
-            <strong>RESOURCES</strong>
-  
-          </div>
-  
-        </h4>
-  
-        <div class="card">
-  
-          <div class="card-block">
-  
-            <h5>
-  
-              <div>
-  
-                <strong>Useful links</strong>
-  
-              </div>
-  
-            </h5>
-  
-            <div>
-  
-              <ul>
-  
-                <li>
-  
-                  <a href="http://www.environmentalevidence.org">Collaboration for Environmental Evidence</a>
-  
-                </li>
-  
-                <li>
-  
-                  <a href="http://www.scie.org.uk/research/maps.asp">Social Care Institute for Excellence (SCIE) systematic map guidelines and examples:</a>
-  
-                </li>
-  
-                <li>
-  
-                  <a href="http://www.3ieimpact.org">International Initiative for Impact Evaluation (3ie) evidence gap maps</a>
-  
-                </li>
-  
-                <li>
-  
-                  <a href="http://www.cochrane.org">Cochrane Collaboration</a>
-  
-                </li>
-  
-              </ul>
-  
-            </div>
-  
-            <h5>
-  
-              <div>
-  
-                <strong>Literature</strong>
-  
-              </div>
-  
-            </h5>
-  
-            <div>
-  
-              <ul>
-  
-                <li>
-  
-                  <a href="http://link.springer.com/article/10.1007%2Fs13280-016-0773-x">
-  
-                    Haddaway NR, Bernes C, Honsson B, Hedlund K. 2016. The benefits of systematic mapping to evidence-based environmental management.
-  
-                    <em>Ambio.</em>
-  
-                    1-8
-  
-                  </a>
-  
-                </li>
-  
-                <li>
-  
-                  <a href="http://onlinelibrary.wiley.com/doi/10.1111/j.1523-1739.2006.00485.x/abstract">
-  
-                    Pullin AS, Stewart GB. 2006. Guidelines for systematic review in conservation and environmental management.
-  
-                    <em>Conservation Biology.</em>
-  
-                    20:1647-1656
-  
-                  </a>
-  
-                </li>
-  
-                <li>
-  
-                  <a href="http://www.nature.com/news/sustainability-map-the-evidence-1.18962">
-  
-                    McKinnon MC, Cheng SH, Garside R, Masuda YJ, Miller DC. 2015. Sustainability: Map the Evidence.
-  
-                    <em>Nature.</em>
-  
-                    528:185-187
-  
-                  </a>
-  
-                </li>
-  
-              </ul>
-  
-            </div>
-  
-          </div>
-  
+        <h5>Useful links</h5>
+
+        <div>
+
+          <ul>
+
+            <li>
+
+              <a href="http://www.environmentalevidence.org">Collaboration for Environmental Evidence</a>
+
+            </li>
+
+            <li>
+
+              <a href="http://www.scie.org.uk/research/maps.asp">Social Care Institute for Excellence (SCIE) systematic map guidelines and examples:</a>
+
+            </li>
+
+            <li>
+
+              <a href="http://www.3ieimpact.org">International Initiative for Impact Evaluation (3ie) evidence gap maps</a>
+
+            </li>
+
+            <li>
+
+              <a href="http://www.cochrane.org">Cochrane Collaboration</a>
+
+            </li>
+
+          </ul>
+
+        </div>
+
+        <h5>Literature</h5>
+
+        <div>
+
+          <ul>
+
+            <li>
+
+              <a href="http://link.springer.com/article/10.1007%2Fs13280-016-0773-x">
+
+                Haddaway NR, Bernes C, Honsson B, Hedlund K. 2016. The benefits of systematic mapping to evidence-based environmental management.
+
+                <em>Ambio.</em>
+
+                1-8
+
+              </a>
+
+            </li>
+
+            <li>
+
+              <a href="http://onlinelibrary.wiley.com/doi/10.1111/j.1523-1739.2006.00485.x/abstract">
+
+                Pullin AS, Stewart GB. 2006. Guidelines for systematic review in conservation and environmental management.
+
+                <em>Conservation Biology.</em>
+
+                20:1647-1656
+
+              </a>
+
+            </li>
+
+            <li>
+
+              <a href="http://www.nature.com/news/sustainability-map-the-evidence-1.18962">
+
+                McKinnon MC, Cheng SH, Garside R, Masuda YJ, Miller DC. 2015. Sustainability: Map the Evidence.
+
+                <em>Nature.</em>
+
+                528:185-187
+
+              </a>
+
+            </li>
+
+          </ul>
+
         </div>
   
       </div>
   
     </div>
   
+    <div class="row align-items-center justify-content-center" style="margin-bottom: 50px;">
+    </div>
   </div>
 </template>
 
-
 <style scoped>
-h3 {
-
-  margin: 1.5em 0;
-}
-
-
-
-h4 {
-
-  margin: 1em 0;
-}
-
-
-
-.card {
-
-  background-color: #ecf0f1;
-
-  border-radius: 4px;
-}
+  .row.alternate-row a {
+    color: white;
+  }
 </style>

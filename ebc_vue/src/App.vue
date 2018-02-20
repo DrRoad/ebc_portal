@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="container-fluid">
     <banner :minimal="minimalbanner"></banner>
-    <nav class="navbar navbar-toggleable-sm navbar-light nb-main" role="navigation">
+    <!--nav class="navbar navbar-toggleable-sm navbar-light nb-main" role="navigation">
       <div class = "container">
         <div class="navbar-header" style="width:130px;">
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#nb-main-collapse" aria-controls="navbarSupportedContentMain" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 
         </div>
       </div>
-    </nav>
+    </nav-->
 
     <div class="container-fluid">
       <keep-alive>
@@ -106,11 +106,14 @@ export default {
   }
 
   .banner-portal {
+    min-height: 300px;
     background-image: url('./assets/header3.jpg');
     background-repeat: no-repeat;
     background-position: 0% 55%;
     background-size: cover;
     margin-bottom: 0px;
+    margin-right: -30px;
+    margin-left: -30px;
     padding-top: 0px;
     border-radius: 0px;
     background-color: rgb(131,146,143);
