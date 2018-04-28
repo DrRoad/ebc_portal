@@ -18,7 +18,7 @@ export default {
   components: {
     Multiselect
   },
-  props: ["filtered", "checkedfilters"],
+  props: ["fulldata", "filtered", "checkedfilters"],
   data: function() {
     return {
       dt: null,
