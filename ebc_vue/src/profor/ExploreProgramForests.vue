@@ -1,9 +1,13 @@
 <template>
   <div>
     <div class="row" style="margin-top: 2em;">
-      <div class="col-md-3" style="overflow:auto; min-height: 100px; max-height:400px; position:fixed; top:150px;">
-        <h4>Filters</h4>
-        <filters  v-on:checked-nodes="checkHandler"></filters>
+      <div class="col-md-3">
+        <div class="sticky-top">
+          <h4>Filters</h4>
+          <div style="overflow:auto; min-height: 100px; max-height:65vh;">
+            <filters  v-on:checked-nodes="checkHandler"></filters>
+          </div>
+        </div>
       </div>
       <div class="col-md-9 ml-md-auto" style="padding-left: 50px;">
         <div class="row justify-content-center">
