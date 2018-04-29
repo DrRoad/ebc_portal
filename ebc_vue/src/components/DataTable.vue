@@ -50,6 +50,7 @@ export default {
       if(newFiltered.data.length && !this.dt) {
         var config = {
           data: newFiltered.data,
+          lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
           columns: Object.keys(newFiltered.data[0]).map(function(col) {
             var title = col
             var render = null
