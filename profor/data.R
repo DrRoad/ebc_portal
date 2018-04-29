@@ -4,6 +4,10 @@ library(readr)
 
 profor <- readRDS("../../profor/map_data_final.rds")
 
+# remove row 55089 which is a blank row
+#   until this row is removed from the RDS or other source data
+profor <- profor[-55089,]
+
 articles <- read.csv(
   "../../profor/Data_Final_PROFOR.csv",
   stringsAsFactors = FALSE
@@ -129,7 +133,7 @@ profor %>%
     .
   } %>%
   jsonlite::toJSON(dataframe="rows", na="string") %>%
-  cat(file="../../profor2/static/data_profor.json")
+  cat(file="../../ebc_vue/static/data_profor.json")
 
 
 profor[,unique_col] %>%
