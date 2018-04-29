@@ -7,7 +7,7 @@
       storage on Amazon Web Services (AWS) DynamoDB.
     </p>
     <button v-on:click="downloadJson">Download JSON</button>
-    <button v-on:click="downloadCsv">Download CSV</button>
+    <button v-on:click="downloadCsv">Download Excel (CSV)</button>
     <registration
      :visible = "registrationVisible"
      @registerComplete = "handleRegister"
