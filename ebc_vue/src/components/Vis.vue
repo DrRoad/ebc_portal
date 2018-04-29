@@ -175,7 +175,7 @@
           "width": 500,
           "height": 450,
           "autosize": "fit",
-          "background": "ded",
+          "background": "#ded",
 
           "signals": [
             { "name": "tx", "update": "width / 2"},
