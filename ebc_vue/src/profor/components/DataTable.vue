@@ -56,6 +56,7 @@ export default {
             var type = null
             if(col === "aid") {
               type = "num"
+              title = "ArticleId"
             }
             if(col === "geo") {
               title = "Country"
