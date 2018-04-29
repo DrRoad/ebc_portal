@@ -37,7 +37,7 @@
           </button>
           <div class="dropdown-menu text-center" aria-labelledby="dropdownExploreButton">
             <router-link to="/explore/wellbeing" class="dropdown-item">Conservation &<br/>Human Well-Being</router-link>
-            <a class="dropdown-item" href="#">Effectiveness of international<br/>wildlife trade programs</a>
+            <router-link to="/explore/wildlife" class="dropdown-item">Effectiveness of international<br/>wildlife trade programs</router-link>
             <router-link to="/explore/profor" class="dropdown-item">Contribution of forests<br/>to poverty alleviation</router-link>
           </div>
         </div>
