@@ -302,12 +302,12 @@ profor %>%
   select(out_group, outcome, code) %>%
   {
     bind_rows(
+      na.omit(.),
       data_frame(
         out_group = "NA",
         outcome = c(NA, "NA"),
         code = "NA"
-      ),
-      na.omit(.)
+      )
     )
   } %>%
   mutate(id=paste0("outcome",1:n())) %>%
@@ -325,7 +325,7 @@ export default function() {
 "
         ,d3r::d3_nest(., value_cols=c("code","id"))
       ),
-      file="../../profor2/src/outcomefilters.js"
+      file="../../ebc_vue/src/profor/outcomefilters.js"
     )
   }
 
