@@ -194,7 +194,7 @@ profor %>%
     bind_rows(
       data_frame(
         habitat = c("NA","NA"), 
-        ecoregion = c(NA,"NA"),
+        ecoregion = c("NA","NA"),
         code = "NA"
       ),
       .
@@ -209,6 +209,11 @@ profor %>%
     )
   } %>%
   arrange(desc(habitat), ecoregion) %>%
+  # all terrestrial so remove this layer
+  select(-habitat) %>%
+  # only need one NA since removing top layer
+  na.omit() %>%
+  unique() %>%
   mutate(id = paste0("habitat",1:n())) %>%
   {
     cat(
@@ -223,7 +228,7 @@ export default function() {
 "
         ,d3r::d3_nest(., value_cols=c("code","id"))
       ),
-      file="../../profor2/src/habitatfilters.js"
+      file="../../ebc_vue/src/profor/habitatfilters.js"
     )    
   }
 
