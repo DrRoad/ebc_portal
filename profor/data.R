@@ -235,16 +235,16 @@ profor %>%
   left_join(codes_int, by=c("Int_type"="Int_type")) %>%
   mutate(group=Int_group, type_code = Int_type, type = Int_label) %>%
   select(group, type, type_code) %>%
-  {
-    bind_rows(
-      data_frame(
-        group = "NA",
-        type = c(NA, "NA"),
-        type_code = c(NA, "NA")
-      ),
-      .
-    )
-  } %>%
+  #{
+  #  bind_rows(
+  #    data_frame(
+  #      group = "NA",
+  #      type = c(NA, "NA"),
+  #      type_code = c(NA, "NA")
+  #    ),
+  #    .
+  #  )
+  #} %>%
   {
     bind_rows(
       data_frame(
@@ -253,6 +253,8 @@ profor %>%
       .
     )
   } %>%
+  # make group factor for PRIME order
+  mutate(group = factor(group, levels = c("Productivity","Rights","Investments","Markets","Ecosystems"), ordered=TRUE)) %>%
   arrange(group, type)  %>%
   mutate(id = paste0("intervention",1:n())) %>%
   {
@@ -268,7 +270,7 @@ export default function() {
 "
         ,d3r::d3_nest(., value_cols=c("type_code","id"))
       ),
-      file="../../profor2/src/interventionfilters.js"
+      file="../../ebc_vue/src/profor/interventionfilters.js"
     )    
   }
 
