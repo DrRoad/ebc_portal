@@ -194,7 +194,7 @@ profor %>%
     bind_rows(
       data_frame(
         habitat = c("NA","NA"), 
-        ecoregion = c("NA","NA"),
+        ecoregion = c("Unknown","Unknown"),
         code = "NA"
       ),
       .
