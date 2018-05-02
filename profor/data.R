@@ -304,8 +304,8 @@ profor %>%
     bind_rows(
       na.omit(.),
       data_frame(
-        out_group = "NA",
-        outcome = c(NA, "NA"),
+        out_group = "Unknown",
+        outcome = c(NA, "Unknown"),
         code = "NA"
       )
     )
@@ -415,7 +415,7 @@ codes_comp %>%
   rename(name = code_def) %>%
   bind_rows(
     data_frame(
-      name = "NA",
+      name = "Unknown",
       code = "NA"
     )
   ) %>%
@@ -437,7 +437,7 @@ export default function() {
 "
 ,jsonlite::toJSON(., dataframe="rows")
       ),
-file="../../profor2/src/compfilters.js"
+file="../../ebc_vue/src/profor/compfilters.js"
     )
   }
 
