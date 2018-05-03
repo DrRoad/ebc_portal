@@ -9,6 +9,7 @@ import AboutToolTool from './components/AboutToolTool.vue'
 import AboutToolGlossary from './components/AboutToolGlossary.vue'
 import Explore from './components/Explore.vue'
 import ExploreHumanWellBeing from './components/ExploreHumanWellBeing.vue'
+import AboutHumanWellBeing from './components/AboutHumanWellBeing.vue'
 import WellbeingVis from './components/Vis.vue'
 import WellbeingDataTable from './components/DataTable.vue'
 import WellbeingDownload from './components/Download.vue'
@@ -16,6 +17,7 @@ import ExploreProgramForests from './profor/ExploreProgramForests.vue'
 import ProforVis from './profor/components/Vis.vue'
 import ProforDataTable from './profor/components/DataTable.vue'
 import ProforDownload from './profor/components/Download.vue'
+import AboutProfor from './profor/components/AboutProfor.vue'
 import ExploreWildlife from './wildlife/components/ExploreWildlife.vue'
 import Research from './components/Research.vue'
 import ResearchOngoing from './components/ResearchOngoing.vue'
@@ -93,8 +95,12 @@ var routes = [
             {
               path: 'download',
               component: WellbeingDownload
+            },
+            {
+              path: 'about',
+              component: AboutHumanWellBeing
             }
-          ]          
+          ]
         },
         {
           path: 'wildlife',
@@ -119,6 +125,10 @@ var routes = [
             {
               path: 'download',
               component: ProforDownload
+            },
+            {
+              path: 'about',
+              component: AboutProfor
             }
           ]
         }
