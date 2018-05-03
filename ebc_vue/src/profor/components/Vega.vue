@@ -122,7 +122,6 @@ export default {
         view.run();
 
         if(this.useViewbox) {
-          debugger
           select(this.$el).select('div.vega-chart svg')
             .style('width', '100%')
             .style('height', '100%')
