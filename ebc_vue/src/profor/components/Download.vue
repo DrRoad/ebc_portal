@@ -1,10 +1,13 @@
 <template>
-  <div> 
-    <h5>Agreement</h5>
-    <p>In order to download the data, please abide by the following policies...</p>
-    <p>So now, registration with valid email and acknowledgement is required before a download begins.
-      The email and date/time of submission will be sent to a serverless registration function for
-      storage on Amazon Web Services (AWS) DynamoDB.
+  <div class="col-12" style="margin-top:15px;">
+    <p>
+      Below you will fill links to download custom, filtered datasets based on your chosen parameters.
+      Data is available to download in two formats, 1) JSON (JavaScript Object Notation) and
+      2) CSV (comma-separated values). Both formats can be viewed and edited in a text editor.
+      CSV files can be opened in Excel or another spreadsheet program.
+    </p>
+    <p>
+      Please ensure that you properly cite any data you use from this study.
     </p>
     <button v-on:click="downloadJson">Download JSON</button>
     <button v-on:click="downloadCsv">Download Excel (CSV)</button>
