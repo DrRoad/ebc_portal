@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="portal-data">
     <div class="row" style="margin-top: 2em;">
       <div class="col-md-3">
         <div class="sticky-top" style="z-index:900; background-color:#ddd;">

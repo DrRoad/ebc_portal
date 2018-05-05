@@ -59,6 +59,16 @@ export default {
               },
               "color": {"field": this.facet, "type": "nominal", "legend": null}
             }
+          },
+          "config": {
+            "axis": {
+              "labelFont": "inherit",
+              "titleFont": "inherit"
+            },
+            "legend": {
+              "labelFont": "inherit",
+              "titleFont": "inherit"
+            }
           }
         }
       }

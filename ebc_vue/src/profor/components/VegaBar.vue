@@ -44,6 +44,16 @@ export default {
                 "title": null
               }
             }
+          },
+          "config": {
+            "axis": {
+              "labelFont": "inherit",
+              "titleFont": "inherit"
+            },
+            "legend": {
+              "labelFont": "inherit",
+              "titleFont": "inherit"
+            }
           }
         }
       }

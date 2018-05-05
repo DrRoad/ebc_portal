@@ -176,7 +176,16 @@
           "height": 450,
           "autosize": "fit",
           "background": "#ded",
-
+          "config": {
+            "axis": {
+              "labelFont": "inherit",
+              "titleFont": "inherit"
+            },
+            "legend": {
+              "labelFont": "inherit",
+              "titleFont": "inherit"
+            }
+          },
           "signals": [
             { "name": "tx", "update": "width / 2"},
             { "name": "ty", "update": "height / 2"},

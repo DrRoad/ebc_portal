@@ -105,6 +105,10 @@ export default {
     line-height: 1.42857143;
   }
 
+  .portal-data {
+    font-family: 'Myriad Pro Regular', 'PT Sans', sans-serif;
+  }
+
   .banner-portal {
     min-height: 300px;
     background-image: url('./assets/header3.jpg');

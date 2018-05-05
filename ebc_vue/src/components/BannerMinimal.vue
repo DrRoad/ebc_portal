@@ -59,6 +59,8 @@
     border: none;
     border-radius: 0px;
     color: white;
+    font-family: 'Myriad Pro Condensed', 'PT Sans Narrow';
+    font-size: 1.25em;
   }
 
   button.btn-secondary:active, .show>.btn-secondary.dropdown-toggle {

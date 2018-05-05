@@ -23,6 +23,6 @@
 
 <style scoped>
   .banner {
-    font-family: 'Myriad Pro Condensed', 'PT Sans';
+    font-family: 'Myriad Pro Condensed', 'PT Sans Narrow';
   }
 </style>

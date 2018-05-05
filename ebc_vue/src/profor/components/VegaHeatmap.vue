@@ -1,5 +1,5 @@
 <template>
-  <Vega v-if="spec !== null" :spec="spec"></Vega>
+  <Vega v-if="spec !== null" :spec="spec" :use-viewbox="false"></Vega>
 </template>
 
 <script>
@@ -44,6 +44,16 @@ export default {
               "legend": {"orient": "top"},
               "scale": {"scheme":"bluegreen"},
               "zero": true
+            }
+          },
+          "config": {
+            "axis": {
+              "labelFont": "inherit",
+              "titleFont": "inherit"
+            },
+            "legend": {
+              "labelFont": "inherit",
+              "titleFont": "inherit"
             }
           }
         }
