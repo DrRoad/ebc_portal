@@ -145,7 +145,7 @@ export default {
               .join("\n")
           }
         })
-debugger
+
         this.dt = $('table', this.$el).DataTable(config)
         return
       }
