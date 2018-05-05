@@ -42,6 +42,7 @@ export default {
               "field": this.z,
               "type": "quantitative",
               "legend": {"orient": "top"},
+              "scale": {"scheme":"bluegreen"},
               "zero": true
             }
           }
