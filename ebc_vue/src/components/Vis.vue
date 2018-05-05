@@ -283,7 +283,7 @@
               "name": "color",
               "type": "sequential",
               "domain": {"data": "geosum", "field": "size"},
-              "range": "heatmap",
+              "range": {"scheme": "bluegreen"},
               "zero": true
             }
           ],
