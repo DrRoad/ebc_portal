@@ -105,13 +105,13 @@ export default {
   }
 
   .el-checkbox__input.is-indeterminate .el-checkbox__inner {
-    background-color: #20a0ff;
-    border-color: #0190fe;
+    background-color: rgb(49, 105, 138);
+    border-color: rgb(49, 105, 138);
   }
 
   .el-checkbox__input.is-checked .el-checkbox__inner {
-    background-color: #20a0ff;
-    border-color: #0190fe;
+    background-color: rgb(49, 105, 138);
+    border-color: rgb(49, 105, 138);
   }
 
   .el-checkbox__original {

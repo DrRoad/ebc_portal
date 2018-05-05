@@ -50,9 +50,11 @@ export default {
 }
 </script>
 
-
 <style>
-  .el-tree {border: none;}
+  .el-tree {
+    border: none;
+    background-color:#ddd;
+  }
 
   .el-checkbox {margin-bottom: 0px;}
 
@@ -101,13 +103,13 @@ export default {
   }
 
   .el-checkbox__input.is-indeterminate .el-checkbox__inner {
-    background-color: #20a0ff;
-    border-color: #0190fe;
+    background-color: rgb(49, 105, 138);
+    border-color: rgb(49, 105, 138);
   }
 
   .el-checkbox__input.is-checked .el-checkbox__inner {
-    background-color: #20a0ff;
-    border-color: #0190fe;
+    background-color: rgb(49, 105, 138);
+    border-color: rgb(49, 105, 138);
   }
 
   .el-checkbox__original {
@@ -120,4 +122,3 @@ export default {
     left: -999px;
   }
 </style>
-
