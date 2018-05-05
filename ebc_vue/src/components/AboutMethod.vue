@@ -5,7 +5,7 @@
   
       <div class="col-10">
   
-        <h3>ABOUT Evidence Synthesis Methodologies</h3>
+        <h3>About Evidence Synthesis Methodologies</h3>
   
         <p>Systematic maps and reviews are transparent, robust, and repeatable methods used to identify and synthesize relevant evidence within a policy-relevant framework. These maps and reviews (SMs and SRs) aim to synthesize large bodies of evidence while minimizing bias in order to provide reliable and comprehensive information for examining impacts and informing decision making. SMs and SRs are widely conducted and used within the medical and public health sector, providing critical syntheses informing best practices and treatment efficacy (Cochrane Collaboration). Systematic maps are particularly useful for assessing the current state of the evidence base, characterizing the research that has been conducted and where key knowledge gaps exist. Both SMs and SRs are increasingly being applied to conservation, environmental management, and development fields (Pullin &amp; Stewart 2006).</p>
   
@@ -33,7 +33,7 @@
 
     <div class="row align-items-center justify-content-center alternate-row" style="background-color:#383838;">
       <div class="col-10" style="color:white;">
-        <h3 style="color:#eec919; margin-top:30px; margin-bottom:30px;">RESOURCES</h3>
+        <h3 style="color:#eec919; margin-top:30px; margin-bottom:30px;">Resources</h3>
   
         <h5>Useful links</h5>
 
