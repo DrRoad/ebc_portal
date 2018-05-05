@@ -67,7 +67,7 @@
   }
 
   .dropdown-menu {
-    background-color: #white;
+    background-color: #fff;
     border: none;
     border-radius: 0px;
   }
