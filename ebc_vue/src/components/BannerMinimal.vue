@@ -15,7 +15,7 @@
         <router-link to="/about/group" style="color:#eec919; font-size:1.5em; padding-right:20px; text-decoration:none;">
           ABOUT
         </router-link>
-        <a href="" style="color:#eec919; font-size:1.5em; text-decoration:none;">CONTACT</a>
+        <router-link to="/contact" style="color:#eec919; font-size:1.5em; text-decoration:none;">CONTACT</router-link>
       </div>
     </div>
     <div class="row align-items-start justify-content-center">

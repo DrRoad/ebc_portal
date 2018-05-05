@@ -7,6 +7,7 @@ import AboutTool from './components/AboutTool.vue'
 import AboutToolData from './components/AboutToolData.vue'
 import AboutToolTool from './components/AboutToolTool.vue'
 import AboutToolGlossary from './components/AboutToolGlossary.vue'
+import Contact from './components/Contact.vue'
 import Explore from './components/Explore.vue'
 import ExploreHumanWellBeing from './components/ExploreHumanWellBeing.vue'
 import AboutHumanWellBeing from './components/AboutHumanWellBeing.vue'
@@ -21,7 +22,6 @@ import AboutProfor from './profor/components/AboutProfor.vue'
 import ExploreWildlife from './wildlife/components/ExploreWildlife.vue'
 import Research from './components/Research.vue'
 import ResearchOngoing from './components/ResearchOngoing.vue'
-import Contact from './components/Contact.vue'
 import News from './components/News.vue'
 import Register from './components/Registration.vue'
 
@@ -70,6 +70,7 @@ var routes = [
         }
       ]
   },
+  { path: '/contact', component: Contact },
   { path: '/explore', component: Explore,
       children: [
         {
@@ -143,7 +144,6 @@ var routes = [
       ]
   },
   { path: '/news', component: News },
-  { path: '/contact', component: Contact },
   { path: '/register', component: Register}
 ]
 
