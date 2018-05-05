@@ -67,6 +67,24 @@
   }
 
   .dropdown-menu {
-    background-color: #bfa952;
+    background-color: #white;
+    border: none;
+    border-radius: 0px;
+  }
+
+  .dropdown-item {
+    background-color: #c9a827;
+    margin-bottom: 5px;
+  }
+
+  .dropdown-item:hover {
+    background-color:#fff;
+    border: 1px #c9a827 solid;
+  }
+
+  .dropdown-item:active {
+    color: black;
+    top: 1px;
   }
 </style>
+
