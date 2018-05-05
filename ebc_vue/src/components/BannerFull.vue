@@ -1,5 +1,5 @@
 <template>
-  <div class = "jumbotron banner-portal">
+  <div class = "jumbotron banner-portal banner">
     <div class="row align-items-center alternate-row" style="background-color:#383838;padding:20px;">
       <div class="col col-md-8" align="left">
         <!--div class="hcon"-->

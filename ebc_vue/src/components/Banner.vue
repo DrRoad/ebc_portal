@@ -22,5 +22,7 @@
 </script>
 
 <style scoped>
-
+  .banner {
+    font-family: 'Myriad Pro Condensed', 'PT Sans';
+  }
 </style>

@@ -98,9 +98,9 @@ export default {
 </script>
 
 <style>
-  @import url("https://fonts.googleapis.com/css?family=Lato:400,700,400italic");
+  @import url("https://fonts.googleapis.com/css?family=PT+Sans|PT+Sans+Narrow");
   body {
-    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 15px;
     line-height: 1.42857143;
   }

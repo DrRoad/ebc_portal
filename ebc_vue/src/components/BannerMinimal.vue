@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid banner">
     <div class="row align-items-center alternate-row" style="background-color:#383838;">
       <div class="col col-md-8" align="left">
         <!--div class="hcon"-->
