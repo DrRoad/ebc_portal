@@ -2,8 +2,8 @@
   <div>
     <div class="row" style="margin-top: 2em;">
       <div class="col-md-3">
-        <div class="sticky-top">
-          <h4>Filters</h4>
+        <div class="sticky-top" style="z-index:900; background-color:#ddd;">
+          <h4 style="border-bottom:1px white solid;">Filters</h4>
           <div style="overflow:auto; min-height: 100px; max-height:65vh;">
             <filters  v-on:checked-nodes="checkHandler"></filters>
           </div>

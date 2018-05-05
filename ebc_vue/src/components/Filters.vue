@@ -53,7 +53,10 @@ export default {
 
 
 <style>
-  .el-tree {border: none;}
+  .el-tree {
+    border: none;
+    background-color:#ddd;
+  }
 
   .el-checkbox {margin-bottom: 0px;}
 
