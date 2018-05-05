@@ -1,6 +1,6 @@
 <template>
   <div class = "jumbotron banner-portal">
-    <div class="row align-items-center alternate-row" style="background-color:#383838;">
+    <div class="row align-items-center alternate-row" style="background-color:#383838;padding:20px;">
       <div class="col col-md-8" align="left">
         <!--div class="hcon"-->
           <h1>

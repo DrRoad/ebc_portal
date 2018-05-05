@@ -16,8 +16,8 @@
         </p>
       </div>
     </div>
-    <div class="jumbotron-fluid jumbo-rice row align-items-center justify-content-center" style="height:250px;">
-      <div class="col-7 standout-description">
+    <div class="jumbotron-fluid jumbo-rice row align-items-center justify-content-center" style="height:350px;">
+      <div class="col-9 standout-description">
         <h3>Purpose of this data portal</h3>
         <p>
           The Evidence for Nature and People Data Portal is an open access online knowledge
@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="jumbotron-fluid jumbo-kid row align-items-center justify-content-center" style="height:300px;">
-      <div class="col-7 standout-description">
+      <div class="col-9 standout-description">
         <h3>Share your data</h3>
         <p>
           If you are interested in having your evidence synthesis data hosted on this portal,
@@ -93,6 +93,9 @@ export default {
   .standout-description {
     background-color: #383838;
     opacity: 0.85;
+    max-height:75%;
+    padding: 50px;
+    overflow:auto;
   }
 
   .standout-description p {
