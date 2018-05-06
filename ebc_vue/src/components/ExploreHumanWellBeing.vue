@@ -149,17 +149,6 @@
   }
 </script>
 
-
-<style>
-  @import url("https://fonts.googleapis.com/css?family=Lato:400,700,400italic");
-  body {
-    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 15px;
-    line-height: 1.42857143;
-  }
-</style>
-
-
 <style scoped>
   .card-title, .card-text {color:white;}
 </style>
