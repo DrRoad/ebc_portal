@@ -1,44 +1,22 @@
 <template>
   <div class="portal-data">
-    <div class="row" style="margin-top: 2em;">
+    <div class="row align-items-center" style="background-color:#d1dbe5;margin-top:1em;">
+      <h4 style="padding:10px;">DATA EXPLORER: PROGRAM ON FORESTS</h4>
+    </div>
+    <div class="row" style="margin-top:0.5em;">
       <div class="col-md-3">
         <div class="sticky-top" style="z-index:900; background-color:#ddd;">
+          <h4>Summary</h4>
+          <div style="background-color:white;">
+            <summary-list :items="calculateSummary(filtered.data)"></summary-list>
+          </div>
           <h4 style="border-bottom:1px white solid;">Filters</h4>
-          <div style="overflow:auto; min-height: 100px; max-height:65vh;">
+          <div style="overflow:auto; min-height: 100px; max-height:60vh;">
             <filters  v-on:checked-nodes="checkHandler"></filters>
           </div>
         </div>
       </div>
       <div class="col-md-9 ml-md-auto" style="padding-left: 50px;">
-        <div class="row justify-content-center">
-          <div class="col col-md-4">
-            <div class="card text-center" style="background-color:#31698a;">
-              <div class="card-block">
-                <h5 class="card-title">Total Articles</h5>
-                <p class="card-text" v-if="fulldata.length > 0">{{getArticleCount(filtered.data)}}</p>
-                <p class="card-text" v-else>loading...</p>
-              </div>
-            </div>
-          </div>
-          <!--div class="col col-md-4">
-            <div class="card text-center" style="background-color:#31698a;">
-              <div class="card-block">
-                <h5 class="card-title">Impact Evaluations</h5>
-                <p class="card-text" v-if="fulldata.length > 0">{{getImpactCount(filtered.data)}}</p>
-                <p class="card=text" v-else>loading...</p>
-              </div>
-            </div>
-          </div>
-          <div class="col col-md-4">
-            <div class="card text-center" style="background-color:#31698a;">
-              <div class="card-block">
-                <h5 class="card-title">Open Access</h5>
-                <p class="card-text" v-if="fulldata.length > 0">{{getOpenCount(filtered.data)}}</p>
-                <p class="card-text" v-else>loading...</p>
-              </div>
-            </div>
-          </div-->
-        </div>
         <Navbar></Navbar>
         <div class="row">
           <keep-alive>
@@ -54,11 +32,13 @@
   import {arrayeq} from './utils.js'
 
   import Navbar from '../components/Navbar.vue'
+  import SummaryList from '../components/SummaryList.vue'
   import Filters from './components/Filters.vue'
 
   export default {
     props: ["fulldata","profordata"],
     components: {
+      SummaryList,
       Filters,
       Navbar
     },
@@ -148,7 +128,15 @@
           return data.filter(d=>d.FullText === "Y").length
         }
         return 0
-      }      
+      },
+      calculateSummary: function(data) {
+        return [
+          {
+            title: "Total Articles",
+            number: this.getArticleCount(data)
+          }
+        ]
+      }
     }
   }
 </script>
