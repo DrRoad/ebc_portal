@@ -110,7 +110,7 @@ export default {
   }
 
   .banner-portal {
-    min-height: 300px;
+    min-height: 375px;
     background-image: url('./assets/header3.jpg');
     background-repeat: no-repeat;
     background-position: 0% 55%;
