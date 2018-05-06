@@ -16,7 +16,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-9 ml-md-auto" style="padding-left: 50px;">      
+      <div class="col-md-9 ml-md-auto">      
         <Navbar></Navbar>
         <div class="row">
           <keep-alive>
