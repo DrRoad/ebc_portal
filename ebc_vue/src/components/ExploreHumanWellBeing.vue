@@ -1,7 +1,7 @@
 <template>
   <div class="portal-data">
     <div class="row align-items-center" style="background-color:#d1dbe5;margin-top:1em;">
-      <h4 style="padding:10px;">DATA EXPLORER: CONSERVATION AND HUMAN WELL-BEING</h4>
+      <h4 style="font-weight:800; padding:10px;">DATA EXPLORER: CONSERVATION AND HUMAN WELL-BEING</h4>
     </div>
     <div class="row" style="margin-top:0.5em;">
       <div class="col-md-3">
@@ -10,7 +10,7 @@
           <div style="background-color:white;">
             <summary-list :items="calculateSummary(filtered.data)"></summary-list>
           </div>
-          <h4 style="border-bottom:1px white solid;">Filters</h4>
+          <h4>Filters</h4>
           <div style="overflow:auto; min-height: 100px; max-height:60vh;">
             <filters  v-on:checked-nodes="checkHandler"></filters>
           </div>
