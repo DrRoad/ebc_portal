@@ -1,7 +1,8 @@
 <template>
   <div class="portal-data">
     <div class="row align-items-center" style="background-color:#d1dbe5;margin-top:1em;">
-      <h4 style="font-weight:800; padding:10px;">DATA EXPLORER: PROGRAM ON FORESTS</h4>
+      <h4 style="font-weight:800; padding-top:10px;padding-left:10px;">DATA EXPLORER: PROGRAM ON FORESTS</h4>
+      <p style="font-style:italic;padding-left:10px;">This map illustrates the quantity of evidence existing for specific linkages and geographies, but does not illustrate direction of impact nor quality of evidence.</p>
     </div>
     <div class="row" style="margin-top:0.5em;">
       <div class="col-md-3">
