@@ -105,7 +105,7 @@ export default {
     line-height: 1.42857143;
   }
 
-  .portal-data {
+  .portal-data, h3, h4 {
     font-family: 'Myriad Pro Regular', 'PT Sans', sans-serif;
   }
 
