@@ -545,9 +545,10 @@ export default function() {
 
 
 ## make csv without outcome direction and direction notes
-profor_csv <- read_csv("../../../ebc/static/data_profor.csv") %>%
+profor_csv <- read_csv("../../profor/Data_Final_PROFOR_7_2_18.csv") %>%
   select(
     -Outcome.direction,
-    -Outcome.direction_notes
+    -Outcome.direction_notes,
+    -matches("x[0-9]{3}")
   ) %>%
   write_csv("../../../ebc/static/data_profor.csv")
