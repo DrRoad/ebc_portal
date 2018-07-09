@@ -2,14 +2,14 @@ library(dplyr)
 library(tidyr)
 library(readr)
 
-profor <- readRDS("../../profor/map_data_final.rds")
+profor <- readRDS("../../profor/map_data_final_7_5_18.rds")
 
 # remove row 55089 which is a blank row
 #   until this row is removed from the RDS or other source data
-profor <- profor[-55089,]
+#profor <- profor[-55089,]
 
 articles <- read.csv(
-  "../../profor/Data_Final_PROFOR.csv",
+  "../../profor/Data_Final_PROFOR_7_2_18.csv",
   stringsAsFactors = FALSE
 )
 
@@ -55,6 +55,24 @@ profor <- replace_country("Tanzania, United Republic Of","Tanzania, United Repub
 profor <- replace_country("Tanzania","Tanzania, United Republic of")
 profor <- replace_country("Venezuela", "Venezuela, Bolivarian Republic of")
 
+profor <- replace_country("Laos", "Lao People's Democratic Republic")
+
+
+# Laos does not have region/subregion
+#  assign as Asia/Southeast Asia
+profor[which(profor$Study_country.x == "Laos"),"region"] <- "Asia"
+profor[which(profor$Study_country.x == "Laos"),"subregion"] <- "South-Eastern Asia"
+
+
+# some study_country are not countries
+#   rather they are groups such as Global, Less-developed countries
+#   and don't fit nicely in our region/sub-region filters
+#   for now assign NA
+#profor <- replace_country("Global", "Other")
+#profor <- replace_country("Less-developed countries", "Other")
+#profor <- replace_country("Low and middle income countries", "Other")
+#profor <- replace_country("Non-OECD countries", "Other")
+
 profor <- profor %>%
   left_join(countries, by = c("country"="name")) %>%
   select(-country)
@@ -78,8 +96,8 @@ profor %>%
       Out_type.cap_asset,
       Indicators,
       Outcome.data_type,
-      Outcome.direction,
-      Outcome.direction_notes,
+      #Outcome.direction,
+      #Outcome.direction_notes,
       Out_subtype,
       Out_type_assigned
     ))),
@@ -144,17 +162,16 @@ profor[,unique_col] %>%
   cat(file="../profor/static/articles_profor.json")
 
 
-
 unique(profor[,c("region","subregion")]) %>%
-{
-  bind_rows(
-    data_frame(
-      region = c("NA","NA"),
-      subregion = c(NA,"NA")
-    ),
-    .
-  ) 
-} %>%
+#{
+#  bind_rows(
+#    data_frame(
+#      region = c("NA","NA"),
+#      subregion = c(NA,"NA")
+#    ),
+#    .
+#  ) 
+#} %>%
 {
   bind_rows(
     data_frame(
@@ -178,7 +195,7 @@ unique(profor[,c("region","subregion")]) %>%
         "
         ,d3r::d3_nest(., value_cols = "id")
       ),
-      file="../../profor/static/geofilters.js"
+      file="../../ebc_vue/src/profor/geofilters.js"
     )
   }
 
@@ -478,3 +495,59 @@ list(
       file = "../../profor2/experiments/upset_int.json"
     )
   }
+
+
+# glossary term type and definitions
+library(readxl)
+defs <- read_xlsx(
+  "../../profor/definitions_PROFOR.xlsx",
+  sheet = "definitions_PROFOR",
+)
+
+termtypelookup <- list(
+  "intervention" = defs %>% filter(grepl(x=Category, pattern="Intervention")) %>% select(Term) %>% unlist() %>% unname(),
+  "outcome" = defs %>% filter(grepl(x=Category, pattern="Outcome")) %>% select(Term) %>% unlist() %>% unname(),
+  "biome" = defs %>% filter(grepl(x=Category, pattern="habitat")) %>% select(Term) %>% unlist() %>% unname(),
+  "forest" = defs %>% filter(grepl(x=Category, pattern="Forest")) %>% select(Term) %>% unlist() %>% unname(),
+  "study" = defs %>% filter(grepl(x=Category, pattern="Study") | grepl(x=Category, pattern="Comparison")) %>% select(Term) %>% unlist() %>% unname()
+) %>%
+  jsonlite::toJSON(auto_unbox=FALSE, pretty=TRUE) %>%
+  {sprintf(
+"
+// term type lookups for glossary
+//  each term should have a corresponding definition in definitions
+
+export default function() {
+  return %s
+}
+",
+  .
+  )} %>%
+  cat(file="../../profor/termtypelookup.js")
+
+defs %>%
+  select(Term, Definition, Examples) %>%
+  jsonlite::toJSON(
+    dataframe="rows",
+    auto_unbox=TRUE,
+    pretty=TRUE
+  ) %>%
+  {sprintf(
+"
+// terms and definitions for glossary
+
+export default function() {
+  return %s
+}
+",
+  .)} %>%
+  cat(file="../../profor/definitions.js")
+
+
+## make csv without outcome direction and direction notes
+profor_csv <- read_csv("../../../ebc/static/data_profor.csv") %>%
+  select(
+    -Outcome.direction,
+    -Outcome.direction_notes
+  ) %>%
+  write_csv("../../../ebc/static/data_profor.csv")
